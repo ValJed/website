@@ -1,5 +1,5 @@
 {
-  "name": "~TODO~",
+  "name": "website",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -10,12 +10,18 @@
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
+    "autoprefixer": "^10.2.5",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-config-standard": "^16.0.2",
     "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "svelte": "^3.34.0"
+    "sass": "^1.32.13",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "svelte": "^3.34.0",
+    "tailwindcss": "^2.1.2"
   },
   "type": "module",
   "dependencies": {
