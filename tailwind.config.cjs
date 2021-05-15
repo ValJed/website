@@ -35,8 +35,12 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-    },
+      title: ['BebasNeue'],
+      text: ['Allerta']
+    }
+    // {
+    //   sans: ['Graphik', 'sans-serif'],
+    //   serif: ['Merriweather', 'serif'],
+    // },
   }
 };

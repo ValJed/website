@@ -1,12 +1,9 @@
 <script>
-	import '../app.scss';
+  import '../app.scss'
 </script>
 
 <main>
-	<slot />
+  <slot />
 </main>
 
 <footer>Valentin Jeudy © All rights reserved.</footer>
-
-<style lang="scss">
-</style>

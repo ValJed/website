@@ -9,25 +9,18 @@
   <title>Home</title>
 </svelte:head>
 
-<section>
-  <h1>JED</h1>
-
-  <h2>
-    Full stack Web developer Interested in os / human collaboration / making the
-    society a better place.
-  </h2>
-
-  <h2>
-    try editing <strong>src/routes/index.svelte</strong>
-  </h2>
+<section class="flex justify-center items-center">
+  <div>
+    <h1 class="text-center text-5xl font-title">Jed</h1>
+    <h2 class="text-center font-text">
+      Full stack Web developer Interested in OS / human collaboration / making
+      the society a better place.
+    </h2>
+  </div>
+  <div>toto</div>
 </section>
 
 <style lang="scss">
   section {
-    @apply flex flex-col justify-center items-center;
-
-    h1 {
-      @apply text-blue;
-    }
   }
 </style>

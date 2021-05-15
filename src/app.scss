@@ -1,3 +1,19 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  @font-face {
+    font-family: BebasNeue;
+    src: url(/fonts/BebasNeue.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: Allerta;
+    src: url(/fonts/Allerta.ttf) format('truetype');
+  }
+}
+
 :root {
   @apply bg-blue-dark text-white;
 }
