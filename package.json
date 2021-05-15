@@ -21,6 +21,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "svelte": "^3.34.0",
+    "svelte-preprocess": "^4.7.3",
     "tailwindcss": "^2.1.2"
   },
   "type": "module",

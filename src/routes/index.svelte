@@ -24,10 +24,10 @@
 
 <style lang="scss">
   section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
+    @apply flex flex-col justify-center items-center;
+
+    h1 {
+      @apply text-blue;
+    }
   }
 </style>
