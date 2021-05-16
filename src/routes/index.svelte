@@ -3,24 +3,31 @@
 </script>
 
 <script>
+  import Model from '@/Model.svelte'
 </script>
 
 <svelte:head>
   <title>Home</title>
 </svelte:head>
 
-<section class="flex justify-center items-center">
-  <div>
-    <h1 class="text-center text-5xl font-title">Jed</h1>
-    <h2 class="text-center font-text">
-      Full stack Web developer Interested in OS / human collaboration / making
-      the society a better place.
-    </h2>
-  </div>
-  <div>toto</div>
-</section>
+<div class="container mx-auto">
+  <section>
+    <div class="w-1/2">
+      <h1 class="text-center text-5xl font-title mb-4">Jed</h1>
+      <h2 class="text-lg font-text">
+        Full stack Web developer Interested in
+        <p>* Open source</p>
+        <p>* Human collaboration</p>
+        <p>* Improving society</p>
+        <p>* Self governance</p>
+      </h2>
+    </div>
+    <Model />
+  </section>
+</div>
 
 <style lang="scss">
   section {
+    @apply flex items-start;
   }
 </style>

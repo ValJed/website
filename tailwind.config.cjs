@@ -38,9 +38,5 @@ module.exports = {
       title: ['BebasNeue'],
       text: ['Allerta']
     }
-    // {
-    //   sans: ['Graphik', 'sans-serif'],
-    //   serif: ['Merriweather', 'serif'],
-    // },
   }
-};
+}
