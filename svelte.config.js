@@ -1,4 +1,7 @@
 import sveltePreprocess from 'svelte-preprocess';
+import { resolve } from 'path';
+
+const cwd = process.cwd()
 
 export default {
 	preprocess: sveltePreprocess({
@@ -6,6 +9,16 @@ export default {
 	}),
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte'
+		target: '#svelte',
+
+		vite: {
+			resolve: {
+				alias: {
+					'@': resolve(cwd, 'src/components'),
+					lib: resolve(cwd, 'src/lib'),
+					models: resolve(cwd, 'src/models'),
+				}
+			}
+		}
 	}
-};
+}
