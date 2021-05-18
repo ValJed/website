@@ -3,5 +3,7 @@
   "scss.validate": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {}
+  "editor.codeActionsOnSave": {
+    "source.fixAll.prettier": true
+  }
 }

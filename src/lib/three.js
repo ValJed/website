@@ -5,83 +5,67 @@ import {
   BoxGeometry,
   MeshBasicMaterial,
   Mesh,
-  PlaneGeometry,
-  DoubleSide,
-  HemisphereLight,
   AmbientLight,
-  Camera
+  Box3
 } from 'three'
+
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-let scene, camera, loader, renderer, model, controls
+export class Three {
+  constructor(canvas, width, height) {
+    this.init(canvas, width, height)
+    this.camera.position.set(0, 0, 200)
+    this.camera.lookAt(0, 0, 0)
 
-const createCube = () => {
-  const geometry = new BoxGeometry()
-  const material = new MeshBasicMaterial({ color: 0x00ff00 })
-  const cube = new Mesh(geometry, material)
+    this.addLight()
 
-  cube.position.set(0, 0, 0)
-  scene.add(cube)
-}
-
-const animate = () => {
-  requestAnimationFrame(animate)
-  model.rotation.z += 0.01
-  // model.rotation.y += 0.01;
-  renderer.render(scene, camera)
-}
-
-const addLight = () => {
-  // const hemiLight = new HemisphereLight(0xffeeb1, 0x080820, 4)
-  const light = new AmbientLight(0x404040, 7)
-  scene.add(light)
-}
-
-const resize = (width, height) => {
-  renderer.setSize(width, height)
-  camera.position.set(0, 0, 5)
-  camera.lookAt(0, 0, 0)
-  // controls.update();
-}
-
-const init = (el, width, height) => {
-  scene = new Scene()
-  camera = new PerspectiveCamera(100, width / height, 0.1, 1000)
-  loader = new GLTFLoader()
-  renderer = new WebGLRenderer({
-    antialias: true,
-    canvas: el
-    // alpha: true
-  })
-  controls = new PointerLockControls(camera, renderer.domElement)
-
-}
-
-export const createScene = (el, width, height) => {
-  try {
-    init(el, width, height)
-    createCube()
-
-    loader.load('models/samuraiMask/scene.gltf', (gltf) => {
-      model = gltf.scene.children[0]
-      model.scale.set(0.5, 0.5, 0.5)
-      model.position.set(1, 1, 1)
-
-      resize(width, height)
-
-      scene.add(gltf.scene)
-      // addLight()
-
-      createCube()
-
-      renderer.render(scene, camera)
-      // animate()
+    this.loadModel(() => {
+      this.animate()
     })
-  } catch (err) {
-    console.error('Error when creatin scene: ', err)
+  }
+
+  init(canvas, width, height) {
+    this.scene = new Scene()
+    this.camera = new PerspectiveCamera(45, width / height, 0.1, 1000)
+    this.renderer = new WebGLRenderer({
+      antialias: true,
+      canvas: canvas,
+      alpha: true
+    })
+    this.cubes = []
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    this.renderer.setSize(width, height)
+  }
+
+  loadModel(cb) {
+    this.loader = new GLTFLoader()
+
+    this.loader.load('models/samuraiMask/scene.gltf', (gltf) => {
+      this.model = gltf.scene.children[0]
+
+      // Getting size of model to position it (only y used)
+      const { y } = new Box3().setFromObject(this.model).getSize();
+
+      this.model.position.set(0, -y, -30)
+
+      this.scene.add(gltf.scene)
+
+      cb()
+    })
+  }
+
+  addLight() {
+    // const hemiLight = new HemisphereLight(0xffeeb1, 0x080820, 4)
+    this.scene.add(new AmbientLight(0x9b9898, 7))
+  }
+
+  animate() {
+    requestAnimationFrame(this.animate.bind(this))
+
+    // this.cubes[0].rotation.y -= 0.01
+
+    this.renderer.render(this.scene, this.camera)
   }
 }
-
-window.addEventListener('resize', resize)

@@ -2,20 +2,29 @@
   import { browser } from '$app/env'
   import { onMount } from 'svelte'
 
-  let el
+  let bgCanvas
+  let modelCanvas
+
   let width
   let height
+  let three
 
   onMount(async () => {
-    const { createScene } = await import('lib/three')
+    const { Three } = await import('lib/three')
+    const { default: generateMatrix } = await import('lib/matrix')
 
-    createScene(el, width, 700)
+    console.log('generateMatrix ===> ', generateMatrix)
+    generateMatrix(bgCanvas, width, 500)
+
+    three = new Three(modelCanvas, width, 500)
   })
 </script>
 
-<div class="w-1/2" bind:clientWidth={width} bind:clientHeight={height}>
-  <canvas bind:this={el} />
+<div class="w-1/2 relative" bind:clientWidth={width}>
+  <canvas class="absolute" bind:this={bgCanvas} />
+  <canvas class="absolute" bind:this={modelCanvas} />
 </div>
 
-<!-- <style lang="scss">
-</style> -->
+<style lang="scss">
+  /* your styles go here */
+</style>
