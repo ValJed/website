@@ -16,10 +16,12 @@
       <h1 class="text-center text-5xl font-title mb-4">Jed</h1>
       <h2 class="text-lg font-text">
         Full stack Web developer Interested in
-        <p>* Open source</p>
-        <p>* Human collaboration</p>
-        <p>* Improving society</p>
-        <p>* Self governance</p>
+        <ul>
+          <li>Open source</li>
+          <li>Human collaboration</li>
+          <li>Improving society</li>
+          <li>Self governance</li>
+        </ul>
       </h2>
     </div>
     <Model />
