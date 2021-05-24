@@ -13,7 +13,6 @@
     const { Three } = await import('lib/three')
     const { default: generateMatrix } = await import('lib/matrix')
 
-    console.log('generateMatrix ===> ', generateMatrix)
     generateMatrix(bgCanvas, width, 500)
 
     three = new Three(modelCanvas, width, 500)

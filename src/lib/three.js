@@ -2,15 +2,13 @@ import {
   Scene,
   PerspectiveCamera,
   WebGLRenderer,
-  BoxGeometry,
-  MeshBasicMaterial,
-  Mesh,
   AmbientLight,
-  Box3
+  Box3,
+  Object3D,
 } from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
+// import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class Three {
@@ -20,6 +18,7 @@ export class Three {
     this.camera.lookAt(0, 0, 0)
 
     this.addLight()
+    this.getMousePosition()
 
     this.loadModel(() => {
       this.animate()
@@ -46,14 +45,39 @@ export class Three {
       this.model = gltf.scene.children[0]
 
       // Getting size of model to position it (only y used)
-      const { y } = new Box3().setFromObject(this.model).getSize();
+      const box = new Box3().setFromObject(this.model);
+
+      const { y } = box.getSize()
 
       this.model.position.set(0, -y, -30)
 
+      // this.pivot = new Group()
+      this.pivot = new Object3D();
+
+      // this.pivot.add(this.model)
+      this.scene.add(this.pivot)
+      this.pivot.add(this.model)
       this.scene.add(gltf.scene)
 
       cb()
     })
+  }
+
+  getMousePosition() {
+    document.addEventListener('mousemove', ({ clientX, clientY }) => {
+      this.mouseX = clientX / window.innerWidth * 100
+      this.mouseY = clientY / window.innerHeight * 100
+    })
+  }
+
+  followMouse() {
+
+    // 75% being the standard place for our model
+    // the rotation should be at 0 when the mouse is at 75%
+    if (this.mouseX && this.mouseY) {
+      this.pivot.rotation.y = (this.mouseX - 70) / 100
+      this.pivot.rotation.x = (this.mouseY - 50) / 100
+    }
   }
 
   addLight() {
@@ -64,8 +88,7 @@ export class Three {
   animate() {
     requestAnimationFrame(this.animate.bind(this))
 
-    // this.cubes[0].rotation.y -= 0.01
-
+    this.followMouse()
     this.renderer.render(this.scene, this.camera)
   }
 }
