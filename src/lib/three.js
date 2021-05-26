@@ -4,7 +4,7 @@ import {
   WebGLRenderer,
   AmbientLight,
   Box3,
-  Object3D,
+  Object3D
 } from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -45,14 +45,14 @@ export class Three {
       this.model = gltf.scene.children[0]
 
       // Getting size of model to position it (only y used)
-      const box = new Box3().setFromObject(this.model);
+      const box = new Box3().setFromObject(this.model)
 
       const { y } = box.getSize()
 
       this.model.position.set(0, -y, -30)
 
       // this.pivot = new Group()
-      this.pivot = new Object3D();
+      this.pivot = new Object3D()
 
       // this.pivot.add(this.model)
       this.scene.add(this.pivot)
@@ -65,13 +65,12 @@ export class Three {
 
   getMousePosition() {
     document.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.mouseX = clientX / window.innerWidth * 100
-      this.mouseY = clientY / window.innerHeight * 100
+      this.mouseX = (clientX / window.innerWidth) * 100
+      this.mouseY = (clientY / window.innerHeight) * 100
     })
   }
 
   followMouse() {
-
     // 75% being the standard place for our model
     // the rotation should be at 0 when the mouse is at 75%
     if (this.mouseX && this.mouseY) {

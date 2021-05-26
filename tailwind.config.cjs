@@ -4,10 +4,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true
   },
   purge: {
-    content: [
-      '.src/**/*.html',
-      '.src/**/*.svelte',
-    ],
+    content: ['.src/**/*.html', '.src/**/*.svelte'],
     options: {
       // This is where we define classes as strings that we want to keep
       safelist: []
@@ -19,7 +16,7 @@ module.exports = {
       sm: '480px',
       md: '768px',
       lg: '976px',
-      xl: '1440px',
+      xl: '1440px'
     },
     colors: {
       black: '#000000',

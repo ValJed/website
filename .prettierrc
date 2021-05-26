@@ -1,6 +1,6 @@
 {
-	"useTabs": false,
-	"singleQuote": true,
-	"trailingComma": "none",
-	"semi": false
+  "useTabs": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "semi": false
 }

@@ -1,4 +1,5 @@
 .svelte-kit/**
 static/**
 build/**
+models/**
 node_modules/**
