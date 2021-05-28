@@ -15,5 +15,9 @@
 }
 
 :root {
-  @apply bg-blue text-white pt-14;
+  @apply bg-blue text-white min-h-screen;
+
+  body {
+    @apply min-h-screen;
+  }
 }

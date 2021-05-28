@@ -10,7 +10,7 @@
   <title>Home</title>
 </svelte:head>
 
-<div class="container mx-auto">
+<div>
   <section>
     <div class="w-1/2">
       <h1 class="text-center text-5xl font-title mb-4">Jed</h1>

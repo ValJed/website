@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  const height = 500
+  const height = 480
   let bgCanvas
   let modelCanvas
 
@@ -18,11 +18,17 @@
   })
 </script>
 
-<div class="w-1/2 re  lative" bind:clientWidth={width}>
+<div class="model-container" bind:clientWidth={width}>
   <canvas class="absolute" bind:this={bgCanvas} />
   <canvas class="absolute" bind:this={modelCanvas} />
 </div>
 
 <style lang="scss">
-  /* your styles go here */
+  .model-container {
+    position: absolute;
+    width: 30rem;
+    height: 30rem;
+    top: 2rem;
+    right: 2rem;
+  }
 </style>
