@@ -17,12 +17,23 @@ export class Three {
     this.camera.position.set(0, 0, 200)
     this.camera.lookAt(0, 0, 0)
 
+    this.setModelCenter(height)
     this.addLight()
     this.getMousePosition()
 
     this.loadModel(() => {
       this.animate()
     })
+  }
+
+  setModelCenter(height) {
+    const bodyWidth = document.body.offsetWidth
+    const bodyHeigh = document.body.offsetHeight
+
+    const centerOffset = (height / 2) + 32
+
+    this.modelCenterX = (bodyWidth - centerOffset) / bodyWidth * 100
+    this.modelCenterY = (centerOffset + 300) / bodyHeigh * 100
   }
 
   init(canvas, width, height) {
@@ -50,13 +61,10 @@ export class Three {
       const { y } = box.getSize()
 
       this.model.position.set(0, -y, -30)
-
-      // this.pivot = new Group()
       this.pivot = new Object3D()
 
-      // this.pivot.add(this.model)
-      this.scene.add(this.pivot)
       this.pivot.add(this.model)
+      this.scene.add(this.pivot)
       this.scene.add(gltf.scene)
 
       cb()
@@ -65,17 +73,15 @@ export class Three {
 
   getMousePosition() {
     document.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.mouseX = (clientX / window.innerWidth) * 100
-      this.mouseY = (clientY / window.innerHeight) * 100
+      this.mouseX = (clientX / document.body.offsetWidth) * 100
+      this.mouseY = (clientY / document.body.offsetHeight) * 100
     })
   }
 
   followMouse() {
-    // 75% being the standard place for our model
-    // the rotation should be at 0 when the mouse is at 75%
     if (this.mouseX && this.mouseY) {
-      this.pivot.rotation.y = (this.mouseX - 70) / 100
-      this.pivot.rotation.x = (this.mouseY - 50) / 100
+      this.pivot.rotation.y = (this.mouseX - this.modelCenterX) / 100 * 1.2
+      this.pivot.rotation.x = (this.mouseY - this.modelCenterY) / 100 * 1.2
     }
   }
 
