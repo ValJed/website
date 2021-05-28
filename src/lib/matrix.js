@@ -8,10 +8,9 @@ export default (canvas, width, height) => {
   canvas.style.borderRadius = '50%'
 
   const ctx = canvas.getContext('2d')
-  const matrix = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}'.split(
-    ''
-  )
-  const fontSize = 10
+  const chars = '悪魔モンスター絶望悲しみ愛する平和エントピ'
+  const matrix = chars.split('')
+  const fontSize = 15
   const columns = width / fontSize // number of columns for the rain
 
   const drops = Array(Math.round(columns)).fill(1)
@@ -22,7 +21,7 @@ export default (canvas, width, height) => {
   function draw() {
     // Black BG for the canvas
     // translucent BG to show trail
-    ctx.fillStyle = 'rgba(0, 0, 26, 0.1)'
+    ctx.fillStyle = 'rgba(0, 0, 10, 0.2)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     ctx.fillStyle = '#269b00' // green text
