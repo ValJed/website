@@ -4,7 +4,15 @@
 
 <script>
   import Model from '@/Model.svelte'
-  import { writter } from 'lib/'
+  import Interests from '@/Interests.svelte'
+  import { writter } from 'lib/writter'
+
+  const texts = [
+    'Human Collaboration',
+    'Open Source',
+    'Improving Society',
+    'Dark Arts'
+  ]
 </script>
 
 <svelte:head>
@@ -21,12 +29,7 @@
         Full stack JS developer
       </h2>
       <p class="text-xl mb-4">Interested in</p>
-      <ul class="text-xl">
-        <li>Human Collaboration</li>
-        <li>Open Source</li>
-        <li>Improving Society</li>
-        <li>Dark Arts</li>
-      </ul>
+      <Interests {texts} />
     </div>
   </div>
   <Model />
@@ -49,6 +52,7 @@
 
   .glitched {
     font-family: 'Fira Mono', monospace;
+    animation: glitch 3s linear infinite;
   }
 
   @keyframes glitch {
@@ -65,10 +69,6 @@
     62% {
       transform: translate(0, 0) skew(5deg);
     }
-  }
-
-  .glitched {
-    animation: glitch 3s linear infinite;
   }
 
   .glitched::before,
