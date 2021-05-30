@@ -1,4 +1,4 @@
-export default (canvas, width, height) => {
+export const generateMatrix = (canvas, width, height) => {
   if (!canvas) {
     return
   }

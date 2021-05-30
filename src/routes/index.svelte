@@ -4,6 +4,7 @@
 
 <script>
   import Model from '@/Model.svelte'
+  import { writter } from 'lib/'
 </script>
 
 <svelte:head>
@@ -11,25 +12,113 @@
 </svelte:head>
 
 <div>
-  <section>
-    <div class="w-1/2">
-      <h1 class="text-center text-5xl font-title mb-4">Jed</h1>
-      <h2 class="text-lg font-text">
-        Full stack Web developer Interested in
-        <ul>
-          <li>Open source</li>
-          <li>Human collaboration</li>
-          <li>Improving society</li>
-          <li>Self governance</li>
-        </ul>
-      </h2>
+  <div class="content">
+    <div class="flex justify-center mb-4">
+      <h1 title="JED" class="glitched text-4xl font-title">JED</h1>
     </div>
-    <Model />
-  </section>
+    <div class="font-text">
+      <h2 title="Full stack JS developer" class="text-xl">
+        Full stack JS developer
+      </h2>
+      <p class="text-xl mb-4">Interested in</p>
+      <ul class="text-xl">
+        <li>Human Collaboration</li>
+        <li>Open Source</li>
+        <li>Improving Society</li>
+        <li>Dark Arts</li>
+      </ul>
+    </div>
+  </div>
+  <Model />
 </div>
 
 <style lang="scss">
-  section {
-    @apply flex items-start;
+  @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+  .content {
+    width: calc(100% - 32rem);
+
+    @apply pt-10 px-20;
+  }
+
+  ul {
+    li {
+      @apply ml-5 mb-2;
+    }
+  }
+
+  .glitched {
+    font-family: 'Fira Mono', monospace;
+  }
+
+  @keyframes glitch {
+    2%,
+    64% {
+      transform: translate(2px, 0) skew(0deg);
+    }
+
+    4%,
+    60% {
+      transform: translate(-2px, 0) skew(0deg);
+    }
+
+    62% {
+      transform: translate(0, 0) skew(5deg);
+    }
+  }
+
+  .glitched {
+    animation: glitch 3s linear infinite;
+  }
+
+  .glitched::before,
+  .glitched::after {
+    content: attr(title);
+    position: absolute;
+    left: 0;
+  }
+
+  .glitched::before {
+    animation: glitchTop 1s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  }
+
+  @keyframes glitchTop {
+    2%,
+    64% {
+      transform: translate(2px, -2px);
+    }
+
+    4%,
+    60% {
+      transform: translate(-2px, 2px);
+    }
+
+    62% {
+      transform: translate(13px, -1px) skew(-13deg);
+    }
+  }
+
+  .glitched::after {
+    animation: glitchBotom 1.5s linear infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitchBotom {
+    2%,
+    64% {
+      transform: translate(-2px, 0);
+    }
+
+    4%,
+    60% {
+      transform: translate(-2px, 0);
+    }
+
+    62% {
+      transform: translate(-22px, 5px) skew(21deg);
+    }
   }
 </style>

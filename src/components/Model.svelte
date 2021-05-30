@@ -10,7 +10,7 @@
 
   onMount(async () => {
     const { Three } = await import('lib/three')
-    const { default: generateMatrix } = await import('lib/matrix')
+    const { generateMatrix } = await import('lib/matrix')
 
     generateMatrix(bgCanvas, width, height)
 
