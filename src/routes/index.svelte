@@ -5,7 +5,7 @@
 <script>
   import Model from '@/Model.svelte'
   import Interests from '@/Interests.svelte'
-  import { writter } from 'lib/writter'
+  import Player from '@/Player.svelte'
 
   const texts = [
     'Human Collaboration',
@@ -33,6 +33,7 @@
     </div>
   </div>
   <Model />
+  <Player />
 </div>
 
 <style lang="scss">
