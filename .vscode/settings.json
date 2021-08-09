@@ -3,9 +3,6 @@
   "scss.validate": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.prettier": true
-  },
   "[json]": {
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true

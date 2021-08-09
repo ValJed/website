@@ -4,16 +4,18 @@ import {
   WebGLRenderer,
   AmbientLight,
   Box3,
-  Object3D
+  Object3D,
+  Vector3
 } from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-export class Three {
+export class Samourai {
   constructor(canvas, width, height) {
     this.init(canvas, width, height)
+
     this.camera.position.set(0, 0, 200)
     this.camera.lookAt(0, 0, 0)
 
@@ -26,22 +28,12 @@ export class Three {
     })
   }
 
-  setModelCenter(height) {
-    const bodyWidth = document.body.offsetWidth
-    const bodyHeigh = document.body.offsetHeight
-
-    const centerOffset = (height / 2) + 32
-
-    this.modelCenterX = (bodyWidth - centerOffset) / bodyWidth * 100
-    this.modelCenterY = (centerOffset + 300) / bodyHeigh * 100
-  }
-
   init(canvas, width, height) {
     this.scene = new Scene()
     this.camera = new PerspectiveCamera(45, width / height, 0.1, 1000)
     this.renderer = new WebGLRenderer({
       antialias: true,
-      canvas: canvas,
+      canvas,
       alpha: true
     })
     this.cubes = []
@@ -49,16 +41,26 @@ export class Three {
     this.renderer.setSize(width, height)
   }
 
+  setModelCenter(height) {
+    const bodyWidth = document.body.offsetWidth
+    const bodyHeigh = document.body.offsetHeight
+
+    const centerOffset = height / 2 + 32
+
+    this.modelCenterX = ((bodyWidth - centerOffset) / bodyWidth) * 100
+    this.modelCenterY = ((centerOffset + 300) / bodyHeigh) * 100
+  }
+
   loadModel(cb) {
     this.loader = new GLTFLoader()
 
-    this.loader.load('models/samuraiMask/scene.gltf', (gltf) => {
+    this.loader.load('/models/samuraiMask/scene.gltf', (gltf) => {
       this.model = gltf.scene.children[0]
 
       // Getting size of model to position it (only y used)
       const box = new Box3().setFromObject(this.model)
 
-      const { y } = box.getSize()
+      const { y } = box.getSize(new Vector3())
 
       this.model.position.set(0, -y, -30)
       this.pivot = new Object3D()
@@ -80,8 +82,8 @@ export class Three {
 
   followMouse() {
     if (this.mouseX && this.mouseY) {
-      this.pivot.rotation.y = (this.mouseX - this.modelCenterX) / 100 * 1.2
-      this.pivot.rotation.x = (this.mouseY - this.modelCenterY) / 100 * 1.2
+      this.pivot.rotation.y = ((this.mouseX - this.modelCenterX) / 100) * 1.2
+      this.pivot.rotation.x = ((this.mouseY - this.modelCenterY) / 100) * 1.2
     }
   }
 
