@@ -1,19 +1,20 @@
 <template>
   <div>
     <div class="content">
-      <div class="flex justify-center mb-4">
-        <h1 title="JED" class="glitched text-4xl font-title">JED</h1>
+      <div class="flex justify-center mb-10">
+        <h1 title="JED" class="glitched text-5xl font-title">JED</h1>
       </div>
       <div class="font-text">
-        <h2 title="Full stack JS developer" class="text-xl">
+        <h2 title="Full stack JS developer" class="text-xl mb-4">
           Full stack JS developer
         </h2>
         <p class="text-xl mb-4">Interested in</p>
         <Interests :texts="texts" />
       </div>
+      <Skills />
     </div>
     <Model />
-    <!-- <SocialNetworks /> -->
+    <SocialNetworks />
     <!-- <Player /> -->
   </div>
 </template>
@@ -22,11 +23,13 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import Model from '@/components/Model.vue'
 import Interests from '@/components/Interests.vue'
+import Skills from '@/components/Skills.vue'
 
 export default defineComponent({
   components: {
     Interests,
-    Model
+    Model,
+    Skills
   },
   setup() {
     const texts = [
@@ -69,7 +72,7 @@ ul {
     transform: translate(2px, 0) skew(0deg);
   }
 
-  4%,
+  20%,
   60% {
     transform: translate(-2px, 0) skew(0deg);
   }

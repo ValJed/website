@@ -20,4 +20,9 @@
   body {
     @apply min-h-screen;
   }
+
+  h2,
+  h3 {
+    @apply font-text text-2xl;
+  }
 }

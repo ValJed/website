@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="interests">
     <ul class="pl-4 text-xl">
       <li v-for="(text, i) in writtenTexts" :key="i" class="my-4">
         <span :class="{ active: activeIndex === i }">{{ text.value }}</span>
@@ -15,8 +15,8 @@ export default defineComponent({
   props: {
     texts: {
       type: Array,
-      default: null,
-    },
+      default: null
+    }
   },
   setup({ texts }) {
     const writtenTexts = texts.map(() => ref(''))
@@ -51,11 +51,17 @@ export default defineComponent({
         })
       }
     }
-  },
+  }
 })
 </script>
 
-<style scoped lang="postcss">
+<style lang="postcss" scoped>
+.interests {
+  @apply mb-6;
+
+  height: 10rem;
+}
+
 .active {
   @apply border-green;
 
