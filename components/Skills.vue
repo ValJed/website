@@ -4,17 +4,17 @@
     <section>
       <span class="skills-title">Javascript</span>
       <ul>
-        <li class="skill">Node</li>
-        <li class="skill">Vue</li>
-        <li class="skill">React</li>
+        <li class="skill"><Node /></li>
+        <li class="skill"><Vue /></li>
+        <li class="skill"><React /></li>
         <li class="skill">Jest</li>
       </ul>
     </section>
     <section>
       <span class="skills-title">Databases</span>
       <ul>
-        <li class="skill">MongoDB</li>
-        <li class="skill">GraphQL</li>
+        <li class="skill"><Mongodb /></li>
+        <li class="skill"><Graphql /></li>
         <li class="skill">SQL</li>
       </ul>
     </section>
@@ -31,8 +31,20 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
+import Node from '@/components/svg/Node.vue'
+import Vue from '@/components/svg/Vue.vue'
+import React from '@/components/svg/React.vue'
+import Mongodb from '@/components/svg/Mongodb.vue'
+import Graphql from '@/components/svg/Graphql.vue'
 
 export default defineComponent({
+  components: {
+    Node,
+    Vue,
+    React,
+    Mongodb,
+    Graphql
+  },
   props: {
     texts: {
       type: Array,
@@ -49,12 +61,22 @@ export default defineComponent({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .skills {
   &-title {
-    @apply text-2xl;
+    @include text-xl;
 
-    background-color: blue;
+    font-style: $fs1;
+
+    // background-color: $blue;
+  }
+}
+
+.skill {
+  width: 6rem;
+  height: 6rem;
+
+  svg {
   }
 }
 </style>

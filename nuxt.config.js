@@ -24,6 +24,12 @@ export default {
     '@/assets/scss/main'
   ],
 
+  styleResources: {
+    scss: [
+      '@/assets/scss/mixins/*.scss'
+    ]
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
@@ -37,7 +43,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
+    '@nuxtjs/style-resources'
   ],
 
   generate: {

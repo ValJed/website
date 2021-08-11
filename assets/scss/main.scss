@@ -15,14 +15,16 @@
 }
 
 :root {
-  @apply bg-blue text-white min-h-screen;
+  color: $white;
+  background-color: $blue;
+  min-height: 100vh;
 
   body {
-    @apply min-h-screen;
+    min-height: 100vh;
   }
 
   h2,
   h3 {
-    @apply font-text text-2xl;
+    @include text-xl;
   }
 }

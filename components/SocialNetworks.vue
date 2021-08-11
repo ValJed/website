@@ -24,7 +24,7 @@ export default {
   components: { LinkedinSvg, GithubSvg, SoundCloudSvg }
 }
 </script>
-<style lang="postcss">
+<style lang="scss">
 .networks {
   position: absolute;
   width: 30rem;

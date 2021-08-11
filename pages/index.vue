@@ -2,16 +2,17 @@
   <div>
     <div class="content">
       <div class="flex justify-center mb-10">
-        <h1 title="JED" class="glitched text-5xl font-title">JED</h1>
+        <h1 title="JED" class="glitched">JED</h1>
       </div>
       <div class="font-text">
-        <h2 title="Full stack JS developer" class="text-xl mb-4">
-          Full stack JS developer
-        </h2>
+        <h2 title="Full stack JS developer">Full stack JS developer</h2>
         <p class="text-xl mb-4">Interested in</p>
         <Interests :texts="texts" />
       </div>
-      <Skills />
+      <div class="description">
+        <p>I'm a passionate web developer... to be continued</p>
+      </div>
+      <!-- <Skills /> -->
     </div>
     <Model />
     <SocialNetworks />
@@ -23,13 +24,13 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import Model from '@/components/Model.vue'
 import Interests from '@/components/Interests.vue'
-import Skills from '@/components/Skills.vue'
+// import Skills from '@/components/Skills.vue'
 
 export default defineComponent({
   components: {
     Interests,
-    Model,
-    Skills
+    Model
+    // Skills
   },
   setup() {
     const texts = [
@@ -46,18 +47,32 @@ export default defineComponent({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+h1 {
+  @include text-3xl;
+
+  font-family: BebasNeue;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+h2 {
+  @include text-2xl;
+
+  margin-bottom: 1rem;
+}
 
 .content {
   width: calc(100% - 32rem);
-
-  @apply pt-10 px-20;
+  padding: 2.5rem 5rem 0;
 }
 
 ul {
   li {
-    @apply ml-5 mb-2;
+    margin-left: 1.25rem;
+    margin-bottom: 0.5rem;
   }
 }
 
