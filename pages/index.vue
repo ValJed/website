@@ -1,16 +1,24 @@
 <template>
   <div>
     <div class="content">
-      <div class="flex justify-center mb-10">
-        <h1 title="JED" class="glitched">JED</h1>
+      <div class="cube">
+        <div class="face front">
+          <div class="flex justify-center mb-10">
+            <h1 title="JED" class="glitched">JED</h1>
+          </div>
+          <div class="font-text">
+            <h2 title="Full stack JS developer">Full stack JS developer</h2>
+            <p class="text-xl mb-4">Interested in</p>
+            <Interests :texts="texts" />
+          </div>
+          <Description />
+        </div>
+        <!-- <div class="face back">Back</div>
+        <div class="face right">Right</div>
+        <div class="face left">Left</div>
+        <div class="face top">Top</div>
+        <div class="face bottom">Bottom</div> -->
       </div>
-      <div class="font-text">
-        <h2 title="Full stack JS developer">Full stack JS developer</h2>
-        <p class="text-xl mb-4">Interested in</p>
-        <Interests :texts="texts" />
-      </div>
-      <Description />
-      <!-- <Skills /> -->
     </div>
     <Model />
     <SocialNetworks />
@@ -49,6 +57,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
 h1 {
@@ -68,6 +83,7 @@ h2 {
 .content {
   width: calc(100% - 32rem);
   padding: 2.5rem 5rem 0;
+  perspective: 600px;
 }
 
 ul {
