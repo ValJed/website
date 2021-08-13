@@ -27,4 +27,11 @@
   h3 {
     @include text-xl;
   }
+
+  p {
+    font-family: Allerta;
+    margin: 1rem 0;
+
+    @include text;
+  }
 }

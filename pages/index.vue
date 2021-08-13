@@ -9,9 +9,7 @@
         <p class="text-xl mb-4">Interested in</p>
         <Interests :texts="texts" />
       </div>
-      <div class="description">
-        <p>I'm a passionate web developer... to be continued</p>
-      </div>
+      <Description />
       <!-- <Skills /> -->
     </div>
     <Model />
@@ -24,12 +22,15 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import Model from '@/components/Model.vue'
 import Interests from '@/components/Interests.vue'
+import Description from '@/components/Description.vue'
+
 // import Skills from '@/components/Skills.vue'
 
 export default defineComponent({
   components: {
     Interests,
-    Model
+    Model,
+    Description
     // Skills
   },
   setup() {
