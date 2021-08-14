@@ -34,4 +34,17 @@
 
     @include text;
   }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+
+    @include desktop {
+      max-width: 1400px;
+    }
+
+    @include desktop-xl {
+      max-width: 1800px;
+    }
+  }
 }

@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <div class="content">
+  <div class="container">
+    <div class="title">
+      <h1 title="JED" class="glitched">JED</h1>
+    </div>
+    <div ref="content" class="content">
       <div class="cube">
         <div class="face front">
-          <div class="flex justify-center mb-10">
-            <h1 title="JED" class="glitched">JED</h1>
-          </div>
+          <div class="flex justify-center mb-10"></div>
           <div class="font-text">
             <h2 title="Full stack JS developer">Full stack JS developer</h2>
             <p class="text-xl mb-4">Interested in</p>
@@ -13,22 +14,22 @@
           </div>
           <Description />
         </div>
-        <!-- <div class="face back">Back</div>
+        <div class="face back">Back</div>
         <div class="face right">Right</div>
         <div class="face left">Left</div>
-        <div class="face top">Top</div>
+        <!-- <div class="face top">Top</div>
         <div class="face bottom">Bottom</div> -->
       </div>
     </div>
-    <Model />
-    <SocialNetworks />
+    <!-- <Model />
+    <SocialNetworks /> -->
     <!-- <Player /> -->
   </div>
 </template>
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import Model from '@/components/Model.vue'
+// import Model from '@/components/Model.vue'
 import Interests from '@/components/Interests.vue'
 import Description from '@/components/Description.vue'
 
@@ -37,7 +38,7 @@ import Description from '@/components/Description.vue'
 export default defineComponent({
   components: {
     Interests,
-    Model,
+    // Model,
     Description
     // Skills
   },
@@ -49,6 +50,9 @@ export default defineComponent({
       'Dark Arts'
     ]
 
+    // TODO: add ref to content to get width, set attribute, and get it from css?
+    // const contentSize = this.$ref
+
     return {
       texts
     }
@@ -57,33 +61,85 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.content {
+  width: calc(100% - 32rem);
+  height: calc(100vh - 88px);
+  perspective: 0;
+  perspective-origin: 0 0;
+}
+
 .cube {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   transform-style: preserve-3d;
+  // transform: rotateY(5deg);
+  animation: spin 10s infinite linear;
+
+  .face {
+    padding: 2.5rem 5rem 0;
+    overflow-x: scroll;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 }
+
+.front {
+  // transform: translateZ(50%);
+  background-color: purple;
+}
+.back {
+  transform: translateZ(-50%) rotateY(180deg);
+  // background-color: orange;
+}
+.right {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+  background-color: cyan;
+}
+.left {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+  background-color: red;
+}
+// .top {
+// 	transform: rotateX(-90deg) translateY(-100px);
+// 	transform-origin: top center;
+// }
+// .bottom {
+// 	transform: rotateX(90deg) translateY(100px);
+// 	transform-origin: bottom center;
+// }
 
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
-h1 {
-  @include text-3xl;
-
-  font-family: BebasNeue;
+.title {
+  display: flex;
   justify-content: center;
   margin-bottom: 2.5rem;
+
+  h1 {
+    @include text-3xl;
+
+    width: calc(100% - 32rem);
+    font-family: BebasNeue;
+  }
 }
 
 h2 {
   @include text-2xl;
 
   margin-bottom: 1rem;
-}
-
-.content {
-  width: calc(100% - 32rem);
-  padding: 2.5rem 5rem 0;
-  perspective: 600px;
 }
 
 ul {

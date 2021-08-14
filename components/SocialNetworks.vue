@@ -33,7 +33,6 @@ export default {
 .networks {
   position: absolute;
   width: 30rem;
-  height: 30rem;
   top: 32rem;
   right: 2rem;
 
