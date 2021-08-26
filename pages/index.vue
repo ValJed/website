@@ -3,20 +3,23 @@
     <div class="title">
       <h1 title="JED" class="glitched">JED</h1>
     </div>
-    <div ref="content" class="content">
+    <div ref="contentDiv" class="content">
       <div class="cube">
-        <div class="face front">
+        <div
+          class="face front"
+          :style="{ transform: `translateZ(${halfContent})` }"
+        >
           <div class="flex justify-center mb-10"></div>
           <div class="font-text">
             <h2 title="Full stack JS developer">Full stack JS developer</h2>
             <p class="text-xl mb-4">Interested in</p>
-            <Interests :texts="texts" />
+            <!-- <Interests :texts="texts" /> -->
           </div>
           <Description />
         </div>
         <div class="face back">Back</div>
-        <div class="face right">Right</div>
-        <div class="face left">Left</div>
+        <div ref="right" class="face right">Right</div>
+        <div ref="left" class="face left">Left</div>
         <!-- <div class="face top">Top</div>
         <div class="face bottom">Bottom</div> -->
       </div>
@@ -28,16 +31,16 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 // import Model from '@/components/Model.vue'
-import Interests from '@/components/Interests.vue'
+// import Interests from '@/components/Interests.vue'
 import Description from '@/components/Description.vue'
 
 // import Skills from '@/components/Skills.vue'
 
 export default defineComponent({
   components: {
-    Interests,
+    // Interests,
     // Model,
     Description
     // Skills
@@ -51,10 +54,25 @@ export default defineComponent({
     ]
 
     // TODO: add ref to content to get width, set attribute, and get it from css?
-    // const contentSize = this.$ref
+    const contentDiv = ref(null)
+    const halfContent = ref(0)
+    // const front = ref(null)
+    // const right = ref(null)
+    // const left = ref(null)
+
+    onMounted(() => {
+      halfContent.value = contentDiv.value.clientWidth / 2
+
+      console.log('contentWidth ===> ', halfContent)
+    })
 
     return {
-      texts
+      texts,
+      contentDiv
+      // contentWidth
+      // front,
+      // right,
+      // left
     }
   }
 })
