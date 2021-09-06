@@ -1,38 +1,24 @@
 <template>
-  <div ref="content" class="content">
-    <!-- :style="{ transform: `rotateY(${homeDescription ? 'Odeg' : '90deg'})` }" -->
-    <div class="font-text">
-      <h2 title="Full stack JS developer">Full stack JS developer</h2>
-      <p class="text-xl mb-4">Interested in</p>
-      <Interests
-        :texts="texts"
-        :texts-loaded="textsLoaded"
-        @setTextsLoaded="$parent.$emit('setTextsLoaded')"
-      />
+  <div class="container">
+    <div class="title">
+      <h1 title="JED" class="glitched">JED</h1>
     </div>
-    <Description />
+    <Nuxt
+      :texts-loaded="textsLoaded"
+      @extendMatrix="extendMatrix"
+      @contractMatrix="contractMatrix"
+      @setTextsLoaded="textsLoaded = true"
+    />
+    <Model :extended-matrix="extendedMatrix" />
+    <SocialNetworks />
   </div>
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
-import Description from '@/components/Description.vue'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  components: {
-    Description
-  },
-  props: {
-    textsLoaded: {
-      type: Boolean
-    },
-    caca: Boolean
-  },
-  // transition: 'page',
-  emits: ['setTextsLoaded'],
-  setup({ textsLoaded, caca }) {
-    console.log('textsLoaded   ===> ', textsLoaded)
-    console.log('caca ===> ', caca)
+  setup() {
     const texts = [
       'Human Collaboration',
       'Open Source',
@@ -40,35 +26,55 @@ export default defineComponent({
       'Dark Arts'
     ]
 
+    const textsLoaded = ref(false)
+
+    const caca = ref(false)
+    const changeCaca = () => {
+      caca.value = true
+
+      setInterval(() => {
+        console.log('caca.value ===> ', caca.value)
+      }, 1000)
+    }
+
+    const extendedMatrix = ref(false)
+
+    const extendMatrix = () => {
+      extendedMatrix.value = true
+    }
+
+    const contractMatrix = () => {
+      extendedMatrix.value = false
+    }
+
     return {
-      texts
+      texts,
+      textsLoaded,
+      extendedMatrix,
+      extendMatrix,
+      contractMatrix,
+      changeCaca,
+      caca
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-@keyframes spin {
-  from {
-    transform: rotateY(0);
-  }
-  to {
-    transform: rotateY(-360deg);
-  }
-}
-
-.content {
-  height: calc(100vh - 104px);
-  perspective: 0;
-  perspective-origin: 0 0;
-  overflow-x: scroll;
-
-  @include desktop {
-    width: calc(100% - 32rem);
-  }
-}
-
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+.title {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0 2.5rem 0;
+
+  h1 {
+    @include text-3xl;
+
+    font-family: BebasNeue;
+    z-index: 5;
+  }
+}
 
 h2 {
   @include text-2xl;

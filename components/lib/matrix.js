@@ -5,7 +5,7 @@ export const generateMatrix = (canvas, width, height) => {
 
   canvas.width = width
   canvas.height = height
-  canvas.style.borderRadius = '50%'
+  // canvas.style.borderRadius = '50%'
 
   const ctx = canvas.getContext('2d')
   const chars = '悪魔モンスター絶望悲しみ愛する平和エントピ'

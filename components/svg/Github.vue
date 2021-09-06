@@ -1,10 +1,8 @@
 <template>
   <svg
-    height="32"
     aria-hidden="true"
     viewBox="0 0 16 16"
     version="1.1"
-    width="32"
     data-view-component="true"
     class="octicon octicon-mark-github v-align-middle"
   >

@@ -1,7 +1,7 @@
 <template>
   <div class="interests">
     <ul class="pl-4 text-xl">
-      <li v-for="(text, i) in writtenTexts" :key="i" class="my-4">
+      <li v-for="(text, i) in writtenTexts" :key="i">
         <span :class="{ active: activeIndex === i }">{{ text.value }}</span>
       </li>
     </ul>
@@ -16,21 +16,31 @@ export default defineComponent({
     texts: {
       type: Array,
       default: null
+    },
+    textsLoaded: {
+      type: Boolean
     }
   },
-  setup({ texts }) {
+  emits: ['setTextsLoaded'],
+  setup({ texts, textsLoaded }, { emit }) {
     const writtenTexts = texts.map(() => ref(''))
     const activeIndex = ref(0)
     const min = 30
     const max = 200
 
     onMounted(() => {
-      write(writtenTexts)
+      write(writtenTexts, textsLoaded)
     })
 
     return { writtenTexts, activeIndex }
 
-    async function write(writtenTexts) {
+    async function write(writtenTexts, textsLoaded) {
+      if (textsLoaded) {
+        writtenTexts = texts
+      }
+
+      emit('setTextsLoaded')
+
       for (const [index, text] of texts.entries()) {
         activeIndex.value = index
 
@@ -55,26 +65,28 @@ export default defineComponent({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .interests {
-  @apply mb-6;
+  margin-bottom: 1rem;
+  height: 8rem;
 
-  height: 10rem;
+  ul li {
+    margin: 0.8rem 0;
+  }
 }
 
 .active {
-  @apply border-green;
-
+  border-color: $green;
   animation: 1s infinite step-end blink;
 }
 
 @keyframes blink {
   0% {
-    @apply border-r-2;
+    border-right-width: 2px;
   }
 
   50% {
-    @apply border-r-0;
+    border-right-width: 0px;
   }
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <svg
-    class="w-10 mx-7"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:cc="http://creativecommons.org/ns#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -9,9 +8,7 @@
     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
     version="1.1"
-    x="0px"
-    y="0px"
-    viewBox="0 0 100 125"
+    viewBox="0 0 100 100"
   >
     <g transform="translate(0,-952.36218)">
       <path
