@@ -1,14 +1,9 @@
 <template>
   <div ref="content" class="content">
-    <!-- :style="{ transform: `rotateY(${homeDescription ? 'Odeg' : '90deg'})` }" -->
     <div class="font-text">
       <h2 title="Full stack JS developer">Full stack JS developer</h2>
       <p class="text-xl mb-4">Interested in</p>
-      <Interests
-        :texts="texts"
-        :texts-loaded="textsLoaded"
-        @setTextsLoaded="$parent.$emit('setTextsLoaded')"
-      />
+      <Interests :texts="texts" />
     </div>
     <Description />
   </div>
@@ -22,17 +17,8 @@ export default defineComponent({
   components: {
     Description
   },
-  props: {
-    textsLoaded: {
-      type: Boolean
-    },
-    caca: Boolean
-  },
   // transition: 'page',
-  emits: ['setTextsLoaded'],
-  setup({ textsLoaded, caca }) {
-    console.log('textsLoaded   ===> ', textsLoaded)
-    console.log('caca ===> ', caca)
+  setup() {
     const texts = [
       'Human Collaboration',
       'Open Source',

@@ -3,12 +3,7 @@
     <div class="title">
       <h1 title="JED" class="glitched">JED</h1>
     </div>
-    <Nuxt
-      :texts-loaded="textsLoaded"
-      @extendMatrix="extendMatrix"
-      @contractMatrix="contractMatrix"
-      @setTextsLoaded="textsLoaded = true"
-    />
+    <Nuxt @extendMatrix="extendMatrix" @contractMatrix="contractMatrix" />
     <Model :extended-matrix="extendedMatrix" />
     <SocialNetworks />
   </div>
@@ -28,15 +23,6 @@ export default defineComponent({
 
     const textsLoaded = ref(false)
 
-    const caca = ref(false)
-    const changeCaca = () => {
-      caca.value = true
-
-      setInterval(() => {
-        console.log('caca.value ===> ', caca.value)
-      }, 1000)
-    }
-
     const extendedMatrix = ref(false)
 
     const extendMatrix = () => {
@@ -52,9 +38,7 @@ export default defineComponent({
       textsLoaded,
       extendedMatrix,
       extendMatrix,
-      contractMatrix,
-      changeCaca,
-      caca
+      contractMatrix
     }
   }
 })

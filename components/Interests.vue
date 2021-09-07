@@ -10,6 +10,7 @@
 
 <script>
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
 export default defineComponent({
   props: {
@@ -21,25 +22,24 @@ export default defineComponent({
       type: Boolean
     }
   },
-  emits: ['setTextsLoaded'],
-  setup({ texts, textsLoaded }, { emit }) {
-    const writtenTexts = texts.map(() => ref(''))
-    const activeIndex = ref(0)
+  setup({ texts }) {
+    const textsLoaded = getTextsLoaded()
+
+    const writtenTexts = texts.map((text) => ref(textsLoaded ? text : ''))
+    const activeIndex = ref(textsLoaded ? 3 : 0)
     const min = 30
     const max = 200
 
-    onMounted(() => {
-      write(writtenTexts, textsLoaded)
-    })
+    if (!textsLoaded) {
+      onMounted(() => {
+        write(writtenTexts)
+      })
+    }
 
     return { writtenTexts, activeIndex }
 
-    async function write(writtenTexts, textsLoaded) {
-      if (textsLoaded) {
-        writtenTexts = texts
-      }
-
-      emit('setTextsLoaded')
+    async function write(writtenTexts) {
+      setTextsLoaded()
 
       for (const [index, text] of texts.entries()) {
         activeIndex.value = index
