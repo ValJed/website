@@ -54,7 +54,7 @@ export default {
     align-items: center;
 
     li {
-      @include text-xl;
+      @include text-2xl;
       font-family: $ftitle;
       cursor: pointer;
 

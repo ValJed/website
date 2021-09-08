@@ -30,7 +30,7 @@
   }
 
   p {
-    font-family: Allerta;
+    font-family: $ftext;
     margin: 1rem 0;
 
     @include text;

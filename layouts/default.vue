@@ -3,7 +3,11 @@
     <div class="title">
       <h1 title="JED" class="glitched">JED</h1>
     </div>
-    <Nuxt @extendMatrix="extendMatrix" @contractMatrix="contractMatrix" />
+    <Nuxt
+      class="content"
+      @extendMatrix="extendMatrix"
+      @contractMatrix="contractMatrix"
+    />
     <Model :extended-matrix="extendedMatrix" />
     <SocialNetworks />
   </div>
@@ -14,15 +18,6 @@ import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
-    const texts = [
-      'Human Collaboration',
-      'Open Source',
-      'Improving Society',
-      'Dark Arts'
-    ]
-
-    const textsLoaded = ref(false)
-
     const extendedMatrix = ref(false)
 
     const extendMatrix = () => {
@@ -34,8 +29,6 @@ export default defineComponent({
     }
 
     return {
-      texts,
-      textsLoaded,
       extendedMatrix,
       extendMatrix,
       contractMatrix
@@ -47,6 +40,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
+.content {
+  height: calc(100vh - 104px);
+  overflow-x: scroll;
+  padding-bottom: 3rem;
+
+  @include desktop {
+    width: calc(100% - 28rem);
+  }
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -55,7 +58,7 @@ export default defineComponent({
   h1 {
     @include text-3xl;
 
-    font-family: BebasNeue;
+    font-family: $ftitle;
     z-index: 5;
   }
 }
