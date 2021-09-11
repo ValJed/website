@@ -42,7 +42,7 @@ export default defineComponent({
 
 .content {
   height: calc(100vh - 104px);
-  overflow-x: scroll;
+  overflow-y: auto;
   padding-bottom: 3rem;
 
   @include desktop {
