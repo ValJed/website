@@ -16,13 +16,7 @@
 
 :root {
   color: $white;
-  background-color: $blue;
-  min-height: 100vh;
-
-  body {
-    min-height: 100vh;
-    overflow: hidden;
-  }
+  background-color: $black;
 
   h2,
   h3 {
@@ -38,8 +32,7 @@
 
   .container {
     width: 80%;
-    height: 100vh;
-    margin: 0 auto;
+    margin: 120px auto 0;
 
     @include desktop {
       max-width: 1400px;

@@ -41,8 +41,6 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
 
 .content {
-  height: calc(100vh - 104px);
-  overflow-y: auto;
   padding-bottom: 3rem;
 
   @include desktop {
@@ -51,15 +49,20 @@ export default defineComponent({
 }
 
 .title {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: 2rem 0 2.5rem 0;
+  // background-color: $black;
+  z-index: 5;
 
   h1 {
     @include text-3xl;
 
     font-family: $ftitle;
-    z-index: 5;
   }
 }
 

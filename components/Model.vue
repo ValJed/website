@@ -45,15 +45,21 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 .model-container {
+  position: fixed;
+  width: 20rem;
+  height: 20rem;
+  top: 2rem;
+  right: 2rem;
+
+  @include desktop {
+    width: 30rem;
+    height: 30rem;
+  }
+
   canvas {
     position: absolute;
-    width: 20rem;
-    height: 20rem;
-
-    @include desktop {
-      width: 30rem;
-      height: 30rem;
-    }
+    width: 100%;
+    height: 100%;
 
     &.matrix {
       width: 100vw;
@@ -63,16 +69,16 @@ export default defineComponent({
     }
 
     &.mask {
-      top: 2rem;
-      right: 2rem;
+      top: 0;
+      right: 0;
     }
   }
 }
 
 .matrix-container {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 0;
+  right: 0;
   width: 20rem;
   height: 20rem;
   border-radius: 50%;
@@ -87,7 +93,7 @@ export default defineComponent({
   &.extended {
     width: 100vw;
     height: 100vh;
-    top: 0;
+    top: -2rem;
     border-radius: 0;
   }
 }

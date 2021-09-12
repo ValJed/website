@@ -42,16 +42,27 @@ export default {
 
 <style lang="scss">
 .links {
-  position: absolute;
-  width: 30rem;
-  top: 32rem;
+  position: fixed;
+  top: 34rem;
   right: 2rem;
+  width: 2rem;
+
+  @include desktop {
+    width: 30rem;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
 
   .menu {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @include desktop {
+      margin-top: 2rem;
+    }
 
     li {
       @include text-2xl;
@@ -59,7 +70,9 @@ export default {
       cursor: pointer;
 
       &:first-child {
-        margin-bottom: 3rem;
+        @include desktop {
+          margin-bottom: 3rem;
+        }
       }
     }
   }
@@ -67,14 +80,22 @@ export default {
   .networks {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
-    transform: translateY(-7rem);
+
+    @include desktop {
+      margin-top: 2rem;
+      flex-direction: row;
+      transform: translateY(-8rem);
+    }
 
     li {
       width: 2.5rem;
       height: 2.5rem;
-      margin: 0 2rem;
+
+      @include desktop {
+        margin: 0 2rem;
+      }
 
       a {
         width: 100%;
