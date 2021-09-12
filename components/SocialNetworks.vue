@@ -43,9 +43,13 @@ export default {
 <style lang="scss">
 .links {
   position: fixed;
-  top: 34rem;
+  top: 2rem;
   right: 2rem;
   width: 2rem;
+
+  @include tablet-landscape {
+    top: 34rem;
+  }
 
   @include desktop {
     width: 30rem;

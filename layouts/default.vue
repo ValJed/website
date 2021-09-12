@@ -50,18 +50,21 @@ export default defineComponent({
 
 .title {
   position: fixed;
-  left: 0;
+  left: calc(50% - 1.5rem);
   top: 0;
-  width: 100%;
   display: flex;
   justify-content: center;
   padding: 2rem 0 2.5rem 0;
-  // background-color: $black;
   z-index: 5;
+
+  // @include tablet-landscape {
+  //   width: 100%;
+  // }
 
   h1 {
     @include text-3xl;
 
+    width: 3rem;
     font-family: $ftitle;
   }
 }

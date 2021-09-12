@@ -10,7 +10,7 @@ import {
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class Samourai {
   constructor(canvas, width, height) {
@@ -37,18 +37,18 @@ export class Samourai {
       alpha: true
     })
     this.cubes = []
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     this.renderer.setSize(width, height)
   }
 
   setModelCenter(height) {
-    const bodyWidth = document.body.offsetWidth
-    const bodyHeigh = document.body.offsetHeight
+    const windowWith = window.innerWidth
+    const windowHeight = window.innerHeight
 
     const centerOffset = height / 2 + 32
 
-    this.modelCenterX = ((bodyWidth - centerOffset) / bodyWidth) * 100
-    this.modelCenterY = ((centerOffset + 300) / bodyHeigh) * 100
+    this.modelCenterX = ((windowWith - centerOffset) / windowWith) * 100
+    this.modelCenterY = ((centerOffset + 300) / windowHeight) * 100
   }
 
   loadModel(cb) {
@@ -62,12 +62,14 @@ export class Samourai {
 
       const { y } = box.getSize(new Vector3())
 
-      this.model.position.set(0, -y, -30)
+      this.model.position.set(0, -y, 0)
       this.pivot = new Object3D()
 
       this.pivot.add(this.model)
       this.scene.add(this.pivot)
       this.scene.add(gltf.scene)
+
+      this.pivot.position.set(0, 0, -900)
 
       cb()
     })
@@ -75,8 +77,8 @@ export class Samourai {
 
   getMousePosition() {
     document.addEventListener('mousemove', ({ clientX, clientY }) => {
-      this.mouseX = (clientX / document.body.offsetWidth) * 100
-      this.mouseY = (clientY / document.body.offsetHeight) * 100
+      this.mouseX = (clientX / window.innerWidth) * 100
+      this.mouseY = (clientY / window.innerHeight) * 100
     })
   }
 
@@ -88,14 +90,18 @@ export class Samourai {
   }
 
   addLight() {
-    // const hemiLight = new HemisphereLight(0xffeeb1, 0x080820, 4)
-    this.scene.add(new AmbientLight(0x9b9898, 7))
+    this.scene.add(new AmbientLight(0x9b9898, 6))
   }
 
   animate() {
     requestAnimationFrame(this.animate.bind(this))
 
-    this.followMouse()
+    if (this.pivot.position.z < -100) {
+      this.pivot.position.set(0, 0, this.pivot.position.z + 30)
+    } else {
+      this.followMouse()
+    }
+
     this.renderer.render(this.scene, this.camera)
   }
 }

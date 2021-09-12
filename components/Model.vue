@@ -3,7 +3,7 @@
     <div class="matrix-container" :class="{ extended: extendedMatrix }">
       <canvas ref="bgCanvas" class="matrix" />
     </div>
-    <canvas ref="modelCanvas" class="mask" />
+    <canvas v-if="!isMobile" ref="modelCanvas" class="mask" />
   </div>
 </template>
 
@@ -20,23 +20,33 @@ export default defineComponent({
     const bgCanvas = ref(null)
     const modelCanvas = ref(null)
     const three = ref(null)
+    const isMobile = ref(false)
 
     onMounted(async () => {
-      const { Samourai } = await import('./lib/three')
+      console.log('window.innerWidth ===> ', window.innerWidth)
+      if (window.innerWidth < 900) {
+        isMobile.value = true
+      }
+
       const { generateMatrix } = await import('./lib/matrix')
 
       generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
 
-      setTimeout(() => {
-        three.value = new Samourai(
-          modelCanvas.value,
-          modelCanvas.value.clientWidth,
-          modelCanvas.value.clientHeight
-        )
-      }, 1300)
+      if (!isMobile.value) {
+        const { Samourai } = await import('./lib/three')
+
+        setTimeout(() => {
+          three.value = new Samourai(
+            modelCanvas.value,
+            modelCanvas.value.clientWidth,
+            modelCanvas.value.clientHeight
+          )
+        }, 1300)
+      }
     })
 
     return {
+      isMobile,
       bgCanvas,
       modelCanvas
     }
@@ -48,8 +58,13 @@ export default defineComponent({
   position: fixed;
   width: 20rem;
   height: 20rem;
-  top: 2rem;
-  right: 2rem;
+  top: 0;
+  right: 0;
+
+  @include tablet-landscape {
+    top: 2rem;
+    right: 2rem;
+  }
 
   @include desktop {
     width: 30rem;
@@ -64,8 +79,13 @@ export default defineComponent({
     &.matrix {
       width: 100vw;
       height: 100vh;
-      top: 0rem;
-      right: 0rem;
+      top: 2rem;
+      right: 5rem;
+
+      @include tablet-landscape {
+        top: 0;
+        right: 0;
+      }
     }
 
     &.mask {
@@ -77,13 +97,19 @@ export default defineComponent({
 
 .matrix-container {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -3rem;
+  right: -5rem;
   width: 20rem;
   height: 20rem;
-  border-radius: 50%;
   overflow: hidden;
   transition: all 0.25s ease-in;
+  border-radius: 50%;
+
+  @include tablet-landscape {
+    top: 0;
+    right: 0;
+    width: 20rem;
+  }
 
   @include desktop {
     width: 30rem;
@@ -93,8 +119,14 @@ export default defineComponent({
   &.extended {
     width: 100vw;
     height: 100vh;
-    top: -2rem;
     border-radius: 0;
+    top: 0;
+    right: 0;
+
+    @include tablet-landscape {
+      top: -2rem;
+      right: -2rem;
+    }
   }
 }
 </style>
