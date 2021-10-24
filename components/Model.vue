@@ -8,7 +8,12 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  onMounted,
+} from '@nuxtjs/composition-api'
+// import { generateMatrix } from './lib/matrix'
 
 export default defineComponent({
   props: {
@@ -22,28 +27,45 @@ export default defineComponent({
     const three = ref(null)
     const isMobile = ref(false)
 
+    // const resizeHandler = () => {
+    //    if (window.innerWidth < 900) {
+    //     // console.log(modelCanvas.value)
+    //   } else if (isMobile.value) {
+    //     three.value = new Samourai(
+    //       modelCanvas.value,
+    //       modelCanvas.value.clientWidth,
+    //       modelCanvas.value.clientHeight
+    //     )
+    //   }
+
+    //   isMobile.value = window.innerWidth < 900
+    // }
+
     onMounted(async () => {
-      console.log('window.innerWidth ===> ', window.innerWidth)
+      // window.addEventListener('resize', resizeHandler)
+
       if (window.innerWidth < 900) {
         isMobile.value = true
       }
 
-      const { generateMatrix } = await import('./lib/matrix')
+     const { generateModel } = await import('./lib/three')
 
-      generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
+      // generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
 
       if (!isMobile.value) {
-        const { Samourai } = await import('./lib/three')
-
         setTimeout(() => {
-          three.value = new Samourai(
+          three.value = generateModel(
             modelCanvas.value,
             modelCanvas.value.clientWidth,
             modelCanvas.value.clientHeight
-          )
+                )
         }, 1300)
       }
     })
+
+    // onUnmounted(() => {
+    //   window.removeEventListener('resize', resizeHandler)
+    // })
 
     return {
       isMobile,
