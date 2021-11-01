@@ -24,7 +24,7 @@ export const generateMatrix = (canvas, width, height) => {
     ctx.fillStyle = 'rgba(0, 0, 10, 0.2)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    ctx.fillStyle = '#269b00' // green text
+    ctx.fillStyle = '#03A062' // green text
     ctx.font = `${fontSize}px arial`
     // looping over drops
 

@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="home">
     <div class="font-text">
-      <h2 title="Full stack JS developer">Full stack JS developer</h2>
-      <p class="text-xl mb-4">Interested in</p>
+      <h1 title="Full stack JS developer">
+        Hi, I'm a full stack web developer.
+      </h1>
       <Interests :texts="texts" />
     </div>
     <Description />
@@ -18,12 +19,7 @@ export default defineComponent({
     Description
   },
   setup() {
-    const texts = [
-      'Human Collaboration',
-      'Open Source',
-      'Philosophy',
-      'Dark Arts'
-    ]
+    const texts = ['Human Collaboration', 'Philosophy', 'Dark Arts']
 
     return {
       texts
@@ -33,7 +29,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h2 {
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
   @include text-2xl;
 
   margin-bottom: 1rem;

@@ -1,5 +1,6 @@
 <template>
   <div class="interests">
+    <p class="text-xl mb-4">Interested in</p>
     <ul class="pl-4 text-xl">
       <li v-for="(text, i) in writtenTexts" :key="i">
         <span :class="{ active: activeIndex === i }">{{ text.value }}</span>

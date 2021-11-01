@@ -12,11 +12,62 @@
     font-family: Allerta;
     src: url(/fonts/Allerta.ttf) format('truetype');
   }
+
+  @font-face {
+    font-family: Ancherr;
+    src: url(/fonts/ancherr/ancherr.otf) format('truetype');
+  }
+
+  // @font-face {
+  //   font-family: Charmset;
+  //   src: url(/fonts/charmset/charmset.ttf) format('truetype');
+  // }
+
+  // @font-face {
+  //   font-family: Chintzy;
+  //   src: url(/fonts/chintzy/chintzy.ttf) format('truetype');
+  // }
+
+  // @font-face {
+  //   font-family: Test;
+  //   src: url(/fonts/computerfont/Computerfont.ttf) format('truetype');
+  // }
+
+  // @font-face {
+  //   font-family: Hexa;
+  //   src: url(/fonts/hexadecimal/Hexadecimal.otf) format('truetype');
+  // }
+
+  // @font-face {
+  //   font-family: Test;
+  //   src: url(/fonts/invasion2000/invasion.ttf) format('truetype');
+  // }
+
+  @font-face {
+    font-family: Many;
+    src: url(/fonts/many/many.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: Martyr;
+    src: url(/fonts/martyr/martyr.ttf) format('truetype');
+  }
+
+  // @font-face {
+  //   font-family: Test;
+  //   src: url(/fonts/no_mercy/no_mercy.ttf) format('truetype');
+  // }
+
+  @font-face {
+    font-family: Payback;
+    src: url(/fonts/payback/payback.ttf) format('truetype');
+  }
 }
 
 :root {
   color: $white;
   background-color: $black;
+  overflow-x: hidden;
 
   h2,
   h3 {
@@ -31,8 +82,11 @@
   }
 
   .container {
+    display: flex;
     width: 80%;
-    margin: 120px auto 0;
+    margin: 0 auto;
+    padding-top: 4rem;
+    min-height: 100vh;
 
     @include desktop {
       max-width: 1400px;

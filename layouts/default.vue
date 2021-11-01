@@ -1,22 +1,29 @@
 <template>
-  <div class="container">
-    <div class="title">
+  <div>
+    <Header />
+    <div class="container">
+      <!-- <div class="title">
       <h1 title="JED" class="glitched">JED</h1>
+    </div> -->
+      <Nuxt
+        class="content"
+        @extendMatrix="extendMatrix"
+        @contractMatrix="contractMatrix"
+      />
+      <Model :extended-matrix="extendedMatrix" />
+      <SocialNetworks />
     </div>
-    <Nuxt
-      class="content"
-      @extendMatrix="extendMatrix"
-      @contractMatrix="contractMatrix"
-    />
-    <Model :extended-matrix="extendedMatrix" />
-    <SocialNetworks />
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+import Header from '@/components/Header.vue'
 
 export default defineComponent({
+  components: {
+    Header
+  },
   setup() {
     const extendedMatrix = ref(false)
 

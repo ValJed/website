@@ -155,7 +155,7 @@ h3 {
 
 .xp-content {
   opacity: 0;
-  transform: translateY(1rem);
+  // transform: translateY(1rem);
   transition: all 0.25s ease-out 0.5s;
 }
 
@@ -189,7 +189,7 @@ li {
 
     .xp-content {
       opacity: 1;
-      transform: translateY(0);
+      // transform: translateY(0);
     }
   }
 }

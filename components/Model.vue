@@ -8,12 +8,8 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  ref,
-  onMounted,
-} from '@nuxtjs/composition-api'
-// import { generateMatrix } from './lib/matrix'
+import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import { generateMatrix } from './lib/matrix'
 
 export default defineComponent({
   props: {
@@ -48,9 +44,9 @@ export default defineComponent({
         isMobile.value = true
       }
 
-     const { generateModel } = await import('./lib/three')
+      const { generateModel } = await import('./lib/three')
 
-      // generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
+      generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
 
       if (!isMobile.value) {
         setTimeout(() => {
@@ -58,7 +54,7 @@ export default defineComponent({
             modelCanvas.value,
             modelCanvas.value.clientWidth,
             modelCanvas.value.clientHeight
-                )
+          )
         }, 1300)
       }
     })
@@ -84,7 +80,7 @@ export default defineComponent({
   right: 0;
 
   @include tablet-landscape {
-    top: 2rem;
+    top: 6rem;
     right: 2rem;
   }
 
