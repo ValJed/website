@@ -6,7 +6,7 @@
       </h1>
       <Interests :texts="texts" />
     </div>
-    <Description />
+    <Description :weapons="weapons" />
   </div>
 </template>
 
@@ -20,9 +20,11 @@ export default defineComponent({
   },
   setup() {
     const texts = ['Human Collaboration', 'Philosophy', 'Dark Arts']
+    const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
 
     return {
-      texts
+      texts,
+      weapons
     }
   }
 })
