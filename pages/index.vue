@@ -4,16 +4,16 @@
       <h1 title="Full stack JS developer">
         Hi, I'm a full stack web developer.
       </h1>
-      <p>
+      <!-- <p>
         I'm coding passionately since
         <span class="green">{{ seconds }}</span> seconds, approximately..
-      </p>
+      </p> -->
       <p>
         Here are the weapons I love to fight with:
         <span class="green">{{ weapon }}</span>
       </p>
       <p class="interests">
-        Also interested in <span>{{ interestsText }}</span>
+        <span>{{ interestsText }}</span>
       </p>
     </div>
   </div>
@@ -22,28 +22,29 @@
 <script>
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
 import weaponsAnimation from '@/lib/weaponsAnimation'
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
 import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
-const interests = 'Human Collaboration / Philosophy / Dark Arts'
+const interests =
+  'Also interested in Human Collaboration / Philosophy / Dark Arts'
 const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
 const typingMin = 30
 const typingMax = 200
 
 export default defineComponent({
   setup() {
-    const start = DateTime.local(2016, 4, 1, 9, 0)
+    // const start = DateTime.local(2016, 4, 1, 9, 0)
     const seconds = ref(0)
     const weapon = ref(weapons[0])
     const textsLoaded = getTextsLoaded()
     const interestsText = ref(textsLoaded ? interests : '')
 
     onMounted(() => {
-      computeDiffDate(start, seconds)
+      // computeDiffDate(start, seconds)
 
-      setInterval(() => {
-        computeDiffDate(start, seconds)
-      }, 1000)
+      // setInterval(() => {
+      //   computeDiffDate(start, seconds)
+      // }, 1000)
 
       setInterval(async () => {
         await weaponsAnimation(weapons, weapon)
@@ -63,13 +64,13 @@ export default defineComponent({
       interestsText
     }
 
-    function computeDiffDate(start, sec) {
-      const now = DateTime.now()
+    // function computeDiffDate(start, sec) {
+    //   const now = DateTime.now()
 
-      const { values } = now.diff(start, ['seconds'])
+    //   const { values } = now.diff(start, ['seconds'])
 
-      sec.value = Math.floor(values.seconds)
-    }
+    //   sec.value = Math.floor(values.seconds)
+    // }
 
     async function write(text, interests) {
       setTextsLoaded()
@@ -127,7 +128,7 @@ p {
 h1 {
   @include text-2xl;
 
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 ul {
