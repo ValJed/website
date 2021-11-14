@@ -1,13 +1,9 @@
 <template>
   <div class="home">
-    <div class="font-text">
+    <div>
       <h1 title="Full stack JS developer">
         Hi, I'm a full stack web developer.
       </h1>
-      <!-- <p>
-        I'm coding passionately since
-        <span class="green">{{ seconds }}</span> seconds, approximately..
-      </p> -->
       <p>
         Here are the weapons I love to fight with:
         <span class="green">{{ weapon }}</span>
@@ -22,30 +18,24 @@
 <script>
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
 import weaponsAnimation from '@/lib/weaponsAnimation'
-// import { DateTime } from 'luxon'
+import { matrixTransition } from '@/lib/transitions'
 import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
 const interests =
   'Also interested in Human Collaboration / Philosophy / Dark Arts'
 const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
 const typingMin = 30
-const typingMax = 200
+const typingMax = 150
 
 export default defineComponent({
+  transition: matrixTransition,
   setup() {
-    // const start = DateTime.local(2016, 4, 1, 9, 0)
     const seconds = ref(0)
     const weapon = ref(weapons[0])
     const textsLoaded = getTextsLoaded()
     const interestsText = ref(textsLoaded ? interests : '')
 
     onMounted(() => {
-      // computeDiffDate(start, seconds)
-
-      // setInterval(() => {
-      //   computeDiffDate(start, seconds)
-      // }, 1000)
-
       setInterval(async () => {
         await weaponsAnimation(weapons, weapon)
       }, 3000)
@@ -63,14 +53,6 @@ export default defineComponent({
       weapon,
       interestsText
     }
-
-    // function computeDiffDate(start, sec) {
-    //   const now = DateTime.now()
-
-    //   const { values } = now.diff(start, ['seconds'])
-
-    //   sec.value = Math.floor(values.seconds)
-    // }
 
     async function write(text, interests) {
       setTextsLoaded()
@@ -106,6 +88,10 @@ export default defineComponent({
   }
 }
 
+h1 {
+  margin-bottom: 2rem;
+}
+
 .interests > span {
   border-color: $green;
   animation: 1s infinite step-end blink;
@@ -118,6 +104,7 @@ export default defineComponent({
 }
 
 p {
+  min-height: 2rem;
   @include text-xl;
 
   .green {
@@ -127,8 +114,6 @@ p {
 
 h1 {
   @include text-2xl;
-
-  margin-bottom: 2rem;
 }
 
 ul {

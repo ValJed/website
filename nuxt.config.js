@@ -19,16 +19,16 @@ export default {
     ]
   },
 
-  pageTransition: {
-    name: 'page',
-    duration: 500,
-    beforeLeave() {
-      this.$emit('extendMatrix')
-    },
-    afterLeave() {
-      this.$emit('contractMatrix')
-    }
-  },
+  // pageTransition: {
+  //   name: 'page',
+  //   duration: 500,
+  //   beforeLeave() {
+  //     this.$emit('extendMatrix')
+  //   },
+  //   afterLeave() {
+  //     this.$emit('contractMatrix')
+  //   }
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

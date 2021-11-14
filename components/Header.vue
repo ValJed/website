@@ -59,7 +59,7 @@ header {
   position: fixed;
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   height: 4rem;
   width: 200%;
   top: 0;
