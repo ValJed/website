@@ -1,34 +1,7 @@
 <template>
   <header>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
-    </div>
-    <div>
-      <span>JED</span>
+    <div v-for="(jed, i) in jedArray" :key="i">
+      <span>{{ jed }}</span>
     </div>
   </header>
 </template>
@@ -41,7 +14,11 @@ import { defineComponent } from '@nuxtjs/composition-api'
 // import Mongodb from '@/components/svg/Mongodb.vue'
 
 export default defineComponent({
-  setup() {}
+  setup() {
+    const jedArray = new Array(10).fill('JED')
+
+    return { jedArray }
+  }
 })
 </script>
 <style scoped lang="scss">
