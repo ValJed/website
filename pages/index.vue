@@ -18,7 +18,6 @@
 <script>
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
 import weaponsAnimation from '@/lib/weaponsAnimation'
-import { matrixTransition } from '@/lib/transitions'
 import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
 const interests =
@@ -28,7 +27,6 @@ const typingMin = 30
 const typingMax = 150
 
 export default defineComponent({
-  transition: matrixTransition,
   setup() {
     const seconds = ref(0)
     const weapon = ref(weapons[0])
@@ -90,6 +88,7 @@ export default defineComponent({
 
 h1 {
   margin-bottom: 2rem;
+  color: $green;
 }
 
 .interests > span {
