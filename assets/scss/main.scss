@@ -58,6 +58,24 @@
   }
 }
 
-// .experiences-leave-active {
+// Anims
+@keyframes titleLeaveAnim {
+  25% {
+    transform: translateX(2rem);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
-// }
+@keyframes titleEnterAnim {
+  0% {
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
