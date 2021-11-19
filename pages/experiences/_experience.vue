@@ -15,10 +15,8 @@
 <script>
 import { defineComponent, useRoute } from '@nuxtjs/composition-api'
 import experiences from '@/data/experiences'
-import { matrixTransition } from '~/lib/transitions'
 
 export default defineComponent({
-  transition: matrixTransition,
   setup() {
     const route = useRoute()
     const { experience: current } = route.value.params
@@ -55,5 +53,18 @@ img {
 
 .stack {
   color: $green;
+}
+
+// Anims
+.matrix-enter-active {
+  .logo {
+    animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+  }
+}
+
+.matrix-leave-active {
+  .logo {
+    animation: 0.5s ease-in-out 0s 1 normal both titleLeaveAnim;
+  }
 }
 </style>

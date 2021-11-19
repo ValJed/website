@@ -36,14 +36,8 @@
 
 <script>
 import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
-import { matrixTransition } from '@/lib/transitions'
 
 export default defineComponent({
-  transition(to, from) {
-    return to.name === 'experiences-experience' && from.name === 'experiences'
-      ? { name: 'xp', duration: 5000 }
-      : matrixTransition
-  },
   setup() {
     const showXp = ref(false)
     const active = ref(null)
@@ -54,9 +48,14 @@ export default defineComponent({
       }, 250)
     })
 
+    const activeToggle = ({ currentTarget }) => {
+      currentTarget.classList.toggle('active')
+    }
+
     return {
       showXp,
-      active
+      active,
+      activeToggle
     }
   }
 })
@@ -77,15 +76,19 @@ h1 {
   }
 
   li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
     transition: all 0.3s linear;
     border-radius: 10px;
 
     &:hover {
       box-shadow: 10px -10px 50px $green;
+    }
+
+    > a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     img {
@@ -116,28 +119,25 @@ h2 {
   padding: 1.5rem 0;
 }
 
-// Animations
+// Anims
+.matrix-enter-active {
+  h1 {
+    animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+  }
+}
 
-// @keyframes showListItem {
-// }
+.matrix-leave-active {
+  h1 {
+    animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
+  }
+}
 
-// @keyframes growbar {
-//   0% {
-//     width: 0;
-//   }
-
-//   100% {
-//     width: 80%;
-//   }
-// }
-
-// .page-enter-active {
-//   h3 {
-//     > span {
-//       &:after {
-//         animation: 0.5s linear 0.1s backwards running growbar;
-//       }
-//     }
-//   }
-// }
+@keyframes titleLeaveAnim {
+  25% {
+    transform: translateX(2rem);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 </style>
