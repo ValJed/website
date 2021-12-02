@@ -68,19 +68,19 @@ h1 {
 
 @keyframes shadow {
   0% {
-    box-shadow: -10px -10px 25px $green;
+    box-shadow: -5px -5px 25px $green;
   }
   25% {
     box-shadow: 0px -5px 25px $green;
   }
   50% {
-    box-shadow: 10px -5px 25px $green;
+    box-shadow: 5px 0px 25px $green;
   }
   75% {
-    box-shadow: 10px 0px 25px $green;
+    box-shadow: 0px 0px 25px $green;
   }
   100% {
-    box-shadow: -10px -10px 25px $green;
+    box-shadow: -5px -5px 25px $green;
   }
 }
 
@@ -94,11 +94,9 @@ h1 {
   }
 
   li {
-    border-radius: 10px;
-    // animation: shadow 0.3s linear 0s 1 reverse;
+    border-radius: 50%;
 
     &:hover {
-      // box-shadow: 10px -10px 50px $green;
       animation: shadow 2s linear 0s infinite running forwards;
     }
 
