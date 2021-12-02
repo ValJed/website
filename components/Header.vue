@@ -43,7 +43,7 @@ header {
   left: -100%;
   background-color: $black;
   z-index: 5;
-  animation: 8s linear 0s infinite normal forwards animateBanner;
+  animation: 14s linear 0s infinite normal forwards animateBanner;
 
   div {
     display: flex;
