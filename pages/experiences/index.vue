@@ -66,6 +66,24 @@ h1 {
   padding: 3rem 0;
 }
 
+@keyframes shadow {
+  0% {
+    box-shadow: -10px -10px 25px $green;
+  }
+  25% {
+    box-shadow: 0px -5px 25px $green;
+  }
+  50% {
+    box-shadow: 10px -5px 25px $green;
+  }
+  75% {
+    box-shadow: 10px 0px 25px $green;
+  }
+  100% {
+    box-shadow: -10px -10px 25px $green;
+  }
+}
+
 .experiences {
   ul {
     position: relative;
@@ -76,11 +94,12 @@ h1 {
   }
 
   li {
-    transition: all 0.3s linear;
     border-radius: 10px;
+    // animation: shadow 0.3s linear 0s 1 reverse;
 
     &:hover {
-      box-shadow: 10px -10px 50px $green;
+      // box-shadow: 10px -10px 50px $green;
+      animation: shadow 2s linear 0s infinite running forwards;
     }
 
     > a {
