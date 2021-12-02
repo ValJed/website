@@ -18,12 +18,8 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Header from '@/components/Header.vue'
 
 export default defineComponent({
-  components: {
-    Header
-  },
   setup() {
     const extendedMatrix = ref(false)
 
