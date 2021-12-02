@@ -1,0 +1,90 @@
+<template>
+  <svg
+    height="300px"
+    width="300px"
+    fill="#000000"
+    xmlns:x="http://ns.adobe.com/Extensibility/1.0/"
+    xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
+    xmlns:graph="http://ns.adobe.com/Graphs/1.0/"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    x="0px"
+    y="0px"
+    viewBox="0 0 100 100"
+    style="enable-background: new 0 0 100 100"
+    xml:space="preserve"
+  >
+    <switch>
+      <foreignObject
+        requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+        x="0"
+        y="0"
+        width="1"
+        height="1"
+      />
+      <g i:extraneous="self">
+        <g>
+          <path
+            class="part-3"
+            d="M50,36.7c1.6,0,3.1-0.6,4.2-1.7l22.3-22.3c2.3-2.3,2.3-6.1,0-8.4c-2.3-2.3-6.1-2.3-8.4,0l-18,18l-18-18     c-2.3-2.3-6.1-2.3-8.4,0c-1.2,1.2-1.7,2.7-1.7,4.2c0,1.5,0.6,3.1,1.7,4.2L45.8,35C46.9,36.1,48.4,36.7,50,36.7z"
+          />
+          <path
+            class="part-2"
+            d="M54.2,65.4l22.3-22.3c2.3-2.3,2.3-6.1,0-8.4c-2.3-2.3-6.1-2.3-8.4,0l-18,18l-18-18c-2.3-2.3-6.1-2.3-8.4,0     c-1.2,1.2-1.7,2.7-1.7,4.2c0,1.5,0.6,3.1,1.7,4.2l22.3,22.3C48.1,67.7,51.9,67.7,54.2,65.4z"
+          />
+          <path
+            class="part-1"
+            d="M54.2,95.8l22.3-22.3c2.3-2.3,2.3-6.1,0-8.4c-2.3-2.3-6.1-2.3-8.4,0l-18,18L32,65c-2.3-2.3-6.1-2.3-8.4,0     c-1.2,1.2-1.7,2.7-1.7,4.2s0.6,3.1,1.7,4.2l22.3,22.3C48.1,98.1,51.9,98.1,54.2,95.8z"
+          />
+        </g>
+      </g>
+    </switch>
+  </svg>
+</template>
+
+<script>
+export default {}
+</script>
+<style scoped lang="scss">
+$distance: 2rem;
+
+svg {
+  width: 4rem;
+  height: auto;
+  transform: rotate(90deg);
+  fill: #fff;
+  overflow: visible;
+
+  .part-1 {
+    transition: transform 0.1s ease-in-out 0.2s;
+  }
+
+  .part-2 {
+    transition: transform 0.1s ease-in-out 0.1s;
+    fill: $green;
+  }
+
+  .part-3 {
+    transition: transform 0.1s ease-in-out 0s;
+  }
+
+  &:hover {
+    [class*='part-'] {
+      transform: translateY($distance);
+    }
+
+    .part-1 {
+      transition: transform 0.1s ease-in-out 0s;
+    }
+
+    .part-2 {
+      transition: transform 0.1s ease-in-out 0.1s;
+    }
+
+    .part-3 {
+      transition: transform 0.1s ease-in-out 0.2s;
+    }
+  }
+}
+</style>

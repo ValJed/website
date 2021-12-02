@@ -4,19 +4,28 @@
       <img :src="`/images/${experience.img}`" :alt="experience.name" />
       <span v-if="experience.logoName">{{ experience.logoName }}</span>
     </div>
-    <p>{{ experience.date }}</p>
-    <p class="stack">{{ experience.stack }}</p>
-    <p v-for="(paragraph, i) in experience.content" :key="i">
-      {{ paragraph }}
-    </p>
+    <div class="content">
+      <p>{{ experience.date }}</p>
+      <p class="stack">{{ experience.stack }}</p>
+      <p v-for="(paragraph, i) in experience.content" :key="i">
+        {{ paragraph }}
+      </p>
+    </div>
+    <NuxtLink class="arrow" to="/experiences">
+      <Arrow />
+    </NuxtLink>
   </div>
 </template>
 
 <script>
 import { defineComponent, useRoute } from '@nuxtjs/composition-api'
 import experiences from '@/data/experiences'
+import Arrow from '@/components/svg/Arrow.vue'
 
 export default defineComponent({
+  components: {
+    Arrow
+  },
   setup() {
     const route = useRoute()
     const { experience: current } = route.value.params
@@ -53,6 +62,14 @@ img {
 
 .stack {
   color: $green;
+}
+
+.arrow {
+  position: absolute;
+  left: 10%;
+  bottom: 4rem;
+  width: 4rem;
+  padding-left: 4rem;
 }
 
 // Anims
