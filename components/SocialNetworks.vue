@@ -2,10 +2,14 @@
   <div class="links">
     <ul class="menu">
       <li>
-        <nuxt-link to="/">Me</nuxt-link>
+        <nuxt-link to="/">
+          <HellSvg />
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/experiences">Xp</nuxt-link>
+        <nuxt-link to="/experiences">
+          <SatanSvg />
+        </nuxt-link>
       </li>
     </ul>
     <ul class="networks">
@@ -30,11 +34,15 @@
 <script>
 import LinkedinSvg from './svg/Linkedin.vue'
 import GithubSvg from './svg/Github.vue'
+import SatanSvg from './svg/Satan.vue'
+import HellSvg from './svg/Hell.vue'
 
 export default {
   components: {
     LinkedinSvg,
-    GithubSvg
+    GithubSvg,
+    SatanSvg,
+    HellSvg
   },
   emits: ['goToHome', 'goToExperiences']
 }
@@ -69,9 +77,13 @@ export default {
     }
 
     li {
-      @include text-2xl;
-      font-family: $ftitle;
-      cursor: pointer;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
 
       &:first-child {
         @include desktop {
