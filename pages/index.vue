@@ -9,7 +9,8 @@
         <span class="green">{{ weapon }}</span>
       </p>
       <p class="interests">
-        <span>{{ interestsText }}</span>
+        Also interested in Human Collaboration <span>/</span> Philosophy
+        <span>/</span> Dark Arts
       </p>
     </div>
   </div>
@@ -92,8 +93,7 @@ h1 {
 }
 
 .interests > span {
-  border-color: $green;
-  animation: 1s infinite step-end blink;
+  color: $green;
 }
 
 .home {
