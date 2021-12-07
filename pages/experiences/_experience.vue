@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <p>{{ experience.date }}</p>
-      <p class="stack">{{ experience.stack }}</p>
+      <p class="stack" v-html="stack"></p>
       <p v-for="(paragraph, i) in experience.content" :key="i">
         {{ paragraph }}
       </p>
@@ -31,7 +31,9 @@ export default defineComponent({
     const { experience: current } = route.value.params
     const experience = experiences[current]
 
-    return { experience }
+    const stack = experience.stack.join(' <span>/</span> ')
+
+    return { experience, stack }
   }
 })
 </script>
@@ -62,6 +64,10 @@ img {
 
 .stack {
   color: $green;
+
+  ::v-deep span {
+    color: #fff;
+  }
 }
 
 .arrow {

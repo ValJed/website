@@ -4,7 +4,7 @@ export default {
     logoName: "Apostrophe",
     date: 'November 2020 - Today',
     img: 'apostrophe.svg',
-    stack: "Nodejs / Vue / Mongodb",
+    stack: ['Nodejs', 'Vue', 'MongoDB'],
     content: [
       'Developing / improving ApostropheCMS core and modules. Setting up and working on ApostropheCMS projects for customers.'
     ]
@@ -13,7 +13,7 @@ export default {
     name: 'EasyLife',
     date: 'November 2019 - July 2020',
     img: 'easylife.svg',
-    stack: 'Nodejs / React / Mssql / Sequelize / Elasticsearch',
+    stack: ['Nodejs', 'React', 'Mssql', 'Sequelize', 'Elasticsearch'],
     content: [
       'Realization of a business tool for a corporate concierge.',
       'Managing tickets, products, collaborators through a single application.',
@@ -22,20 +22,33 @@ export default {
       'Smart search system with Elasticsearch.'
     ]
   },
+  grondin: {
+    name: 'Aurore Grondin',
+    date: 'Octobre - Novembre 2020',
+    img: 'ag.svg',
+    stack: ['Nuxt', 'Nodejs', 'TipTap', 'MongoDB'],
+    link: 'http://auroregrondin.fr',
+    content: [
+      'Development of a website using Nuxt for the front end, Nodejs for the API and MongoDB as Database.',
+      'Realization of an admin UI to manage projects, using tip tap for text edition.',
+    ]
+  },
   iboycott: {
     name: 'Iboycott',
-    date: 'November 2020 - Today',
+    date: 'Spetember - October 2020',
     img: 'iboycott.png',
-    stack: "Nodejs / React / SQL",
+    stack: ['Nodejs', 'React', 'SQL'],
     content: [
-      'Developing / improving ApostropheCMS core and modules. Setting up and working on ApostropheCMS projects for customers.'
+      'Helping to improve, maintain the React app.',
+      'Fixing existing bugs in the application.',
+      'Starting to migrate to webpack 5.',
     ]
   },
   michelin: {
     name: 'Michelin',
     date: 'May 2017 - November 2019',
     img: 'michelin.png',
-    stack: 'Nodejs / Vue / MongoDB',
+    stack: ['Nodejs', 'Vue', 'MongoDB'],
     content: [
       'multilingual sites conception for the different brands of the group.',
       'Delivering a large amount of websites through our ApostropheCMS factory.',
@@ -46,7 +59,7 @@ export default {
     name: 'Dedi Agency',
     date: 'April - September 2016',
     img: 'dedi.png',
-    stack: 'HTML / Sass',
+    stack: ['HTML', 'Sass'],
     content: ['Pixel perfect and responsive integrations for online shops.']
   }
 }
