@@ -1,150 +1,164 @@
 <template>
-  <div ref="modelContainer" class="model-container">
-    <div class="matrix-container" :class="{ extended: extendedMatrix }">
-      <canvas ref="bgCanvas" class="matrix" />
-    </div>
-    <canvas v-if="!isMobile" ref="modelCanvas" class="mask" />
-  </div>
+  <canvas v-if="!isMobile" ref="model" class="mask" />
 </template>
 
 <script>
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
-import { generateMatrix } from './lib/matrix'
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  AmbientLight,
+  Box3,
+  Object3D,
+  Vector3
+} from 'three'
 
 export default defineComponent({
-  props: {
-    extendedMatrix: {
-      type: Boolean
-    }
-  },
   setup() {
-    const bgCanvas = ref(null)
-    const modelCanvas = ref(null)
-    const three = ref(null)
+    const model = ref(null)
     const isMobile = ref(false)
+    const mouseX = ref(null)
+    const mouseY = ref(null)
 
-    // const resizeHandler = () => {
-    //    if (window.innerWidth < 900) {
-    //     // console.log(modelCanvas.value)
-    //   } else if (isMobile.value) {
-    //     three.value = new Samourai(
-    //       modelCanvas.value,
-    //       modelCanvas.value.clientWidth,
-    //       modelCanvas.value.clientHeight
-    //     )
-    //   }
-
-    //   isMobile.value = window.innerWidth < 900
-    // }
-
-    onMounted(async () => {
-      // window.addEventListener('resize', resizeHandler)
-
+    onMounted(() => {
       if (window.innerWidth < 900) {
         isMobile.value = true
       }
-
-      const { generateModel } = await import('./lib/three')
-
-      generateMatrix(bgCanvas.value, window.innerWidth, window.innerHeight)
-
       if (!isMobile.value) {
-        setTimeout(() => {
-          three.value = generateModel(
-            modelCanvas.value,
-            modelCanvas.value.clientWidth,
-            modelCanvas.value.clientHeight
-          )
-        }, 1300)
+        generateModel(
+          model.value,
+          model.value.clientWidth,
+          model.value.clientHeight
+        )
       }
     })
 
-    // onUnmounted(() => {
-    //   window.removeEventListener('resize', resizeHandler)
-    // })
-
     return {
       isMobile,
-      bgCanvas,
-      modelCanvas
+      model
+    }
+
+    async function generateModel(canvas, width, height) {
+      const { scene, renderer, camera } = init(canvas, width, height)
+      // const controls = new OrbitControls(camera, renderer.domElement)
+
+      const { model, gltfScene } = await loadModel()
+
+      const { centerX, centerY } = setModelCenterAndPosition(model, height)
+
+      const pivot = new Object3D()
+
+      pivot.add(model)
+      scene.add(pivot)
+      scene.add(gltfScene)
+
+      pivot.position.set(0, 0, -900)
+
+      // Mouse position listener
+      document.addEventListener('mousemove', ({ clientX, clientY }) => {
+        mouseX.value = (clientX / window.innerWidth) * 100
+        mouseY.value = (clientY / window.innerHeight) * 100
+      })
+
+      animate()
+
+      function animate() {
+        requestAnimationFrame(animate)
+
+        // Before the mask has been fully loaded
+        if (pivot.position.z < -100) {
+          pivot.position.set(0, 0, pivot.position.z + 20)
+        } else if (mouseX.value && mouseY.value) {
+          computePivot(pivot, centerX, centerY)
+        }
+
+        renderer.render(scene, camera)
+      }
+    }
+
+    function computePivot(pivot, centerX, centerY) {
+      const destinationY = ((mouseX.value - centerX) / 100) * 1.2
+      const destinationX = ((mouseY.value - centerY) / 100) * 1.2
+
+      const maxDistance = 0.08
+
+      if (pivot.rotation.y !== destinationY) {
+        pivot.rotation.y = getDistance(pivot.rotation.y, destinationY)
+      }
+      if (pivot.rotation.x !== destinationX) {
+        pivot.rotation.x = getDistance(pivot.rotation.x, destinationX)
+      }
+
+      function getDistance(position, destination) {
+        const decrease = destination < position
+        const diff = decrease ? position - destination : destination - position
+
+        return diff > maxDistance
+          ? decrease
+            ? position - maxDistance
+            : position + maxDistance
+          : destination
+      }
+    }
+
+    function init(canvas, width, height) {
+      const camera = new PerspectiveCamera(45, width / height, 0.1, 1000)
+      const scene = new Scene()
+      const renderer = new WebGLRenderer({
+        antialias: true,
+        canvas,
+        alpha: true
+      })
+
+      // Camera setting
+      camera.position.set(0, 0, 200)
+      camera.lookAt(0, 0, 0)
+
+      // Light
+      scene.add(new AmbientLight(0x9b9898, 6))
+
+      renderer.setSize(width, height)
+
+      return {
+        scene,
+        camera,
+        renderer
+      }
+    }
+
+    function setModelCenterAndPosition(model, height) {
+      // Mode position
+      const box = new Box3().setFromObject(model)
+      const { y } = box.getSize(new Vector3())
+      model.position.set(0, -y, 0)
+
+      // Model center
+      const windowWith = window.innerWidth
+      const windowHeight = window.innerHeight
+      const centerOffset = height / 2 + 32
+
+      return {
+        centerX: ((windowWith - centerOffset) / windowWith) * 100,
+        centerY: ((centerOffset + 300) / windowHeight) * 100
+      }
+    }
+
+    async function loadModel() {
+      const { GLTFLoader } = await import(
+        'three/examples/jsm/loaders/GLTFLoader'
+      )
+      const loader = new GLTFLoader()
+      return new Promise((resolve, reject) => {
+        loader.load('/models/samuraiMask/scene.gltf', (gltf) => {
+          const [model] = gltf.scene.children
+          if (model) {
+            resolve({ model, gltfScene: gltf.scene })
+          }
+        })
+      })
     }
   }
 })
 </script>
-<style scoped lang="scss">
-.model-container {
-  position: fixed;
-  width: 20rem;
-  height: 20rem;
-  top: 0;
-  right: 0;
-
-  @include tablet-landscape {
-    top: 6rem;
-    right: 2rem;
-  }
-
-  @include desktop {
-    width: 30rem;
-    height: 30rem;
-  }
-
-  canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    &.matrix {
-      width: 100vw;
-      height: 100vh;
-      top: 2rem;
-      right: 5rem;
-
-      @include tablet-landscape {
-        top: 0;
-        right: 0;
-      }
-    }
-
-    &.mask {
-      top: 0;
-      right: 0;
-    }
-  }
-}
-
-.matrix-container {
-  position: absolute;
-  top: -3rem;
-  right: -5rem;
-  width: 20rem;
-  height: 20rem;
-  overflow: hidden;
-  transition: all 0.25s ease-in;
-  border-radius: 50%;
-
-  @include tablet-landscape {
-    top: 0;
-    right: 0;
-    width: 20rem;
-  }
-
-  @include desktop {
-    width: 30rem;
-    height: 30rem;
-  }
-
-  &.extended {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    top: 0;
-    right: 0;
-
-    @include tablet-landscape {
-      top: -2rem;
-      right: -2rem;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
