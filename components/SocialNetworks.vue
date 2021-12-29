@@ -73,14 +73,14 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 10rem;
+    height: 10.5rem;
 
     @include desktop {
       margin-top: 4rem;
     }
 
     li {
-      width: 3.7rem;
+      width: 4rem;
 
       svg {
         width: 100%;
@@ -96,9 +96,8 @@ export default {
     align-items: center;
 
     @include desktop {
-      margin-top: 1.7rem;
       flex-direction: row;
-      transform: translateY(-8rem);
+      transform: translateY(-6.5rem);
     }
 
     li {
