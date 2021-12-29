@@ -3,6 +3,7 @@
     <ul class="menu">
       <li>
         <nuxt-link to="/">
+          <!-- <img src="/images/hell.svg" alt="" /> -->
           <HellSvg />
         </nuxt-link>
       </li>
@@ -71,24 +72,19 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: 10rem;
 
     @include desktop {
-      margin-top: 2rem;
+      margin-top: 4rem;
     }
 
     li {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 3.7rem;
 
       svg {
         width: 100%;
         height: 100%;
-      }
-
-      &:first-child {
-        @include desktop {
-          margin-bottom: 3rem;
-        }
       }
     }
   }
@@ -100,7 +96,7 @@ export default {
     align-items: center;
 
     @include desktop {
-      margin-top: 2rem;
+      margin-top: 1.7rem;
       flex-direction: row;
       transform: translateY(-8rem);
     }
