@@ -11,22 +11,21 @@
         @contractMatrix="contractMatrix"
       />
       <div class="model-container">
-        <!-- <Matrix extended-matrix="extendedMatrix" /> -->
-        <Model />
+        <Matrix :extended-matrix="extendedMatrix" />
+        <!-- <Model /> -->
       </div>
-      <!-- <Model :extended-matrix="extendedMatrix" />
-      <SocialNetworks /> -->
+      <SocialNetworks />
     </div>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Model from '@/components/Model.vue'
+// import Model from '@/components/Model.vue'
 
 export default defineComponent({
   components: {
-    Model
+    // Model
   },
   setup() {
     const extendedMatrix = ref(false)
