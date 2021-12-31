@@ -8,7 +8,13 @@
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  setup({ extendedMatrix }) {
+  props: {
+    extendedMatrix: {
+      type: Boolean,
+      required: true
+    }
+  },
+  setup() {
     const matrix = ref(null)
     const width = ref(null)
     const height = ref(null)
@@ -21,7 +27,6 @@ export default defineComponent({
     })
 
     return {
-      extendedMatrix,
       matrix,
       width,
       height
@@ -38,7 +43,9 @@ export default defineComponent({
       const fontSize = 15
       const columns = width.value / fontSize // number of columns for the rain
 
-      const drops = Array(Math.round(columns)).fill(1)
+      const drops = Array(Math.round(columns)).fill(
+        Math.floor(Math.random() * height.value)
+      )
 
       setInterval(draw, 40)
 
@@ -52,16 +59,14 @@ export default defineComponent({
         ctx.font = `${fontSize}px arial`
 
         drops.forEach((drop, i) => {
-          // a random chinese character to print
           const text = matrix[Math.floor(Math.random() * matrix.length)]
-          // x = i*fontSize, y = value of drops[i]*fontSize
-          ctx.fillText(text, i * fontSize, drop * fontSize)
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize)
 
-          // sending the drop back to the top randomly after it has crossed the screen
-          // adding a randomness to the reset to make the drops scattered on the Y axis
-          if (drop * fontSize > height && Math.random() > 0.975) drop = 0
+          if (drops[i] * fontSize > height.value && Math.random() > 0.975) {
+            drops[i] = 0
+          }
 
-          drop++
+          drops[i]++
         })
       }
     }
@@ -77,30 +82,41 @@ export default defineComponent({
   height: 20rem;
   overflow: hidden;
   transition: all 0.25s ease-in;
-  border-radius: 50%;
+  border-radius: 0 0 0 50%;
 
   @include tablet-landscape {
-    top: 0;
-    right: 0;
+    top: -2rem;
+    right: -2rem;
     width: 20rem;
   }
 
   @include desktop {
-    width: 30rem;
-    height: 30rem;
+    width: 32rem;
+    height: 32rem;
   }
 
   &.extended {
-    width: 100vw;
-    height: 100vh;
+    width: 110vw;
+    height: 110vh;
     border-radius: 0;
-    top: 0;
-    right: 0;
 
     @include tablet-landscape {
       top: -2rem;
       right: -2rem;
     }
+  }
+}
+
+canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+
+  @include tablet-landscape {
+    top: -2rem;
+    right: -2rem;
   }
 }
 </style>
