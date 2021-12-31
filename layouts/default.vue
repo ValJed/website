@@ -12,7 +12,7 @@
       />
       <div class="model-container">
         <Matrix :extended-matrix="extendedMatrix" />
-        <!-- <Model /> -->
+        <Model />
       </div>
       <SocialNetworks />
     </div>
