@@ -2,9 +2,6 @@
   <div>
     <Header />
     <div class="container">
-      <!-- <div class="title">
-      <h1 title="JED" class="glitched">JED</h1>
-    </div> -->
       <Nuxt
         class="content"
         @extendMatrix="extendMatrix"
@@ -21,12 +18,8 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-// import Model from '@/components/Model.vue'
 
 export default defineComponent({
-  components: {
-    // Model
-  },
   setup() {
     const extendedMatrix = ref(false)
 
