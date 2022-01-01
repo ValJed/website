@@ -1,5 +1,5 @@
 <template>
-  <canvas v-if="!isMobile" ref="model" class="mask" />
+  <canvas ref="modelCanvas" />
 </template>
 
 <script>
@@ -16,34 +16,38 @@ import {
 
 export default defineComponent({
   setup() {
-    const model = ref(null)
-    const isMobile = ref(false)
+    const modelCanvas = ref(null)
+    // const model = ref(null)
     const mouseX = ref(null)
     const mouseY = ref(null)
 
-    onMounted(() => {
-      if (window.innerWidth < 900) {
-        isMobile.value = true
-      }
-      if (!isMobile.value) {
-        generateModel(
-          model.value,
-          model.value.clientWidth,
-          model.value.clientHeight
-        )
+    // const worker = this.$worker.createWorker()
+
+    onMounted(async () => {
+      const { default: Worker } = await import('@/model.worker')
+
+      const worker = new Worker()
+
+      worker.postMessage('')
+
+      worker.onmessage = (e) => {
+        console.log('e.data ===> ', e.data)
+        const { model, gltfScene } = e.data
+
+        generateModel(modelCanvas.value, model, gltfScene)
       }
     })
 
-    return {
-      isMobile,
-      model
-    }
+    return { modelCanvas }
 
-    async function generateModel(canvas, width, height) {
+    function generateModel(canvas, model, gltfScene) {
+      const width = canvas.clientWidth
+      const height = canvas.clientHeight
+
       const { scene, renderer, camera } = init(canvas, width, height)
       // const controls = new OrbitControls(camera, renderer.domElement)
 
-      const { model, gltfScene } = await loadModel()
+      // const { model, gltfScene } = await loadModel()
 
       const { centerX, centerY } = setModelCenterAndPosition(model, height)
 
@@ -111,11 +115,9 @@ export default defineComponent({
         alpha: true
       })
 
-      // Camera setting
       camera.position.set(0, 0, 200)
       camera.lookAt(0, 0, 0)
 
-      // Light
       scene.add(new AmbientLight(0x9b9898, 6))
 
       renderer.setSize(width, height)
@@ -128,7 +130,7 @@ export default defineComponent({
     }
 
     function setModelCenterAndPosition(model, height) {
-      // Mode position
+      // Model position
       const box = new Box3().setFromObject(model)
       const { y } = box.getSize(new Vector3())
       model.position.set(0, -y, 0)
@@ -142,21 +144,6 @@ export default defineComponent({
         centerX: ((windowWith - centerOffset) / windowWith) * 100,
         centerY: ((centerOffset + 300) / windowHeight) * 100
       }
-    }
-
-    async function loadModel() {
-      const { GLTFLoader } = await import(
-        'three/examples/jsm/loaders/GLTFLoader'
-      )
-      const loader = new GLTFLoader()
-      return new Promise((resolve, reject) => {
-        loader.load('/models/samuraiMask/scene.gltf', (gltf) => {
-          const [model] = gltf.scene.children
-          if (model) {
-            resolve({ model, gltfScene: gltf.scene })
-          }
-        })
-      })
     }
   }
 })
