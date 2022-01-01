@@ -40,6 +40,7 @@
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",
     "sass-loader": "^10",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "worker-loader": "^3.0.8"
   }
 }
