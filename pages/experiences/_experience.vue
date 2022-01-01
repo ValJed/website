@@ -10,6 +10,12 @@
       <p v-for="(paragraph, i) in experience.content" :key="i">
         {{ paragraph }}
       </p>
+      <p v-if="experience.link">
+        See
+        <a class="link" target="__blank" :href="experience.link">{{
+          experience.link
+        }}</a>
+      </p>
     </div>
     <NuxtLink class="arrow" to="/experiences">
       <Arrow />
@@ -68,6 +74,10 @@ img {
   ::v-deep span {
     color: #fff;
   }
+}
+
+.link {
+  color: $green;
 }
 
 .arrow {

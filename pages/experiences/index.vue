@@ -21,6 +21,11 @@
         </NuxtLink>
       </li>
       <li>
+        <NuxtLink to="experiences/ag">
+          <img src="/images/ag.svg" alt="AG" />
+        </NuxtLink>
+      </li>
+      <li>
         <NuxtLink to="experiences/michelin">
           <img src="/images/michelin.png" alt="Michelin" />
         </NuxtLink>

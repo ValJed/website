@@ -22,14 +22,14 @@ export default {
       'Smart search system with Elasticsearch.'
     ]
   },
-  grondin: {
+  ag: {
     name: 'Aurore Grondin',
     date: 'Octobre - Novembre 2020',
     img: 'ag.svg',
     stack: ['Nuxt', 'Nodejs', 'TipTap', 'MongoDB'],
     link: 'http://auroregrondin.fr',
     content: [
-      'Development of a website using Nuxt for the front end, Nodejs for the API and MongoDB as Database.',
+      'Development of a portfolio website using Nuxt for the front end, Nodejs for the API and MongoDB as Database.',
       'Realization of an admin UI to manage projects, using tip tap for text edition.',
     ]
   },
