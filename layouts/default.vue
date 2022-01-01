@@ -9,7 +9,7 @@
       />
       <div class="model-container">
         <Matrix :extended-matrix="extendedMatrix" />
-        <Model />
+        <Model v-if="!isMobile" />
       </div>
       <SocialNetworks />
     </div>
@@ -17,10 +17,11 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
+    const isMobile = ref(false)
     const extendedMatrix = ref(false)
 
     const extendMatrix = () => {
@@ -31,10 +32,17 @@ export default defineComponent({
       extendedMatrix.value = false
     }
 
+    onMounted(() => {
+      if (window.innerWidth < 900) {
+        isMobile.value = true
+      }
+    })
+
     return {
       extendedMatrix,
       extendMatrix,
-      contractMatrix
+      contractMatrix,
+      isMobile
     }
   }
 })
