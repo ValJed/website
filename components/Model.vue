@@ -17,37 +17,34 @@ import {
 export default defineComponent({
   setup() {
     const modelCanvas = ref(null)
-    // const model = ref(null)
     const mouseX = ref(null)
     const mouseY = ref(null)
 
-    // const worker = this.$worker.createWorker()
-
     onMounted(async () => {
-      const { default: Worker } = await import('@/model.worker')
+      await generateModel(modelCanvas.value)
 
-      const worker = new Worker()
-
-      worker.postMessage('')
-
-      worker.onmessage = (e) => {
-        console.log('e.data ===> ', e.data)
-        const { model, gltfScene } = e.data
-
-        generateModel(modelCanvas.value, model, gltfScene)
-      }
+      // TRYING TO LOAD MODEL THROUGH WEB WORKER
+      // const { default: Worker } = await import('@/model.worker')
+      // const worker = new Worker()
+      // worker.postMessage({})
+      // worker.onmessage = ({ data }) => {
+      //   console.log('data ===> ', data)
+      //   const gltfScene = makeIterableTransferable(data, true)
+      //   const [model] = gltfScene.children
+      //   generateModel(modelCanvas.value, model, gltfScene)
+      // }
     })
 
     return { modelCanvas }
 
-    function generateModel(canvas, model, gltfScene) {
+    async function generateModel(canvas) {
       const width = canvas.clientWidth
       const height = canvas.clientHeight
 
       const { scene, renderer, camera } = init(canvas, width, height)
       // const controls = new OrbitControls(camera, renderer.domElement)
 
-      // const { model, gltfScene } = await loadModel()
+      const { model, gltfScene } = await loadModel()
 
       const { centerX, centerY } = setModelCenterAndPosition(model, height)
 
@@ -85,7 +82,7 @@ export default defineComponent({
       const destinationY = ((mouseX.value - centerX) / 100) * 1.2
       const destinationX = ((mouseY.value - centerY) / 100) * 1.2
 
-      const maxDistance = 0.08
+      const maxDistance = 0.1
 
       if (pivot.rotation.y !== destinationY) {
         pivot.rotation.y = getDistance(pivot.rotation.y, destinationY)
@@ -127,6 +124,22 @@ export default defineComponent({
         camera,
         renderer
       }
+    }
+
+    async function loadModel() {
+      const { GLTFLoader } = await import(
+        'three/examples/jsm/loaders/GLTFLoader'
+      )
+      const loader = new GLTFLoader()
+
+      return new Promise((resolve) => {
+        loader.load('/models/samuraiMask/scene.gltf', (gltf) => {
+          resolve({
+            gltfScene: gltf.scene,
+            model: gltf.scene.children[0]
+          })
+        })
+      })
     }
 
     function setModelCenterAndPosition(model, height) {
