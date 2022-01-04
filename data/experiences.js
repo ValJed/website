@@ -27,7 +27,7 @@ export default {
     date: 'Octobre - Novembre 2020',
     img: 'ag.svg',
     stack: ['Nuxt', 'Nodejs', 'TipTap', 'MongoDB'],
-    link: 'http://auroregrondin.fr',
+    link: 'https://auroregrondin.fr',
     content: [
       'Development of a portfolio website using Nuxt for the front end, Nodejs for the API and MongoDB as Database.',
       'Realization of an admin UI to manage projects, using tip tap for text edition.',
