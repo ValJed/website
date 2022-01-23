@@ -13,7 +13,7 @@
             :extended-matrix="extendedMatrix"
             :container-size="containerSize"
           />
-          <!-- <Model v-if="!isMobile" /> -->
+          <Model v-if="!isMobile" />
         </div>
         <SocialNetworks />
       </aside>
@@ -87,45 +87,13 @@ export default defineComponent({
 
 .sidebar {
   position: relative;
-  padding-top: 20px;
+  padding-top: 2rem;
   width: 20rem;
 }
 
 .model-container {
+  position: relative;
   width: 100%;
   height: 20rem;
-
-  @include tablet-landscape {
-    top: 6rem;
-    right: 2rem;
-  }
-
-  // @include desktop {
-  //   width: 30rem;
-  //   height: 30rem;
-  // }
-
-  canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    &.matrix {
-      width: 100vw;
-      height: 100vh;
-      top: 2rem;
-      right: 5rem;
-
-      @include tablet-landscape {
-        top: 0;
-        right: 0;
-      }
-    }
-
-    &.mask {
-      top: 0;
-      right: 0;
-    }
-  }
 }
 </style>

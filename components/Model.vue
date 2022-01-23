@@ -161,4 +161,12 @@ export default defineComponent({
   }
 })
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+</style>
