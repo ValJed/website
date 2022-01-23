@@ -1,17 +1,22 @@
 <template>
   <div>
     <Header />
-    <div class="container">
+    <div ref="containerRef" class="container">
       <Nuxt
         class="content"
         @extendMatrix="extendMatrix"
         @contractMatrix="contractMatrix"
       />
-      <div class="model-container">
-        <Matrix :extended-matrix="extendedMatrix" />
-        <Model v-if="!isMobile" />
-      </div>
-      <SocialNetworks />
+      <aside class="sidebar">
+        <div class="model-container">
+          <Matrix
+            :extended-matrix="extendedMatrix"
+            :container-size="containerSize"
+          />
+          <!-- <Model v-if="!isMobile" /> -->
+        </div>
+        <SocialNetworks />
+      </aside>
     </div>
   </div>
 </template>
@@ -23,6 +28,8 @@ export default defineComponent({
   setup() {
     const isMobile = ref(false)
     const extendedMatrix = ref(false)
+    const containerRef = ref(null)
+    const containerSize = ref(0)
 
     const extendMatrix = () => {
       extendedMatrix.value = true
@@ -36,43 +43,67 @@ export default defineComponent({
       if (window.innerWidth < 900) {
         isMobile.value = true
       }
+
+      containerSize.value = containerRef.value.clientWidth
+
+      window.onresize = () => {
+        containerSize.value = containerRef.value.clientWidth
+      }
     })
 
     return {
       extendedMatrix,
       extendMatrix,
       contractMatrix,
-      isMobile
+      isMobile,
+      containerRef,
+      containerSize
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 4rem;
+  min-height: 100vh;
+
+  @include desktop {
+    max-width: 1400px;
+  }
+}
+
 .content {
   padding-bottom: 3rem;
+  flex-grow: 1;
 
   @include desktop {
     width: calc(100% - 28rem);
   }
 }
 
-.model-container {
-  position: fixed;
+.sidebar {
+  position: relative;
+  padding-top: 20px;
   width: 20rem;
+}
+
+.model-container {
+  width: 100%;
   height: 20rem;
-  top: 0;
-  right: 0;
 
   @include tablet-landscape {
     top: 6rem;
     right: 2rem;
   }
 
-  @include desktop {
-    width: 30rem;
-    height: 30rem;
-  }
+  // @include desktop {
+  //   width: 30rem;
+  //   height: 30rem;
+  // }
 
   canvas {
     position: absolute;

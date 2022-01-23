@@ -96,6 +96,10 @@ h1 {
     gap: 1rem;
     grid-template-columns: repeat(2, auto);
     height: calc(100% - 132px);
+
+    @include tablet-portrait {
+      padding-right: 20px;
+    }
   }
 
   li {

@@ -40,22 +40,6 @@
 
     @include text;
   }
-
-  .container {
-    display: flex;
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 4rem;
-    min-height: 100vh;
-
-    @include desktop {
-      max-width: 1400px;
-    }
-
-    @include desktop-xl {
-      max-width: 1800px;
-    }
-  }
 }
 
 // Anims

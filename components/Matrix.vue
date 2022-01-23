@@ -1,23 +1,46 @@
 <template>
-  <div class="matrix-container" :class="{ extended: extendedMatrix }">
+  <div
+    class="matrix-container"
+    :style="{ width: matrixContainerWidth, left: matrixContainerLeft }"
+    :class="{ extended: extendedMatrix }"
+  >
     <canvas ref="matrix" :width="width" :height="height" />
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, ref, onMounted, watch } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
     extendedMatrix: {
       type: Boolean,
       required: true
+    },
+    containerSize: {
+      type: Number,
+      required: true
     }
   },
-  setup() {
+  setup(props) {
     const matrix = ref(null)
     const width = ref(null)
     const height = ref(null)
+    const matrixContainerWidth = ref('100%')
+    const matrixContainerLeft = ref('0px')
+
+    watch(
+      () => props.extendedMatrix,
+      () => {
+        matrixContainerWidth.value = props.extendedMatrix
+          ? `${props.containerSize}px`
+          : '100%'
+
+        matrixContainerLeft.value = props.extendedMatrix
+          ? `calc(-${props.containerSize}px + 20rem)`
+          : '0px'
+      }
+    )
 
     onMounted(() => {
       width.value = window.innerWidth
@@ -29,7 +52,9 @@ export default defineComponent({
     return {
       matrix,
       width,
-      height
+      height,
+      matrixContainerWidth,
+      matrixContainerLeft
     }
 
     function generateMatrix(canvas) {
@@ -75,34 +100,24 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 .matrix-container {
-  position: absolute;
-  top: -3rem;
-  right: -5rem;
-  width: 20rem;
+  position: relative;
+  width: 100%;
   height: 20rem;
   overflow: hidden;
   transition: all 0.25s ease-in;
-  border-radius: 0 0 0 50%;
-
-  @include tablet-landscape {
-    top: -2rem;
-    right: -2rem;
-    width: 20rem;
-  }
-
-  @include desktop {
-    width: 32rem;
-    height: 32rem;
-  }
+  border-radius: 50%;
+  right: 0;
 
   &.extended {
-    width: 110vw;
-    height: 110vh;
+    height: calc(100vh - (4rem + 20px));
     border-radius: 0;
 
     @include tablet-landscape {
-      top: -2rem;
-      right: -2rem;
+      right: 0;
+    }
+
+    @include desktop {
+      width: 1400px;
     }
   }
 }
@@ -111,12 +126,6 @@ canvas {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  top: 0;
   right: 0;
-
-  @include tablet-landscape {
-    top: -2rem;
-    right: -2rem;
-  }
 }
 </style>
