@@ -15,29 +15,24 @@ import {
 } from 'three'
 
 export default defineComponent({
-  setup() {
+  props: {
+    containerSize: {
+      type: Number,
+      required: true
+    }
+  },
+  setup({ containerSize }) {
     const modelCanvas = ref(null)
     const mouseX = ref(null)
     const mouseY = ref(null)
 
     onMounted(async () => {
-      await generateModel(modelCanvas.value)
-
-      // TRYING TO LOAD MODEL THROUGH WEB WORKER
-      // const { default: Worker } = await import('@/model.worker')
-      // const worker = new Worker()
-      // worker.postMessage({})
-      // worker.onmessage = ({ data }) => {
-      //   console.log('data ===> ', data)
-      //   const gltfScene = makeIterableTransferable(data, true)
-      //   const [model] = gltfScene.children
-      //   generateModel(modelCanvas.value, model, gltfScene)
-      // }
+      await generateModel(modelCanvas.value, containerSize)
     })
 
     return { modelCanvas }
 
-    async function generateModel(canvas) {
+    async function generateModel(canvas, containerSize) {
       const width = canvas.clientWidth
       const height = canvas.clientHeight
 
@@ -46,7 +41,11 @@ export default defineComponent({
 
       const { model, gltfScene } = await loadModel()
 
-      const { centerX, centerY } = setModelCenterAndPosition(model, height)
+      const { centerX, centerY } = setModelCenterAndPosition(
+        model,
+        height,
+        containerSize
+      )
 
       const pivot = new Object3D()
 
@@ -142,7 +141,7 @@ export default defineComponent({
       })
     }
 
-    function setModelCenterAndPosition(model, height) {
+    function setModelCenterAndPosition(model, modelSize, containerSize) {
       // Model position
       const box = new Box3().setFromObject(model)
       const { y } = box.getSize(new Vector3())
@@ -151,11 +150,12 @@ export default defineComponent({
       // Model center
       const windowWith = window.innerWidth
       const windowHeight = window.innerHeight
-      const centerOffset = height / 2 + 32
+      const centerOffsetY = modelSize / 2 + 32
+      const centerOffsetX = modelSize / 2 + (windowWith - containerSize) / 2
 
       return {
-        centerX: ((windowWith - centerOffset) / windowWith) * 100,
-        centerY: ((centerOffset + 300) / windowHeight) * 100
+        centerX: ((windowWith - centerOffsetX) / windowWith) * 100,
+        centerY: ((centerOffsetY + 300) / windowHeight) * 100
       }
     }
   }
