@@ -14,8 +14,14 @@ import { defineComponent } from '@nuxtjs/composition-api'
 // import Mongodb from '@/components/svg/Mongodb.vue'
 
 export default defineComponent({
-  setup() {
-    const jedArray = new Array(10).fill('JED')
+  props: {
+    isMobile: {
+      type: Boolean,
+      required: true
+    }
+  },
+  setup({ isMobile }) {
+    const jedArray = new Array(isMobile ? 6 : 10).fill('JED')
 
     return { jedArray }
   }

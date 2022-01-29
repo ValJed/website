@@ -51,17 +51,15 @@ export default {
 
 <style lang="scss">
 .links {
+  width: 4rem;
+  top: 5rem;
   position: fixed;
-  top: 2rem;
-  right: 2rem;
-  width: 2rem;
+  right: 0.4rem;
+  z-index: 10;
 
   @include tablet-landscape {
-    top: 34rem;
-  }
-
-  @include desktop {
-    width: 30rem;
+    position: static;
+    width: 100%;
   }
 
   li {
@@ -73,14 +71,22 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 10.5rem;
 
-    @include desktop {
+    @include tablet-landscape {
+      height: 10.5rem;
       margin-top: 4rem;
     }
 
     li {
-      width: 4rem;
+      width: 3.2rem;
+
+      @include tablet-landscape {
+        width: 4rem;
+      }
+
+      &:first-child {
+        margin-bottom: 0.4rem;
+      }
 
       svg {
         width: 100%;
@@ -95,16 +101,18 @@ export default {
     flex-direction: column;
     align-items: center;
 
-    @include desktop {
+    @include tablet-landscape {
       flex-direction: row;
       transform: translateY(-6.5rem);
     }
 
     li {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
 
-      @include desktop {
+      @include tablet-landscape {
+        width: 2.5rem;
+        height: 2.5rem;
         margin: 0 2rem;
       }
 

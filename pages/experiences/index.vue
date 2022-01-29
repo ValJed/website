@@ -94,19 +94,27 @@ h1 {
     position: relative;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(1, auto);
     height: calc(100% - 132px);
+    padding-right: 20px;
 
-    @include tablet-portrait {
-      padding-right: 20px;
+    @include tablet-landscape {
+      padding: 0 2rem 2rem 2rem;
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(2, auto);
     }
   }
 
   li {
     border-radius: 50%;
+    height: 6rem;
 
-    &:hover {
-      animation: shadow 2s linear 0s infinite running forwards;
+    @include tablet-landscape {
+      &:hover {
+        animation: shadow 2s linear 0s infinite running forwards;
+      }
     }
 
     > a {
@@ -120,9 +128,13 @@ h1 {
     img {
       display: block;
       min-height: 2.5rem;
-      max-height: 5rem;
+      max-height: 4rem;
       max-width: 13rem;
       height: auto;
+
+      @include desktop {
+        max-height: 5rem;
+      }
     }
 
     div {

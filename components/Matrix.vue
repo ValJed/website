@@ -20,6 +20,10 @@ export default defineComponent({
     containerSize: {
       type: Number,
       required: true
+    },
+    isMobile: {
+      type: Boolean,
+      required: true
     }
   },
   setup(props) {
@@ -32,13 +36,15 @@ export default defineComponent({
     watch(
       () => props.extendedMatrix,
       () => {
-        matrixContainerWidth.value = props.extendedMatrix
-          ? `${props.containerSize}px`
-          : '100%'
+        matrixContainerWidth.value =
+          props.extendedMatrix && !props.isMobile
+            ? `${props.containerSize}px`
+            : '100%'
 
-        matrixContainerLeft.value = props.extendedMatrix
-          ? `calc(-${props.containerSize}px + 20rem)`
-          : '0px'
+        matrixContainerLeft.value =
+          props.extendedMatrix && !props.isMobile
+            ? `calc(-${props.containerSize}px + 20rem)`
+            : '0px'
       }
     )
 
@@ -99,25 +105,48 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
+@keyframes mobileExtented {
+  15% {
+    height: 0;
+    z-index: 3;
+  }
+
+  50% {
+    height: calc(100vh - 4rem); // header
+  }
+
+  85% {
+    height: 0;
+    z-index: 1;
+  }
+
+  100% {
+    height: 7rem;
+  }
+}
+
 .matrix-container {
   position: relative;
   width: 100%;
-  height: 20rem;
+  height: 7rem;
   overflow: hidden;
   transition: all 0.25s ease-in;
-  border-radius: 50%;
   right: 0;
+  z-index: -10;
+
+  @include tablet-landscape {
+    height: 20rem;
+    border-radius: 50%;
+  }
 
   &.extended {
-    height: calc(100vh - (4rem + 20px));
-    border-radius: 0;
+    animation: 0.5s mobileExtented;
+    // height: calc(100vh - 4rem); // header
 
     @include tablet-landscape {
+      height: calc(100vh - 6rem); // header + sidear padding
       right: 0;
-    }
-
-    @include desktop {
-      width: 1400px;
+      border-radius: 0;
     }
   }
 }

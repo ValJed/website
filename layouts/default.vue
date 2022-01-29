@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
       <Nuxt
         class="content"
@@ -12,8 +12,9 @@
           <Matrix
             :extended-matrix="extendedMatrix"
             :container-size="containerSize"
+            :is-mobile="isMobile"
           />
-          <Model v-if="!isMobile" />
+          <Model v-if="!isMobile" :container-size="containerSize" />
         </div>
         <SocialNetworks />
       </aside>
@@ -65,11 +66,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .container {
-  display: flex;
   width: 80%;
   margin: 0 auto;
   padding-top: 4rem;
   min-height: 100vh;
+
+  @include tablet-landscape {
+    display: flex;
+  }
 
   @include desktop {
     max-width: 1400px;
@@ -77,8 +81,17 @@ export default defineComponent({
 }
 
 .content {
+  position: relative;
   padding-bottom: 3rem;
   flex-grow: 1;
+  z-index: 0;
+  padding-right: 1rem;
+  padding: 2rem 1rem 0 0;
+  min-height: calc(100vh - 4rem);
+
+  @include tablet-landscape {
+    padding: 5rem 0 0 0;
+  }
 
   @include desktop {
     width: calc(100% - 28rem);
@@ -86,9 +99,18 @@ export default defineComponent({
 }
 
 .sidebar {
-  position: relative;
-  padding-top: 2rem;
-  width: 20rem;
+  position: fixed;
+  width: 100%;
+  height: 5rem;
+  left: 0;
+  top: 4rem;
+
+  @include tablet-landscape {
+    position: relative;
+    width: 20rem;
+    padding-top: 2rem;
+    flex-shrink: 0;
+  }
 }
 
 .model-container {
