@@ -35,14 +35,12 @@ export default defineComponent({
 
     watch(
       () => props.extendedMatrix,
-      () => {
+      (newVal) => {
         matrixContainerWidth.value =
-          props.extendedMatrix && !props.isMobile
-            ? `${props.containerSize}px`
-            : '100%'
+          newVal && !props.isMobile ? `${props.containerSize}px` : '100%'
 
         matrixContainerLeft.value =
-          props.extendedMatrix && !props.isMobile
+          newVal && !props.isMobile
             ? `calc(-${props.containerSize}px + 20rem)`
             : '0px'
       }
@@ -137,6 +135,7 @@ export default defineComponent({
   @include tablet-landscape {
     height: 20rem;
     border-radius: 50%;
+    z-index: 0;
   }
 
   &.extended {
@@ -144,9 +143,10 @@ export default defineComponent({
     // height: calc(100vh - 4rem); // header
 
     @include tablet-landscape {
-      height: calc(100vh - 6rem); // header + sidear padding
+      height: calc(100vh - 10rem); // header + sidear padding
       right: 0;
       border-radius: 0;
+      animation: none;
     }
   }
 }

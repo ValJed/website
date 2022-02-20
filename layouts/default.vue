@@ -90,7 +90,7 @@ export default defineComponent({
   min-height: calc(100vh - 4rem);
 
   @include tablet-landscape {
-    padding: 5rem 0 0 0;
+    padding: 0;
   }
 
   @include desktop {
