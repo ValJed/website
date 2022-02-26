@@ -44,10 +44,6 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
-h1 {
-  padding: 3rem 0;
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -81,23 +77,27 @@ img {
 }
 
 .arrow {
-  position: absolute;
-  left: 10%;
-  bottom: 4rem;
+  position: relative;
+  left: 1.24rem;
   width: 4rem;
-  padding-left: 4rem;
-}
 
-// Anims
-.matrix-enter-active {
-  .logo {
-    animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+  @include tablet-landscape {
+    top: 3rem;
   }
 }
 
-.matrix-leave-active {
-  .logo {
-    animation: 0.5s ease-in-out 0s 1 normal both titleLeaveAnim;
+// Anims
+@include tablet-landscape {
+  .matrix-enter-active {
+    .logo {
+      animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+    }
+  }
+
+  .matrix-leave-active {
+    .logo {
+      animation: 0.5s ease-in-out 0s 1 normal both titleLeaveAnim;
+    }
   }
 }
 </style>

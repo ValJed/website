@@ -58,7 +58,7 @@ export default {
   z-index: 10;
 
   @include tablet-landscape {
-    position: static;
+    position: inherit;
     width: 100%;
   }
 

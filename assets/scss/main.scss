@@ -27,6 +27,7 @@
   h1 {
     @include text-2xl;
     font-family: $ftext;
+    margin: 0 0 3rem;
   }
 
   h2,
