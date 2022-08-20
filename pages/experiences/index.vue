@@ -67,10 +67,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  padding: 3rem 0;
-}
-
 @keyframes shadow {
   0% {
     box-shadow: -5px -5px 25px $green;
@@ -158,15 +154,17 @@ h2 {
 }
 
 // Anims
-.matrix-enter-active {
-  h1 {
-    animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+@include tablet-landscape {
+  .matrix-enter-active {
+    h1 {
+      animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+    }
   }
-}
 
-.matrix-leave-active {
-  h1 {
-    animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
+  .matrix-leave-active {
+    h1 {
+      animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
+    }
   }
 }
 

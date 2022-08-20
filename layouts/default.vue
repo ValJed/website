@@ -10,9 +10,7 @@
       <aside class="sidebar">
         <div class="model-container">
           <Matrix
-            :extended-matrix="extendedMatrix"
-            :container-size="containerSize"
-            :is-mobile="isMobile"
+            v-if="containerSize" :extended-matrix="extendedMatrix" :container-size="containerSize" :is-mobile="isMobile"
           />
           <Model v-if="!isMobile" :container-size="containerSize" />
         </div>
@@ -46,10 +44,9 @@ export default defineComponent({
       }
 
       containerSize.value = containerRef.value.clientWidth
+      console.log('size value: ', containerSize.value)
 
-      window.onresize = () => {
-        containerSize.value = containerRef.value.clientWidth
-      }
+      // resize()
     })
 
     return {
@@ -60,15 +57,33 @@ export default defineComponent({
       containerRef,
       containerSize
     }
+
+    // function resize() {
+    //   let timeout = null
+
+    //   window.onresize = () => {
+    //     if (timeout) {
+    //       clearTimeout(timeout)
+    //     }
+
+    //     timeout = setTimeout(() => {
+    //       containerSize.value = containerRef.value.clientWidth
+    //       timeout = null
+
+    //       console.log('containerSize.value ===> ', containerSize.value)
+    //     }, 500)
+    //   }
+    // }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .container {
+  position: relative;
   width: 80%;
   margin: 0 auto;
-  padding-top: 4rem;
+  padding-top: 6rem;
   min-height: 100vh;
 
   @include tablet-landscape {
@@ -85,9 +100,9 @@ export default defineComponent({
   padding-bottom: 3rem;
   flex-grow: 1;
   z-index: 0;
-  padding-right: 1rem;
-  padding: 2rem 1rem 0 0;
+  padding: 7rem 1rem 2rem 0;
   min-height: calc(100vh - 4rem);
+  min-height: 50vh;
 
   @include tablet-landscape {
     padding: 0;
@@ -102,13 +117,15 @@ export default defineComponent({
   position: fixed;
   width: 100%;
   height: 5rem;
-  left: 0;
+  right: 0;
   top: 4rem;
 
   @include tablet-landscape {
-    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 6rem;
+    flex-shrink: 0;
     width: 20rem;
-    padding-top: 2rem;
     flex-shrink: 0;
   }
 }
@@ -116,6 +133,9 @@ export default defineComponent({
 .model-container {
   position: relative;
   width: 100%;
-  height: 20rem;
+
+  @include tablet-landscape {
+    height: 20rem;
+  }
 }
 </style>

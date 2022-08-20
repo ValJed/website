@@ -1,7 +1,12 @@
 <template>
   <header>
-    <div v-for="(jed, i) in jedArray" :key="i">
-      <span>{{ jed }}</span>
+    <div v-for="(jed, i) in jedArray" :key="i" toto="roroororororroo" tata="tat" tutu="asazda">
+      <span>{{ jed }} </span>
+
+
+
+
+
     </div>
   </header>
 </template>

@@ -43,6 +43,19 @@ export default defineComponent({
           newVal && !props.isMobile
             ? `calc(-${props.containerSize}px + 20rem)`
             : '0px'
+
+        if (newVal) {
+          console.log('props.containerSize ===> ', props.containerSize)
+          // console.log(
+          //   'matrixContainerWidth.value ===> ',
+          //   matrixContainerWidth.value
+          // )
+
+          // console.log(
+          //   'matrixContainerLeft.value ===> ',
+          //   matrixContainerLeft.value
+          // )
+        }
       }
     )
 
@@ -87,7 +100,7 @@ export default defineComponent({
         ctx.fillStyle = '#03A062' // green text
         ctx.font = `${fontSize}px arial`
 
-        drops.forEach((drop, i) => {
+        drops.forEach((_, i) => {
           const text = matrix[Math.floor(Math.random() * matrix.length)]
           ctx.fillText(text, i * fontSize, drops[i] * fontSize)
 
@@ -139,11 +152,11 @@ export default defineComponent({
   }
 
   &.extended {
-    animation: 0.5s mobileExtented;
-    // height: calc(100vh - 4rem); // header
+    // animation: 0.5s mobileExtented;
+    height: calc(100vh - 4rem); // header
 
     @include tablet-landscape {
-      height: calc(100vh - 10rem); // header + sidear padding
+      height: calc(100vh - 6rem); // header + container padding
       right: 0;
       border-radius: 0;
       animation: none;

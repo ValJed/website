@@ -27,6 +27,8 @@ export default defineComponent({
     const mouseY = ref(null)
 
     onMounted(async () => {
+      console.log('container size => ', containerSize)
+
       await generateModel(modelCanvas.value, containerSize)
     })
 

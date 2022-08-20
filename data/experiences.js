@@ -1,7 +1,7 @@
 export default {
   apostrophe: {
     name: 'Apostrophe',
-    logoName: "Apostrophe",
+    logoName: 'Apostrophe',
     date: 'November 2020 - Today',
     img: 'apostrophe.svg',
     stack: ['Nodejs', 'Vue', 'MongoDB'],
