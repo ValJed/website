@@ -104,7 +104,7 @@ export default defineComponent({
   }
 
   li {
-    border-radius: 50%;
+    border-radius: 50px;
     height: 6rem;
 
     @include tablet-landscape {
