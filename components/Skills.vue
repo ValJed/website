@@ -29,38 +29,6 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
-import Node from '@/components/svg/Node.vue'
-import Vue from '@/components/svg/Vue.vue'
-import React from '@/components/svg/React.vue'
-import Mongodb from '@/components/svg/Mongodb.vue'
-import Graphql from '@/components/svg/Graphql.vue'
-
-export default defineComponent({
-  components: {
-    Node,
-    Vue,
-    React,
-    Mongodb,
-    Graphql
-  },
-  props: {
-    texts: {
-      type: Array,
-      default: null
-    }
-  },
-  setup() {
-    // onMounted(() => {
-    //   write(writtenTexts)
-    // })
-
-    return {}
-  }
-})
-</script>
-
 <style lang="scss" scoped>
 .skills {
   &-title {

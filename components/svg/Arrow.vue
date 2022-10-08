@@ -43,9 +43,6 @@
   </svg>
 </template>
 
-<script>
-export default {}
-</script>
 <style scoped lang="scss">
 $distance: 2rem;
 

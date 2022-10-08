@@ -9,61 +9,55 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
-import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
+<script setup>
+/* import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api' */
+/* import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded' */
 
-export default defineComponent({
-  props: {
-    texts: {
-      type: Array,
-      default: null
-    },
-    textsLoaded: {
-      type: Boolean
-    }
+const props = defineProps({
+  texts: {
+    type: Array,
+    default: null
   },
-  setup({ texts }) {
-    const textsLoaded = getTextsLoaded()
-
-    const writtenTexts = texts.map((text) => ref(textsLoaded ? text : ''))
-    const activeIndex = ref(textsLoaded ? 3 : 0)
-    const min = 30
-    const max = 200
-
-    if (!textsLoaded) {
-      onMounted(() => {
-        write(writtenTexts)
-      })
-    }
-
-    return { writtenTexts, activeIndex }
-
-    async function write(writtenTexts) {
-      setTextsLoaded()
-
-      for (const [index, text] of texts.entries()) {
-        activeIndex.value = index
-
-        for (const char of text) {
-          await timeOut()
-
-          writtenTexts[index].value += char
-        }
-      }
-
-      function timeOut() {
-        return new Promise((resolve) => {
-          const random = Math.random() * (max - min + 1) + min
-
-          setTimeout(() => {
-            resolve()
-          }, random)
-        })
-      }
-    }
+  textsLoaded: {
+    type: Boolean
   }
 })
+const textsLoaded = getTextsLoaded()
+
+const writtenTexts = props.texts.map((text) => ref(textsLoaded ? text : ''))
+const activeIndex = ref(textsLoaded.textsLoaded ? 3 : 0)
+const min = 30
+const max = 200
+
+if (!props.textsLoaded) {
+  onMounted(() => {
+    write(writtenTexts)
+  })
+}
+
+async function write(writtenTexts) {
+  setTextsLoaded()
+
+  for (const [index, text] of texts.entries()) {
+    activeIndex.value = index
+
+    for (const char of text) {
+      await timeOut()
+
+      writtenTexts[index].value += char
+    }
+  }
+
+  function timeOut() {
+    return new Promise((resolve) => {
+      const random = Math.random() * (max - min + 1) + min
+
+      setTimeout(() => {
+        resolve()
+      }, random)
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>

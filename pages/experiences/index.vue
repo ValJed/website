@@ -39,31 +39,21 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
+<script setup>
+/* import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api' */
 
-export default defineComponent({
-  setup() {
-    const showXp = ref(false)
-    const active = ref(null)
+const showXp = ref(false)
+const active = ref(null)
 
-    onMounted(() => {
-      setTimeout(() => {
-        showXp.value = true
-      }, 250)
-    })
-
-    const activeToggle = ({ currentTarget }) => {
-      currentTarget.classList.toggle('active')
-    }
-
-    return {
-      showXp,
-      active,
-      activeToggle
-    }
-  }
+onMounted(() => {
+  setTimeout(() => {
+    showXp.value = true
+  }, 250)
 })
+
+const activeToggle = ({ currentTarget }) => {
+  currentTarget.classList.toggle('active')
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,16 +1,19 @@
 <template>
   <div>
-    <Header :is-mobile="isMobile" />
+    <SiteHeader :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
       <Nuxt
         class="content"
-        @extendMatrix="extendMatrix"
-        @contractMatrix="contractMatrix"
+        @extend-matrix="extendMatrix"
+        @contract-matrix="contractMatrix"
       />
       <aside class="sidebar">
         <div class="model-container">
           <Matrix
-            v-if="containerSize" :extended-matrix="extendedMatrix" :container-size="containerSize" :is-mobile="isMobile"
+            v-if="containerSize"
+            :extended-matrix="extendedMatrix"
+            :container-size="containerSize"
+            :is-mobile="isMobile"
           />
           <Model v-if="!isMobile" :container-size="containerSize" />
         </div>
@@ -20,62 +23,49 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
+<script setup>
+/* import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api' */
 
-export default defineComponent({
-  setup() {
-    const isMobile = ref(false)
-    const extendedMatrix = ref(false)
-    const containerRef = ref(null)
-    const containerSize = ref(0)
+const isMobile = ref(false)
+const extendedMatrix = ref(false)
+const containerRef = ref(null)
+const containerSize = ref(0)
 
-    const extendMatrix = () => {
-      extendedMatrix.value = true
-    }
+const extendMatrix = () => {
+  extendedMatrix.value = true
+}
 
-    const contractMatrix = () => {
-      extendedMatrix.value = false
-    }
+const contractMatrix = () => {
+  extendedMatrix.value = false
+}
 
-    onMounted(() => {
-      if (window.innerWidth < 900) {
-        isMobile.value = true
-      }
-
-      containerSize.value = containerRef.value.clientWidth
-      console.log('size value: ', containerSize.value)
-
-      // resize()
-    })
-
-    return {
-      extendedMatrix,
-      extendMatrix,
-      contractMatrix,
-      isMobile,
-      containerRef,
-      containerSize
-    }
-
-    // function resize() {
-    //   let timeout = null
-
-    //   window.onresize = () => {
-    //     if (timeout) {
-    //       clearTimeout(timeout)
-    //     }
-
-    //     timeout = setTimeout(() => {
-    //       containerSize.value = containerRef.value.clientWidth
-    //       timeout = null
-
-    //       console.log('containerSize.value ===> ', containerSize.value)
-    //     }, 500)
-    //   }
-    // }
+onMounted(() => {
+  if (window.innerWidth < 900) {
+    isMobile.value = true
   }
+
+  containerSize.value = containerRef.value.clientWidth
+  console.log('size value: ', containerSize.value)
+
+  // resize()
 })
+
+// function resize() {
+//   let timeout = null
+
+//   window.onresize = () => {
+//     if (timeout) {
+//       clearTimeout(timeout)
+//     }
+
+//     timeout = setTimeout(() => {
+//       containerSize.value = containerRef.value.clientWidth
+//       timeout = null
+
+//       console.log('containerSize.value ===> ', containerSize.value)
+//     }, 500)
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

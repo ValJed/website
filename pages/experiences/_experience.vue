@@ -23,26 +23,18 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
+<script setup>
+/* import { defineComponent, useRoute } from '@nuxtjs/composition-api' */
 import experiences from '@/data/experiences'
 import Arrow from '@/components/svg/Arrow.vue'
 
-export default defineComponent({
-  components: {
-    Arrow
-  },
-  setup() {
-    const route = useRoute()
-    const { experience: current } = route.value.params
-    const experience = experiences[current]
+const route = useRoute()
+const { experience: current } = route.value.params
+const experience = experiences[current]
 
-    const stack = experience.stack.join(' <span>/</span> ')
-
-    return { experience, stack }
-  }
-})
+const stack = experience.stack.join(' <span>/</span> ')
 </script>
+
 <style scoped lang="scss">
 .logo {
   display: flex;

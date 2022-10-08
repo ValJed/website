@@ -1,37 +1,26 @@
 <template>
   <header>
-    <div v-for="(jed, i) in jedArray" :key="i" toto="roroororororroo" tata="tat" tutu="asazda">
+    <div v-for="(jed, i) in jedArray" :key="i">
       <span>{{ jed }} </span>
-
-
-
-
-
     </div>
   </header>
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
-
+<script setup>
 // import Node from '@/components/svg/Node.vue'
 // import Vue from '@/components/svg/Vue.vue'
 // import Mongodb from '@/components/svg/Mongodb.vue'
 
-export default defineComponent({
-  props: {
-    isMobile: {
-      type: Boolean,
-      required: true
-    }
-  },
-  setup({ isMobile }) {
-    const jedArray = new Array(isMobile ? 6 : 10).fill('JED')
-
-    return { jedArray }
+const props = defineProps({
+  isMobile: {
+    type: Boolean,
+    required: true
   }
 })
+
+const jedArray = new Array(props.isMobile ? 6 : 10).fill('JED')
 </script>
+
 <style scoped lang="scss">
 @keyframes animateBanner {
   0% {

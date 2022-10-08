@@ -16,8 +16,8 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
+<script setup>
+/* import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api' */
 import weaponsAnimation from '@/lib/weaponsAnimation'
 import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
@@ -27,53 +27,42 @@ const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
 const typingMin = 30
 const typingMax = 150
 
-export default defineComponent({
-  setup() {
-    const seconds = ref(0)
-    const weapon = ref(weapons[0])
-    const textsLoaded = getTextsLoaded()
-    const interestsText = ref(textsLoaded ? interests : '')
+/* const seconds = ref(0) */
+const weapon = ref(weapons[0])
+const textsLoaded = getTextsLoaded()
+const interestsText = ref(textsLoaded ? interests : '')
 
-    onMounted(() => {
-      setInterval(async () => {
-        await weaponsAnimation(weapons, weapon)
-      }, 3000)
+onMounted(() => {
+  setInterval(async () => {
+    await weaponsAnimation(weapons, weapon)
+  }, 3000)
 
-      if (!textsLoaded) {
-        setTimeout(() => {
-          write(interestsText, interests)
-        }, 2000)
-      }
-    })
-
-    return {
-      seconds,
-      interests,
-      weapon,
-      interestsText
-    }
-
-    async function write(text, interests) {
-      setTextsLoaded()
-
-      for (const char of interests) {
-        await timeOut()
-
-        text.value += char
-      }
-
-      function timeOut() {
-        return new Promise((resolve) => {
-          const random = Math.random() * (typingMax - typingMin + 1) + typingMin
-
-          setTimeout(() => {
-            resolve()
-          }, random)
-        })
-      }
-    }
+  if (!textsLoaded) {
+    setTimeout(() => {
+      write(interestsText, interests)
+    }, 2000)
   }
 })
+
+async function write(text, interests) {
+  setTextsLoaded()
+
+  for (const char of interests) {
+    await timeOut()
+
+    text.value += char
+  }
+
+  function timeOut() {
+    return new Promise((resolve) => {
+      const random = Math.random() * (typingMax - typingMin + 1) + typingMin
+
+      setTimeout(() => {
+        resolve()
+      }, random)
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>

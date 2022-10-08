@@ -32,23 +32,6 @@
   </div>
 </template>
 
-<script>
-import LinkedinSvg from './svg/Linkedin.vue'
-import GithubSvg from './svg/Github.vue'
-import SatanSvg from './svg/Satan.vue'
-import HellSvg from './svg/Hell.vue'
-
-export default {
-  components: {
-    LinkedinSvg,
-    GithubSvg,
-    SatanSvg,
-    HellSvg
-  },
-  emits: ['goToHome', 'goToExperiences']
-}
-</script>
-
 <style lang="scss">
 .links {
   width: 4rem;
