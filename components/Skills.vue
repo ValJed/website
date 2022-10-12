@@ -4,17 +4,17 @@
     <section>
       <span class="skills-title">Javascript</span>
       <ul>
-        <li class="skill"><Node /></li>
-        <li class="skill"><Vue /></li>
-        <li class="skill"><React /></li>
+        <li class="skill"><SvgNode /></li>
+        <li class="skill"><SvgVue /></li>
+        <li class="skill"><SvgReact /></li>
         <li class="skill">Jest</li>
       </ul>
     </section>
     <section>
       <span class="skills-title">Databases</span>
       <ul>
-        <li class="skill"><Mongodb /></li>
-        <li class="skill"><Graphql /></li>
+        <li class="skill"><SvgMongodb /></li>
+        <li class="skill"><SvgGraphql /></li>
         <li class="skill">SQL</li>
       </ul>
     </section>
@@ -35,16 +35,11 @@
     @include text-xl;
 
     font-style: $fs1;
-
-    // background-color: $blue;
   }
 }
 
 .skill {
   width: 6rem;
   height: 6rem;
-
-  svg {
-  }
 }
 </style>

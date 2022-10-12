@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setu>
+<script setup>
 const props = defineProps({
   extendedMatrix: {
     type: Boolean,

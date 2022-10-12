@@ -59,7 +59,7 @@ img {
 .stack {
   color: $green;
 
-  ::v-deep span {
+  ::deep span {
     color: #fff;
   }
 }

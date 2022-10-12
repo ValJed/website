@@ -10,9 +10,6 @@
 </template>
 
 <script setup>
-/* import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api' */
-/* import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded' */
-
 const props = defineProps({
   texts: {
     type: Array,

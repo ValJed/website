@@ -2,7 +2,7 @@
   <div>
     <SiteHeader :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
-      <Nuxt
+      <NuxtPage
         class="content"
         @extend-matrix="extendMatrix"
         @contract-matrix="contractMatrix"
@@ -24,8 +24,6 @@
 </template>
 
 <script setup>
-/* import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api' */
-
 const isMobile = ref(false)
 const extendedMatrix = ref(false)
 const containerRef = ref(null)

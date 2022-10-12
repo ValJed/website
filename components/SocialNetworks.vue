@@ -3,20 +3,19 @@
     <ul class="menu">
       <li>
         <nuxt-link to="/">
-          <!-- <img src="/images/hell.svg" alt="" /> -->
-          <HellSvg />
+          <SvgHell />
         </nuxt-link>
       </li>
       <li>
         <nuxt-link to="/experiences">
-          <SatanSvg />
+          <SvgSatan />
         </nuxt-link>
       </li>
     </ul>
     <ul class="networks">
       <li>
         <a href="https://github.com/ValJed" target="__blank">
-          <GithubSvg />
+          <SvgGithub />
         </a>
       </li>
       <li>
@@ -24,7 +23,7 @@
           href="https://www.linkedin.com/in/valentin-jeudy-585466112"
           target="__blank"
         >
-          <LinkedinSvg />
+          <SvgLinkedin />
         </a>
         <!-- <img src="/static/svg/noun_linkedin_2045186.svg" alt=""> -->
       </li>
