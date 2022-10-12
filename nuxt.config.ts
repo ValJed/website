@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
   app: {
     head: {
-      title: 'nuxt-website',
+      title: 'Valenin Jeudy Developer',
       htmlAttrs: {
         lang: 'en'
       },
@@ -37,8 +37,8 @@ export default defineNuxtConfig({
   vite: {
     css: {
       preprocessorOptions: {
-        scss: { additionalData: '@use "@/assets/scss/mixins.scss" as *;' },
-              scss: { additionalData: '@use "@/assets/_colors.scss" as *;' }
+        scss: {
+          additionalData: '@use "@/assets/scss/main.scss" as *;'
         }
       }
     }
