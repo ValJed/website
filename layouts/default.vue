@@ -2,11 +2,26 @@
   <div>
     <SiteHeader :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
-      <NuxtPage
-        class="content"
-        @extend-matrix="extendMatrix"
-        @contract-matrix="contractMatrix"
-      />
+      <slot />
+      <!-- <NuxtPage -->
+      <!--   class="content" -->
+      <!--   @extend-matrix="extendMatrix" -->
+      <!--   @contract-matrix="contractMatrix" -->
+      <!-- /> -->
+      <!-- <div class="content"> -->
+      <!--   <router-view v-slot="{ Component }"> -->
+      <!--     <transition -->
+      <!--       name="matrix" -->
+      <!--       mode="out-in" -->
+      <!--       :css="false" -->
+      <!--       @before-leave="extendMatrix" -->
+      <!--       @after-leave="contractMatrix" -->
+      <!--     > -->
+      <!--       <component :is="Component" /> -->
+      <!--     </transition> -->
+      <!--   </router-view> -->
+      <!-- </div> -->
+
       <aside class="sidebar">
         <div class="model-container">
           <Matrix
@@ -15,7 +30,7 @@
             :container-size="containerSize"
             :is-mobile="isMobile"
           />
-          <Model v-if="!isMobile" :container-size="containerSize" />
+          <!-- <Model v-if="!isMobile" :container-size="containerSize" /> -->
         </div>
         <SocialNetworks />
       </aside>
@@ -29,13 +44,15 @@ const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
 
-const extendMatrix = () => {
-  extendedMatrix.value = true
-}
-
-const contractMatrix = () => {
-  extendedMatrix.value = false
-}
+/* const extendMatrix = () => { */
+/*   console.log('extend matrix') */
+/*   extendedMatrix.value = true */
+/* } */
+/**/
+/* const contractMatrix = () => { */
+/*   console.log('contract matrix') */
+/*   extendedMatrix.value = false */
+/* } */
 
 onMounted(() => {
   if (window.innerWidth < 900) {
@@ -67,6 +84,21 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.page-enter-active,
+.page-leave-active {
+  background-color: red;
+  matrix-container {
+    transition: all 0.5s;
+  }
+}
+.page-enter-from,
+.page-leave-to {
+  matrix-container {
+    opacity: 0;
+    filter: blur(1rem);
+  }
+}
+
 .container {
   position: relative;
   width: 80%;
@@ -89,7 +121,7 @@ onMounted(() => {
   flex-grow: 1;
   z-index: 0;
   padding: 7rem 1rem 2rem 0;
-  min-height: calc(100vh - 4rem);
+  /* min-height: calc(100vh - 4rem); */
   min-height: 50vh;
 
   @include tablet-landscape {
@@ -97,13 +129,13 @@ onMounted(() => {
   }
 
   @include desktop {
-    width: calc(100% - 28rem);
+    width: calc(1400px - 20rem);
   }
 }
 
 .sidebar {
   position: fixed;
-  width: 100%;
+  /* width: 100%; */
   height: 5rem;
   right: 0;
   top: 4rem;

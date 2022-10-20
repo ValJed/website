@@ -21,16 +21,18 @@ export default defineNuxtConfig({
     }
   },
 
-  pageTransition: {
-    name: 'matrix',
-    duration: 500,
-    beforeLeave() {
-      this.$emit('extendMatrix')
-    },
-    afterLeave() {
-      this.$emit('contractMatrix')
-    }
-  },
+  // pageTransition: {
+  //   name: 'matrix',
+  //   duration: 5000
+  //   // beforeLeave() {
+  //   //   console.log('extend')
+  //   //   this.$emit('extendMatrix')
+  //   // },
+  //   // afterLeave() {
+  //   //   console.log('contact')
+  //   //   this.$emit('contractMatrix')
+  //   // }
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   // css: ['@/assets/scss/main'],
