@@ -85,7 +85,7 @@
 
     @include tablet-landscape {
       flex-direction: row;
-      transform: translateY(-6.5rem);
+      transform: translateY(-7.5rem);
     }
 
     li {

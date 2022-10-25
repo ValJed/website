@@ -7,10 +7,6 @@
 </template>
 
 <script setup>
-// import Node from '@/components/svg/Node.vue'
-// import Vue from '@/components/svg/Vue.vue'
-// import Mongodb from '@/components/svg/Mongodb.vue'
-
 const props = defineProps({
   isMobile: {
     type: Boolean,

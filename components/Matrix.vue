@@ -138,17 +138,16 @@ function generateMatrix(canvas) {
     z-index: 0;
   }
 
-  /* &.extended { */
-  /*   // animation: 0.5s mobileExtented; */
-  /*   height: calc(100vh - 4rem); // header */
-  /**/
-  /*   @include tablet-landscape { */
-  /*     height: calc(100vh - 6rem); // header + container padding */
-  /*     right: 0; */
-  /*     border-radius: 0; */
-  /*     animation: none; */
-  /*   } */
-  /* } */
+  &.extended {
+    height: calc(100vh - 4rem); // header
+
+    @include tablet-landscape {
+      height: calc(100vh - 6rem); // header + container padding
+      right: 0;
+      border-radius: 0;
+      animation: none;
+    }
+  }
 }
 
 canvas {

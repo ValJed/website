@@ -2,25 +2,16 @@
   <div>
     <SiteHeader :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
-      <slot />
-      <!-- <NuxtPage -->
-      <!--   class="content" -->
-      <!--   @extend-matrix="extendMatrix" -->
-      <!--   @contract-matrix="contractMatrix" -->
-      <!-- /> -->
-      <!-- <div class="content"> -->
-      <!--   <router-view v-slot="{ Component }"> -->
-      <!--     <transition -->
-      <!--       name="matrix" -->
-      <!--       mode="out-in" -->
-      <!--       :css="false" -->
-      <!--       @before-leave="extendMatrix" -->
-      <!--       @after-leave="contractMatrix" -->
-      <!--     > -->
-      <!--       <component :is="Component" /> -->
-      <!--     </transition> -->
-      <!--   </router-view> -->
-      <!-- </div> -->
+      <router-view v-slot="{ Component }">
+        <transition
+          mode="out-in"
+          duration="500"
+          @before-enter="contractMatrix"
+          @before-leave="extendMatrix"
+        >
+          <component :is="Component" class="content" />
+        </transition>
+      </router-view>
 
       <aside class="sidebar">
         <div class="model-container">
@@ -44,15 +35,15 @@ const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
 
-/* const extendMatrix = () => { */
-/*   console.log('extend matrix') */
-/*   extendedMatrix.value = true */
-/* } */
-/**/
-/* const contractMatrix = () => { */
-/*   console.log('contract matrix') */
-/*   extendedMatrix.value = false */
-/* } */
+const extendMatrix = () => {
+  console.log('extend matrix')
+  extendedMatrix.value = true
+}
+
+const contractMatrix = () => {
+  console.log('contract matrix')
+  extendedMatrix.value = false
+}
 
 onMounted(() => {
   if (window.innerWidth < 900) {
@@ -60,6 +51,7 @@ onMounted(() => {
   }
 
   containerSize.value = containerRef.value.clientWidth
+
   console.log('size value: ', containerSize.value)
 
   // resize()
@@ -83,21 +75,46 @@ onMounted(() => {
 // }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .page-enter-active,
 .page-leave-active {
-  background-color: red;
-  matrix-container {
-    transition: all 0.5s;
+  transition: all 1s;
+}
+
+.page-enter-active {
+  .matrix-container {
+    /* border: 3px solid red; */
   }
 }
-.page-enter-from,
-.page-leave-to {
-  matrix-container {
-    opacity: 0;
-    filter: blur(1rem);
+
+.page-leave-active {
+  .matrix-container {
+    height: calc(100vh - 4rem);
+    width: 100vw;
+    z-index: 5;
+
+    @include tablet-landscape {
+      height: calc(100vh - 6rem);
+      right: 0;
+      border-radius: 0;
+    }
   }
 }
+
+/* .page-enter-active, */
+/* .page-leave-active { */
+/*   background-color: red; */
+/*   matrix-container { */
+/*     transition: all 0.5s; */
+/*   } */
+/* } */
+/* .page-enter-from, */
+/* .page-leave-to { */
+/*   matrix-container { */
+/*     opacity: 0; */
+/*     filter: blur(1rem); */
+/*   } */
+/* } */
 
 .container {
   position: relative;
@@ -123,6 +140,7 @@ onMounted(() => {
   padding: 7rem 1rem 2rem 0;
   /* min-height: calc(100vh - 4rem); */
   min-height: 50vh;
+  flex: 1;
 
   @include tablet-landscape {
     padding: 0;
