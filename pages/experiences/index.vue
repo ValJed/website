@@ -43,7 +43,7 @@
 /* import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api' */
 
 const showXp = ref(false)
-const active = ref(null)
+/* const active = ref(null) */
 
 onMounted(() => {
   setTimeout(() => {
@@ -51,9 +51,9 @@ onMounted(() => {
   }, 250)
 })
 
-const activeToggle = ({ currentTarget }) => {
-  currentTarget.classList.toggle('active')
-}
+/* const activeToggle = ({ currentTarget }) => { */
+/*   currentTarget.classList.toggle('active') */
+/* } */
 </script>
 
 <style lang="scss" scoped>

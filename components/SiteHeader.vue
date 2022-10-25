@@ -46,7 +46,7 @@ header {
     justify-content: center;
     align-items: center;
     flex: 1;
-    border: solid 4px $green;
+    /* border: solid 4px $green; */
 
     span {
       @include text-3xl;

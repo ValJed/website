@@ -21,7 +21,7 @@
             :container-size="containerSize"
             :is-mobile="isMobile"
           />
-          <!-- <Model v-if="!isMobile" :container-size="containerSize" /> -->
+          <Model v-if="!isMobile" :container-size="containerSize" />
         </div>
         <SocialNetworks />
       </aside>
@@ -36,12 +36,10 @@ const containerRef = ref(null)
 const containerSize = ref(0)
 
 const extendMatrix = () => {
-  console.log('extend matrix')
   extendedMatrix.value = true
 }
 
 const contractMatrix = () => {
-  console.log('contract matrix')
   extendedMatrix.value = false
 }
 
@@ -51,8 +49,6 @@ onMounted(() => {
   }
 
   containerSize.value = containerRef.value.clientWidth
-
-  console.log('size value: ', containerSize.value)
 
   // resize()
 })
@@ -138,22 +134,20 @@ onMounted(() => {
   flex-grow: 1;
   z-index: 0;
   padding: 7rem 1rem 2rem 0;
-  /* min-height: calc(100vh - 4rem); */
-  min-height: 50vh;
+  /* min-height: 50vh; */
   flex: 1;
 
   @include tablet-landscape {
     padding: 0;
   }
 
-  @include desktop {
-    width: calc(1400px - 20rem);
-  }
+  /* @include desktop { */
+  /*   width: calc(1400px - 20rem); */
+  /* } */
 }
 
 .sidebar {
   position: fixed;
-  /* width: 100%; */
   height: 5rem;
   right: 0;
   top: 4rem;

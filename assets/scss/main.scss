@@ -27,6 +27,14 @@
   background-color: $black;
   overflow-x: hidden;
 
+  ul {
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+  }
+
   h1 {
     @include text-2xl;
     font-family: $ftext;

@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-/* import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api' */
 import {
   Scene,
   PerspectiveCamera,
@@ -26,8 +25,6 @@ const mouseX = ref(null)
 const mouseY = ref(null)
 
 onMounted(async () => {
-  console.log('container size => ', props.containerSize)
-
   await generateModel(modelCanvas.value, props.containerSize)
 })
 
@@ -156,6 +153,7 @@ function setModelCenterAndPosition(model, modelSize, containerSize) {
   }
 }
 </script>
+
 <style scoped lang="scss">
 canvas {
   position: absolute;
