@@ -21,7 +21,10 @@
             :container-size="containerSize"
             :is-mobile="isMobile"
           />
-          <Model v-if="!isMobile" :container-size="containerSize" />
+          <Model
+            v-if="!isMobile && containerSize"
+            :container-size="containerSize"
+          />
         </div>
         <SocialNetworks />
       </aside>
