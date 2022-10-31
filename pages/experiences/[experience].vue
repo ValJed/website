@@ -24,12 +24,14 @@
 </template>
 
 <script setup>
-/* import { defineComponent, useRoute } from '@nuxtjs/composition-api' */
 import experiences from '@/data/experiences'
 import Arrow from '@/components/svg/Arrow.vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const { experience: current } = route.value.params
+
+console.log('route:', route.params)
+const current = route.params.experience
 const experience = experiences[current]
 
 const stack = experience.stack.join(' <span>/</span> ')
