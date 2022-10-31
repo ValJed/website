@@ -30,7 +30,7 @@ export default {
     link: 'https://auroregrondin.fr',
     content: [
       'Development of a portfolio website using Nuxt for the front end, Nodejs for the API and MongoDB as Database.',
-      'Realization of an admin UI to manage projects, using tip tap for text edition.',
+      'Realization of an admin UI to manage projects, using tip tap for text edition.'
     ]
   },
   iboycott: {
@@ -41,7 +41,7 @@ export default {
     content: [
       'Helping to improve, maintain the React app.',
       'Fixing existing bugs in the application.',
-      'Starting to migrate to webpack 5.',
+      'Starting to migrate to webpack 5.'
     ]
   },
   michelin: {

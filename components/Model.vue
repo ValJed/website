@@ -11,6 +11,7 @@ import {
   Box3,
   Object3D,
   Vector3
+  /* OrbitControls */
 } from 'three'
 
 const props = defineProps({
@@ -33,7 +34,7 @@ async function generateModel(canvas, containerSize) {
   const height = canvas.clientHeight
 
   const { scene, renderer, camera } = init(canvas, width, height)
-  // const controls = new OrbitControls(camera, renderer.domElement)
+  /* const controls = new OrbitControls(camera, renderer.domElement) */
 
   const { model, gltfScene } = await loadModel()
 
