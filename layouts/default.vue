@@ -9,7 +9,7 @@
           @before-enter="contractMatrix"
           @before-leave="extendMatrix"
         >
-          <component :is="Component" class="content" />
+          <component :is="Component" :is-mobile="isMobile" class="content" />
         </transition>
       </router-view>
 
@@ -75,17 +75,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.page-enter-active,
-.page-leave-active {
-  transition: all 1s;
-}
-
-.page-enter-active {
-  .matrix-container {
-    /* border: 3px solid red; */
-  }
-}
-
 .page-leave-active {
   .matrix-container {
     height: calc(100vh - 4rem);
@@ -100,26 +89,10 @@ onMounted(() => {
   }
 }
 
-/* .page-enter-active, */
-/* .page-leave-active { */
-/*   background-color: red; */
-/*   matrix-container { */
-/*     transition: all 0.5s; */
-/*   } */
-/* } */
-/* .page-enter-from, */
-/* .page-leave-to { */
-/*   matrix-container { */
-/*     opacity: 0; */
-/*     filter: blur(1rem); */
-/*   } */
-/* } */
-
 .container {
-  position: relative;
   width: 80%;
   margin: 0 auto;
-  padding-top: 6rem;
+  padding-top: 4rem;
   min-height: 100vh;
 
   @include tablet-landscape {
@@ -133,25 +106,22 @@ onMounted(() => {
 
 .content {
   position: relative;
-  padding-bottom: 3rem;
   flex-grow: 1;
   z-index: 0;
-  padding: 7rem 1rem 2rem 0;
-  /* min-height: 50vh; */
+  margin-top: 5rem;
+  padding-top: 2rem;
   flex: 1;
+  min-height: calc(100vh - 9rem);
 
   @include tablet-landscape {
     padding: 0;
   }
-
-  /* @include desktop { */
-  /*   width: calc(1400px - 20rem); */
-  /* } */
 }
 
 .sidebar {
   position: fixed;
   height: 5rem;
+  width: 100%;
   right: 0;
   top: 4rem;
 

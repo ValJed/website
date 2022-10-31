@@ -33,8 +33,6 @@
 .skills {
   &-title {
     @include text-xl;
-
-    font-style: $fs1;
   }
 }
 

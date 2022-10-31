@@ -25,13 +25,18 @@
         >
           <SvgLinkedin />
         </a>
-        <!-- <img src="/static/svg/noun_linkedin_2045186.svg" alt=""> -->
       </li>
     </ul>
   </div>
 </template>
 
 <style lang="scss">
+@include mobile-only {
+  ul {
+    margin: 0;
+  }
+}
+
 .links {
   width: 4rem;
   top: 5rem;

@@ -42,16 +42,7 @@ watch(
         : '0px'
 
     if (newVal) {
-      console.log('props.containerSize ===> ', props.containerSize)
-      // console.log(
-      //   'matrixContainerWidth.value ===> ',
-      //   matrixContainerWidth.value
-      // )
-
-      // console.log(
-      //   'matrixContainerLeft.value ===> ',
-      //   matrixContainerLeft.value
-      // )
+      /* console.log('props.containerSize ===> ', props.containerSize) */
     }
   }
 )
@@ -103,30 +94,10 @@ function generateMatrix(canvas) {
 }
 </script>
 <style scoped lang="scss">
-@keyframes mobileExtented {
-  15% {
-    height: 0;
-    z-index: 3;
-  }
-
-  50% {
-    height: calc(100vh - 4rem); // header
-  }
-
-  85% {
-    height: 0;
-    z-index: 1;
-  }
-
-  100% {
-    height: 7rem;
-  }
-}
-
 .matrix-container {
   position: relative;
   width: 100%;
-  height: 7rem;
+  height: 5rem;
   overflow: hidden;
   transition: all 0.25s ease-in;
   right: 0;
