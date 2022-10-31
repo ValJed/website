@@ -5,7 +5,7 @@
         Hi, I'm a full stack web developer.
       </h1>
       <p>
-        Here are the weapons I love to fight with:
+        Here are the weapons I love to fight with: <br v-if="isMobile" />
         <span class="green">{{ weapon }}</span>
       </p>
       <p class="interests">
@@ -17,7 +17,6 @@
 </template>
 
 <script setup>
-/* import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api' */
 import weaponsAnimation from '@/lib/weaponsAnimation'
 import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
@@ -27,10 +26,16 @@ const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
 const typingMin = 30
 const typingMax = 150
 
-/* const seconds = ref(0) */
 const weapon = ref(weapons[0])
 const textsLoaded = getTextsLoaded()
 const interestsText = ref(textsLoaded ? interests : '')
+
+const props = defineProps({
+  isMobile: {
+    type: Boolean,
+    required: true
+  }
+})
 
 onMounted(() => {
   setInterval(async () => {
@@ -89,7 +94,6 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* height: 100%; */
 }
 
 p {

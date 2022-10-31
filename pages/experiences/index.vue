@@ -40,8 +40,6 @@
 </template>
 
 <script setup>
-/* import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api' */
-
 const showXp = ref(false)
 /* const active = ref(null) */
 
