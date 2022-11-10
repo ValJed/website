@@ -57,19 +57,13 @@ onMounted(() => {
 <style lang="scss" scoped>
 @keyframes shadow {
   0% {
-    box-shadow: -5px -5px 25px $green;
-  }
-  25% {
-    box-shadow: 0px -5px 25px $green;
+    box-shadow: -7px -7px 25px $green;
   }
   50% {
-    box-shadow: 5px 0px 25px $green;
-  }
-  75% {
-    box-shadow: 0px 0px 25px $green;
+    box-shadow: 7px 5px 25px $green;
   }
   100% {
-    box-shadow: -5px -5px 25px $green;
+    box-shadow: -7px -7px 25px $green;
   }
 }
 
@@ -143,13 +137,13 @@ h2 {
 
 // Anims
 @include tablet-landscape {
-  .matrix-enter-active {
+  .v-enter-active {
     h1 {
       animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
     }
   }
 
-  .matrix-leave-active {
+  .v-leave-active {
     h1 {
       animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
     }

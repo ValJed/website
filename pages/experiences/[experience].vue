@@ -4,7 +4,7 @@
       <img :src="`/images/${experience.img}`" :alt="experience.name" />
       <span v-if="experience.logoName">{{ experience.logoName }}</span>
     </div>
-    <div class="content">
+    <div class="description">
       <p>{{ experience.date }}</p>
       <p class="stack" v-html="stack"></p>
       <p v-for="(paragraph, i) in experience.content" :key="i">
@@ -30,7 +30,6 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-console.log('route:', route.params)
 const current = route.params.experience
 const experience = experiences[current]
 
@@ -38,6 +37,10 @@ const stack = experience.stack.join(' <span>/</span> ')
 </script>
 
 <style scoped lang="scss">
+.work {
+  position: relative;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -50,7 +53,6 @@ const stack = experience.stack.join(' <span>/</span> ')
 }
 
 img {
-  margin: 3rem 0;
   display: block;
   min-height: 2.5rem;
   max-height: 5rem;
@@ -58,10 +60,18 @@ img {
   height: auto;
 }
 
+.description {
+  margin-top: 6rem;
+
+  @include tablet-landscape {
+    margin-top: 3rem;
+  }
+}
+
 .stack {
   color: $green;
 
-  ::deep span {
+  :deep(span) {
     color: #fff;
   }
 }
@@ -71,12 +81,14 @@ img {
 }
 
 .arrow {
-  position: relative;
-  left: 1.24rem;
+  display: inline-block;
   width: 4rem;
+  height: 4rem;
+  margin: 3rem 0 3rem 1.24rem;
 
   @include tablet-landscape {
-    top: 3rem;
+    position: absolute;
+    bottom: 5rem;
   }
 }
 

@@ -38,15 +38,25 @@
 }
 
 .links {
+  display: flex;
   width: 4rem;
   top: 5rem;
   position: fixed;
-  right: 0.4rem;
+  align-items: center;
+  width: 100%;
   z-index: 10;
+
+  ul {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: center;
+    justify-content: space-around;
+  }
 
   @include tablet-landscape {
     position: inherit;
-    width: 100%;
+    display: inherit;
   }
 
   li {
@@ -54,25 +64,19 @@
   }
 
   .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
     @include tablet-landscape {
       height: 10.5rem;
       margin-top: 4rem;
+      justify-content: space-between;
+      flex-direction: column;
     }
 
     li {
       width: 3.2rem;
+      height: 3.2rem;
 
       @include tablet-landscape {
         width: 4rem;
-      }
-
-      &:first-child {
-        margin-bottom: 0.4rem;
       }
 
       svg {
@@ -83,14 +87,10 @@
   }
 
   .networks {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-
     @include tablet-landscape {
       flex-direction: row;
       transform: translateY(-7.5rem);
+      justify-content: center;
     }
 
     li {
