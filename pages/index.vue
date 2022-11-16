@@ -71,15 +71,15 @@ async function write(text, interests) {
 </script>
 
 <style lang="scss" scoped>
-@keyframes blink {
-  0% {
-    border-right-width: 2px;
-  }
-
-  50% {
-    border-right-width: 0px;
-  }
-}
+/* @keyframes blink { */
+/*   0% { */
+/*     border-right-width: 2px; */
+/*   } */
+/**/
+/*   50% { */
+/*     border-right-width: 0px; */
+/*   } */
+/* } */
 
 h1 {
   margin-bottom: 2rem;
@@ -98,7 +98,11 @@ h1 {
 
 p {
   min-height: 2rem;
-  @include text-xl;
+  @include text;
+
+  @include tablet-landscape {
+    @include text-xl;
+  }
 
   .green {
     color: $green;
@@ -106,7 +110,11 @@ p {
 }
 
 h1 {
-  @include text-2xl;
+  @include text-xl;
+
+  @include tablet-landscape {
+    @include text-2xl;
+  }
 }
 
 ul {

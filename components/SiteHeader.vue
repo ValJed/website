@@ -49,7 +49,12 @@ header {
     /* border: solid 4px $green; */
 
     span {
-      @include text-3xl;
+      @include text-2xl;
+
+      @include tablet-landscape {
+        @include text-3xl;
+      }
+
       color: $green;
       font-size: 2rem;
       font-family: 'Martyr';

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SiteHeader :is-mobile="isMobile" />
+    <SiteHeader v-if="containerSize" :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
       <router-view v-slot="{ Component }">
         <transition
@@ -50,6 +50,8 @@ onMounted(() => {
   if (window.innerWidth < 900) {
     isMobile.value = true
   }
+
+  console.log('isMobile:', isMobile.value)
 
   containerSize.value = containerRef.value.clientWidth
 
