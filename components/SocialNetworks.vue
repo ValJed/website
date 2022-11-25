@@ -40,7 +40,7 @@
 .links {
   display: flex;
   width: 4rem;
-  top: 5rem;
+  bottom: 0;
   position: fixed;
   align-items: center;
   width: 100%;
@@ -49,9 +49,8 @@
   ul {
     display: flex;
     flex-grow: 1;
-    justify-content: space-around;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
 
   @include tablet-landscape {
@@ -60,29 +59,28 @@
   }
 
   li {
+    width: 2.5rem;
+    height: 2.5rem;
     margin-bottom: 1rem;
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .menu {
     @include tablet-landscape {
-      height: 10.5rem;
+      height: 10rem;
       margin-top: 4rem;
       justify-content: space-between;
       flex-direction: column;
-    }
-
-    li {
-      width: 3.2rem;
-      height: 3.2rem;
-
-      @include tablet-landscape {
-        width: 4rem;
-      }
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 
@@ -94,23 +92,8 @@
     }
 
     li {
-      width: 2rem;
-      height: 2rem;
-
       @include tablet-landscape {
-        width: 2.5rem;
-        height: 2.5rem;
         margin: 0 2rem;
-      }
-
-      a {
-        width: 100%;
-        height: 100%;
-      }
-
-      svg {
-        width: 100%;
-        height: 100%;
       }
     }
   }

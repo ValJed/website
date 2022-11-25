@@ -95,15 +95,17 @@ function generateMatrix(canvas) {
 </script>
 <style scoped lang="scss">
 .matrix-container {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 5rem;
   overflow: hidden;
   transition: all 0.25s ease-in;
   right: 0;
+  bottom: 0;
   z-index: -10;
 
   @include tablet-landscape {
+    position: relative;
     height: 20rem;
     border-radius: 50%;
     z-index: 0;
@@ -116,7 +118,7 @@ function generateMatrix(canvas) {
       height: calc(100vh - 6rem); // header + container padding
       right: 0;
       border-radius: 0;
-      animation: none;
+      /* animation: none; */
     }
   }
 }
@@ -126,5 +128,10 @@ canvas {
   width: 100vw;
   height: 100vh;
   right: 0;
+  bottom: 0;
+
+  @include tablet-landscape {
+    bottom: auto;
+  }
 }
 </style>

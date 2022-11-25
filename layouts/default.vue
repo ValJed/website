@@ -22,8 +22,9 @@
             :is-mobile="isMobile"
           />
           <Model
-            v-if="!isMobile && containerSize"
+            v-if="containerSize"
             :container-size="containerSize"
+            :is-mobile="isMobile"
           />
         </div>
         <SocialNetworks />
@@ -51,8 +52,6 @@ onMounted(() => {
     isMobile.value = true
   }
 
-  console.log('isMobile:', isMobile.value)
-
   containerSize.value = containerRef.value.clientWidth
 
   // resize()
@@ -77,19 +76,19 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.page-leave-active {
-  .matrix-container {
-    height: calc(100vh - 4rem);
-    width: 100vw;
-    z-index: 5;
-
-    @include tablet-landscape {
-      height: calc(100vh - 6rem);
-      right: 0;
-      border-radius: 0;
-    }
-  }
-}
+/* .page-leave-active { */
+/*   .matrix-container { */
+/*     height: calc(100vh - 4rem); */
+/*     width: 100vw; */
+/*     z-index: 5; */
+/**/
+/*     @include tablet-landscape { */
+/*       height: calc(100vh - 6rem); */
+/*       right: 0; */
+/*       border-radius: 0; */
+/*     } */
+/*   } */
+/* } */
 
 .container {
   width: 80%;
@@ -110,12 +109,12 @@ onMounted(() => {
   position: relative;
   flex-grow: 1;
   z-index: 0;
-  margin-top: 5rem;
   padding-top: 2rem;
   flex: 1;
   min-height: calc(100vh - 9rem);
 
   @include tablet-landscape {
+    margin-top: 5rem;
     padding: 0;
   }
 }
@@ -125,7 +124,8 @@ onMounted(() => {
   height: 5rem;
   width: 100%;
   right: 0;
-  top: 4rem;
+  /* top: 4rem; */
+  bottom: 0;
 
   @include tablet-landscape {
     position: -webkit-sticky;
@@ -138,10 +138,13 @@ onMounted(() => {
 }
 
 .model-container {
-  position: relative;
   width: 100%;
+  height: 8rem;
+  position: absolute;
+  bottom: 0;
 
   @include tablet-landscape {
+    position: relative;
     height: 20rem;
   }
 }

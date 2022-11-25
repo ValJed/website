@@ -11,10 +11,13 @@ import {
   Box3,
   Object3D,
   Vector3
-  /* OrbitControls */
 } from 'three'
 
 const props = defineProps({
+  isMobile: {
+    type: Boolean,
+    required: true
+  },
   containerSize: {
     type: Number,
     required: true
@@ -34,13 +37,14 @@ async function generateModel(canvas, containerSize) {
   const height = canvas.clientHeight
 
   const { scene, renderer, camera } = init(canvas, width, height)
-  /* const controls = new OrbitControls(camera, renderer.domElement) */
 
   const { model, gltfScene } = await loadModel()
 
+  const modelSize = props.isMobile ? height * 3 : height
+
   const { centerX, centerY } = setModelCenterAndPosition(
     model,
-    height,
+    modelSize,
     containerSize
   )
 
@@ -50,7 +54,11 @@ async function generateModel(canvas, containerSize) {
   scene.add(pivot)
   scene.add(gltfScene)
 
-  pivot.position.set(0, 0, -900)
+  if (props.isMobile) {
+    pivot.position.set(0, -80, 50)
+  } else {
+    pivot.position.set(0, 0, -900)
+  }
 
   // Mouse position listener
   document.addEventListener('mousemove', ({ clientX, clientY }) => {
@@ -63,11 +71,17 @@ async function generateModel(canvas, containerSize) {
   function animate() {
     requestAnimationFrame(animate)
 
-    // Before the mask has been fully loaded
-    if (pivot.position.z < -100) {
-      pivot.position.set(0, 0, pivot.position.z + 20)
-    } else if (mouseX.value && mouseY.value) {
-      computePivot(pivot, centerX, centerY)
+    if (!props.isMobile) {
+      // Before the mask has been fully loaded
+      if (pivot.position.z < -100) {
+        pivot.position.set(0, 0, pivot.position.z + 20)
+      } else if (mouseX.value && mouseY.value && !props.isMobile) {
+        computePivot(pivot, centerX, centerY)
+      }
+    } else {
+      if (pivot.position.y < -28) {
+        pivot.position.set(0, pivot.position.y + 2, 50)
+      }
     }
 
     renderer.render(scene, camera)
@@ -161,6 +175,11 @@ canvas {
   width: 100%;
   height: 100%;
   left: 0;
-  top: 0;
+  /* bottom: -10rem; */
+  bottom: 0;
+
+  @include tablet-landscape {
+    bottom: 0;
+  }
 }
 </style>

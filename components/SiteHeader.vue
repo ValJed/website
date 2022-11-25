@@ -51,9 +51,9 @@ header {
     span {
       @include text-2xl;
 
-      @include tablet-landscape {
-        @include text-3xl;
-      }
+      /* @include tablet-landscape { */
+      /*   @include text-3xl; */
+      /* } */
 
       color: $green;
       font-size: 2rem;
