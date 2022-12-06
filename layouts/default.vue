@@ -93,10 +93,11 @@ onMounted(() => {
 .container {
   width: 80%;
   margin: 0 auto;
-  padding-top: 4rem;
+  padding: 4rem 0 7rem;
   min-height: 100vh;
 
   @include tablet-landscape {
+    padding: 4rem 0 0;
     display: flex;
   }
 

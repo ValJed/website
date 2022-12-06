@@ -55,7 +55,7 @@ async function generateModel(canvas, containerSize) {
   scene.add(gltfScene)
 
   if (props.isMobile) {
-    pivot.position.set(0, -80, 50)
+    pivot.position.set(0, -75, 50)
   } else {
     pivot.position.set(0, 0, -900)
   }

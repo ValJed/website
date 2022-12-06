@@ -94,13 +94,13 @@ img {
 
 // Anims
 @include tablet-landscape {
-  .matrix-enter-active {
+  .v-enter-active {
     .logo {
       animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
     }
   }
 
-  .matrix-leave-active {
+  .v-leave-active {
     .logo {
       animation: 0.5s ease-in-out 0s 1 normal both titleLeaveAnim;
     }
