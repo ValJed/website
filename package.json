@@ -5,11 +5,13 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "start": "nuxt start",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "jsonfn": "^0.31.0",
     "luxon": "^2.0.2",
     "three": "^0.130.0"

@@ -1,8 +1,13 @@
-/* import { defineNuxtConfig } from 'nuxt3' */
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+
+  server: {
+    port: parseInt(process.env.PORT, 10) || 3000
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   app: {
