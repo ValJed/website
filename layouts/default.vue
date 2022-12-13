@@ -112,7 +112,7 @@ onMounted(() => {
   z-index: 0;
   padding-top: 2rem;
   flex: 1;
-  min-height: calc(100vh - 9rem);
+  min-height: calc(100vh - 11rem);
 
   @include tablet-landscape {
     margin-top: 5rem;
