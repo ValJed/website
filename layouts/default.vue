@@ -2,7 +2,7 @@
   <div>
     <SiteHeader v-if="containerSize" :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
-      <router-view v-slot="{ Component }">
+      <router-view v-if="!isMobile" v-slot="{ Component }">
         <transition
           mode="out-in"
           duration="500"
@@ -11,6 +11,10 @@
         >
           <component :is="Component" :is-mobile="isMobile" class="content" />
         </transition>
+      </router-view>
+
+      <router-view v-else v-slot="{ Component }">
+        <component :is="Component" :is-mobile="isMobile" class="content" />
       </router-view>
 
       <aside class="sidebar">
@@ -27,7 +31,11 @@
             :is-mobile="isMobile"
           />
         </div>
-        <SocialNetworks />
+        <SocialNetworks
+          :is-mobile="isMobile"
+          :extended-matrix="extendedMatrix"
+          @toggle-menu="toggleMenu"
+        />
       </aside>
     </div>
   </div>
@@ -45,6 +53,10 @@ const extendMatrix = () => {
 
 const contractMatrix = () => {
   extendedMatrix.value = false
+}
+
+const toggleMenu = () => {
+  extendedMatrix.value = !extendedMatrix.value
 }
 
 onMounted(() => {
@@ -76,20 +88,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-/* .page-leave-active { */
-/*   .matrix-container { */
-/*     height: calc(100vh - 4rem); */
-/*     width: 100vw; */
-/*     z-index: 5; */
-/**/
-/*     @include tablet-landscape { */
-/*       height: calc(100vh - 6rem); */
-/*       right: 0; */
-/*       border-radius: 0; */
-/*     } */
-/*   } */
-/* } */
-
 .container {
   width: 80%;
   margin: 0 auto;
@@ -125,7 +123,6 @@ onMounted(() => {
   height: 5rem;
   width: 100%;
   right: 0;
-  /* top: 4rem; */
   bottom: 0;
 
   @include tablet-landscape {
@@ -135,6 +132,7 @@ onMounted(() => {
     flex-shrink: 0;
     width: 20rem;
     flex-shrink: 0;
+    height: auto;
   }
 }
 

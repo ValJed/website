@@ -1,5 +1,15 @@
 <template>
   <div class="links">
+    <div
+      v-if="isMobile"
+      class="menu-btn"
+      :class="{ opened: extendedMatrix }"
+      @click="toggleMenu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <ul class="menu">
       <li>
         <nuxt-link to="/">
@@ -30,7 +40,79 @@
   </div>
 </template>
 
+<script setup>
+const props = defineProps({
+  isMobile: {
+    type: Boolean,
+    required: true
+  },
+  extendedMatrix: {
+    type: Boolean,
+    required: true
+  }
+})
+const emit = defineEmits(['toggleMenu'])
+
+const toggleMenu = () => {
+  emit('toggleMenu')
+}
+</script>
+
 <style lang="scss">
+$menuTranslate: 10px;
+
+.menu-btn {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  right: 2rem;
+  top: 0;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.opened {
+    span:first-child {
+      width: 100%;
+      transform: rotate(-45deg) translateY($menuTranslate)
+        translateX(-$menuTranslate);
+    }
+
+    span:nth-child(2) {
+      transform: translateX(-100%);
+    }
+
+    span:last-child {
+      width: 100%;
+      transform: rotate(45deg) translateY(-$menuTranslate)
+        translateX(-$menuTranslate);
+    }
+  }
+
+  span {
+    display: block;
+    height: 1.5px;
+    background-color: #fff;
+    transition: all 0.3s ease-out;
+
+    &:first-child {
+      width: 80%;
+    }
+
+    &:nth-child(2) {
+      width: 100%;
+    }
+
+    &:last-child {
+      width: 60%;
+    }
+  }
+}
+
 @include mobile-only {
   ul {
     margin: 0;
@@ -38,6 +120,7 @@
 }
 
 .links {
+  position: relative;
   display: flex;
   width: 4rem;
   bottom: 0;
@@ -46,16 +129,16 @@
   width: 100%;
   z-index: 10;
 
+  @include tablet-landscape {
+    position: inherit;
+    display: inherit;
+  }
+
   ul {
     display: flex;
     flex-grow: 1;
     align-items: center;
     justify-content: space-evenly;
-  }
-
-  @include tablet-landscape {
-    position: inherit;
-    display: inherit;
   }
 
   li {
