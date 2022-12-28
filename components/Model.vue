@@ -21,6 +21,10 @@ const props = defineProps({
   containerSize: {
     type: Number,
     required: true
+  },
+  extendedMatrix: {
+    type: Boolean,
+    required: true
   }
 })
 
@@ -40,11 +44,9 @@ async function generateModel(canvas, containerSize) {
 
   const { model, gltfScene } = await loadModel()
 
-  const modelSize = props.isMobile ? height * 3 : height
-
   const { centerX, centerY } = setModelCenterAndPosition(
     model,
-    modelSize,
+    height,
     containerSize
   )
 
@@ -55,7 +57,7 @@ async function generateModel(canvas, containerSize) {
   scene.add(gltfScene)
 
   if (props.isMobile) {
-    pivot.position.set(0, -75, 50)
+    pivot.position.set(0, -75, 0)
   } else {
     pivot.position.set(0, 0, -900)
   }
@@ -71,17 +73,29 @@ async function generateModel(canvas, containerSize) {
   function animate() {
     requestAnimationFrame(animate)
 
-    if (!props.isMobile) {
+    const mobileMutations = ({ position, rotation }) => {
+      if (position.y < 0) {
+        position.set(0, position.y + 2, 0)
+      } else if (props.extendedMatrix && rotation.z > -0.2) {
+        rotation.z = rotation.z - 0.002
+      } else if (!props.extendedMatrix && rotation.z < 0) {
+        rotation.z = rotation.z + 0.01
+      }
+    }
+
+    const desktopMutations = (p) => {
       // Before the mask has been fully loaded
-      if (pivot.position.z < -100) {
+      if (p.position.z < -100) {
         pivot.position.set(0, 0, pivot.position.z + 20)
       } else if (mouseX.value && mouseY.value && !props.isMobile) {
         computePivot(pivot, centerX, centerY)
       }
+    }
+
+    if (!props.isMobile) {
+      desktopMutations(pivot)
     } else {
-      if (pivot.position.y < -28) {
-        pivot.position.set(0, pivot.position.y + 2, 50)
-      }
+      mobileMutations(pivot)
     }
 
     renderer.render(scene, camera)
@@ -175,7 +189,7 @@ canvas {
   width: 100%;
   height: 100%;
   left: 0;
-  bottom: 0;
+  bottom: -4.5rem;
 
   @include tablet-landscape {
     bottom: 0;
