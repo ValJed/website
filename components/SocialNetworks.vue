@@ -1,43 +1,45 @@
 <template>
-  <div class="links">
-    <div
-      v-if="isMobile"
-      class="menu-btn"
-      :class="{ opened: extendedMatrix }"
-      @click="toggleMenu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="menu">
-      <li>
-        <nuxt-link to="/">
-          <SvgHell />
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/experiences">
-          <SvgSatan />
-        </nuxt-link>
-      </li>
-    </ul>
-    <ul class="networks">
-      <li>
-        <a href="https://github.com/ValJed" target="__blank">
-          <SvgGithub />
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://www.linkedin.com/in/valentin-jeudy-585466112"
-          target="__blank"
-        >
-          <SvgLinkedin />
-        </a>
-      </li>
-    </ul>
+  <div
+    v-if="isMobile"
+    class="menu-btn"
+    :class="{ opened: extendedMatrix }"
+    @click="toggleMenu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
+  <transition name="fade">
+    <div v-if="!isMobile || extendedMatrix" class="links">
+      <ul class="menu">
+        <li>
+          <nuxt-link to="/">
+            <SvgHell />
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/experiences">
+            <SvgSatan />
+          </nuxt-link>
+        </li>
+      </ul>
+      <ul class="networks">
+        <li>
+          <a href="https://github.com/ValJed" target="__blank">
+            <SvgGithub />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/valentin-jeudy-585466112"
+            target="__blank"
+          >
+            <SvgLinkedin />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </transition>
 </template>
 
 <script setup>
@@ -61,6 +63,111 @@ const toggleMenu = () => {
 <style lang="scss">
 $menuTranslate: 10px;
 
+.fade-enter-active {
+  transition: all 0.3s linear 0.3s;
+}
+
+.fade-leave-active {
+  transition: all 0.1s linear;
+}
+
+/* .fade-enter-active, */
+/* .fade-leave-active { */
+/*   transition: opacity 0.3s linear; */
+/* } */
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@include mobile-only {
+  ul {
+    margin: 0;
+  }
+}
+
+.links {
+  position: absolute;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* bottom: -100vh; */
+  /* position: fixed; */
+  /* display: none; */
+  /* opacity: 0; */
+  align-items: center;
+  width: 100%;
+  bottom: 10rem;
+  z-index: 10;
+
+  @include tablet-landscape {
+    position: inherit;
+    display: inherit;
+    opacity: 1;
+  }
+
+  ul {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  li {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 3.5rem;
+
+    @include tablet-landscape {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .menu {
+    flex-direction: column;
+
+    @include tablet-landscape {
+      height: 10rem;
+      margin-top: 4rem;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+  }
+
+  .networks {
+    flex-direction: column;
+
+    @include tablet-landscape {
+      flex-direction: row;
+      transform: translateY(-7.5rem);
+      justify-content: center;
+    }
+
+    li {
+      @include tablet-landscape {
+        margin: 0 2rem;
+      }
+    }
+  }
+}
+
+/* .extended { */
+/*   .links { */
+/*     opacity: 1; */
+/*   } */
+/* } */
+
 .menu-btn {
   position: absolute;
   display: flex;
@@ -71,7 +178,7 @@ $menuTranslate: 10px;
   height: 30px;
   background-color: none;
   right: 2rem;
-  top: 0;
+  bottom: calc((5rem - 30px) / 2);
   overflow: hidden;
   cursor: pointer;
 
@@ -109,75 +216,6 @@ $menuTranslate: 10px;
 
     &:last-child {
       width: 60%;
-    }
-  }
-}
-
-@include mobile-only {
-  ul {
-    margin: 0;
-  }
-}
-
-.links {
-  position: relative;
-  display: flex;
-  width: 4rem;
-  bottom: 0;
-  position: fixed;
-  align-items: center;
-  width: 100%;
-  z-index: 10;
-
-  @include tablet-landscape {
-    position: inherit;
-    display: inherit;
-  }
-
-  ul {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  li {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: 1rem;
-
-    a {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .menu {
-    @include tablet-landscape {
-      height: 10rem;
-      margin-top: 4rem;
-      justify-content: space-between;
-      flex-direction: column;
-    }
-  }
-
-  .networks {
-    @include tablet-landscape {
-      flex-direction: row;
-      transform: translateY(-7.5rem);
-      justify-content: center;
-    }
-
-    li {
-      @include tablet-landscape {
-        margin: 0 2rem;
-      }
     }
   }
 }

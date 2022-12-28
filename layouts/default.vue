@@ -17,7 +17,7 @@
         <component :is="Component" :is-mobile="isMobile" class="content" />
       </router-view>
 
-      <aside class="sidebar">
+      <aside class="sidebar" :class="{ extended: extendedMatrix && isMobile }">
         <div class="model-container">
           <Matrix
             v-if="containerSize"
@@ -27,8 +27,10 @@
           />
           <Model
             v-if="containerSize"
+            class="model-canvas"
             :container-size="containerSize"
             :is-mobile="isMobile"
+            :extended-matrix="extendedMatrix"
           />
         </div>
         <SocialNetworks
@@ -134,11 +136,21 @@ onMounted(() => {
     flex-shrink: 0;
     height: auto;
   }
+
+  &.extended {
+    .model-canvas {
+      transform: translateY(-75vh);
+    }
+  }
+}
+
+.model-canvas {
+  transition: transform 0.3s ease-out;
 }
 
 .model-container {
   width: 100%;
-  height: 8rem;
+  height: 12rem;
   position: absolute;
   bottom: 0;
 
