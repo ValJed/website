@@ -71,11 +71,6 @@ $menuTranslate: 10px;
   transition: all 0.1s linear;
 }
 
-/* .fade-enter-active, */
-/* .fade-leave-active { */
-/*   transition: opacity 0.3s linear; */
-/* } */
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -89,16 +84,14 @@ $menuTranslate: 10px;
 
 .links {
   position: absolute;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* bottom: -100vh; */
-  /* position: fixed; */
-  /* display: none; */
-  /* opacity: 0; */
   align-items: center;
   width: 100%;
-  bottom: 10rem;
+  bottom: 10vh;
   z-index: 10;
+
+  @media (max-height: 800px) {
+    bottom: 3vh;
+  }
 
   @include tablet-landscape {
     position: inherit;

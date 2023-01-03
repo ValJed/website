@@ -185,13 +185,16 @@ function setModelCenterAndPosition(model, modelSize, containerSize) {
 
 <style scoped lang="scss">
 canvas {
-  position: absolute;
-  width: 100%;
+  position: relative;
+  width: 12rem;
   height: 100%;
   left: 0;
   bottom: -4.5rem;
 
   @include tablet-landscape {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     bottom: 0;
   }
 }

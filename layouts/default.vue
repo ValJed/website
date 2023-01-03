@@ -148,6 +148,10 @@ onMounted(() => {
   &.extended {
     .model-canvas {
       transform: translateY(-75vh);
+
+      @media (max-height: 800px) {
+        transform: translateY(-70vh);
+      }
     }
   }
 }
@@ -157,12 +161,15 @@ onMounted(() => {
 }
 
 .model-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 12rem;
-  position: absolute;
   bottom: 0;
 
   @include tablet-landscape {
+    display: block;
     position: relative;
     height: 20rem;
   }
