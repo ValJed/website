@@ -49,6 +49,8 @@ const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
 
+const router = useRouter()
+
 const extendMatrix = () => {
   extendedMatrix.value = true
 }
@@ -59,6 +61,12 @@ const contractMatrix = () => {
 
 const toggleMenu = () => {
   extendedMatrix.value = !extendedMatrix.value
+}
+
+if (isMobile) {
+  router.beforeEach(() => {
+    contractMatrix()
+  })
 }
 
 onMounted(() => {

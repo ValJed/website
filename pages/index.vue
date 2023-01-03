@@ -105,6 +105,8 @@ p {
   }
 
   .green {
+    display: inline-block;
+    height: 30px;
     color: $green;
   }
 }
