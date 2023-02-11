@@ -3,10 +3,10 @@ dotenv.config()
 
 export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  ssr: true,
 
-  server: {
-    port: parseInt(process.env.PORT, 10) || 3000
+  devServer: {
+    port: parseInt(process.env.PORT || '3000', 10)
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -23,8 +23,13 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=no' }
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+      // headers: { 'Access-Control-Allow-Origin': '*' }
     }
   },
+
+  // routeRules: {
+  //   '/_nuxt/**': { headers: { 'Access-Control-Allow-Origin': '*' } }
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   // css: ['@/assets/scss/main'],
@@ -59,7 +64,7 @@ export default defineNuxtConfig({
 
   generate: {
     // choose to suit your project
-    interval: 2000
+    // interval: 2000
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
