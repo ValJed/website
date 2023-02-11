@@ -155,12 +155,6 @@ $menuTranslate: 10px;
   }
 }
 
-/* .extended { */
-/*   .links { */
-/*     opacity: 1; */
-/*   } */
-/* } */
-
 .menu-btn {
   position: absolute;
   display: flex;
