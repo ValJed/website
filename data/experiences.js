@@ -4,9 +4,12 @@ export default {
     logoName: 'Apostrophe',
     date: 'November 2020 - Today',
     img: 'apostrophe.svg',
-    stack: ['Nodejs', 'Vue', 'MongoDB'],
+    stack: ['Nodejs', 'Vue', 'MongoDB', 'AWS'],
     content: [
-      'Developing / improving ApostropheCMS core and modules. Setting up and working on ApostropheCMS projects for customers.'
+      'Developing / improving ApostropheCMS core and modules.',
+      'Setting up and working on ApostropheCMS projects for customers.',
+      'Support to customers and open source community.',
+      'Maintaining infra scripts, creating AWS clouds and MongoDB Atlas clusters.'
     ]
   },
   easylife: {
@@ -35,7 +38,7 @@ export default {
   },
   iboycott: {
     name: 'Iboycott',
-    date: 'Spetember - October 2020',
+    date: 'September - October 2020',
     img: 'iboycott.png',
     stack: ['Nodejs', 'React', 'SQL'],
     content: [
