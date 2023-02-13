@@ -45,6 +45,7 @@
 
 <style scoped lang="scss">
 $distance: 2rem;
+$timeDiff: 0.5;
 
 svg {
   width: 4rem;
@@ -54,16 +55,16 @@ svg {
   overflow: visible;
 
   .part-1 {
-    transition: transform 0.1s ease-in-out 0.2s;
+    transition: transform 0.05s ease-in-out 0.1s;
   }
 
   .part-2 {
-    transition: transform 0.1s ease-in-out 0.1s;
+    transition: transform 0.05s ease-in-out 0.05s;
     fill: $green;
   }
 
   .part-3 {
-    transition: transform 0.1s ease-in-out 0s;
+    transition: transform 0.05s ease-in-out 0s;
   }
 
   &:hover {
@@ -72,15 +73,15 @@ svg {
     }
 
     .part-1 {
-      transition: transform 0.1s ease-in-out 0s;
+      transition: transform 0.05s ease-in-out 0s;
     }
 
     .part-2 {
-      transition: transform 0.1s ease-in-out 0.1s;
+      transition: transform 0.05s ease-in-out 0.05s;
     }
 
     .part-3 {
-      transition: transform 0.1s ease-in-out 0.2s;
+      transition: transform 0.05s ease-in-out 0.1s;
     }
   }
 }
