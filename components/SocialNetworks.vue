@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   isMobile: {
     type: Boolean,
     required: true

@@ -30,7 +30,7 @@ const weapon = ref(weapons[0])
 const textsLoaded = getTextsLoaded()
 const interestsText = ref(textsLoaded ? interests : '')
 
-const props = defineProps({
+defineProps({
   isMobile: {
     type: Boolean,
     required: true
