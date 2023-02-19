@@ -22,8 +22,7 @@ export default defineNuxtConfig({
         { hid: 'description', name: 'description', content: '' },
         { name: 'format-detection', content: 'telephone=no' }
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-      // headers: { 'Access-Control-Allow-Origin': '*' }
+      link: [{ rel: 'icon', href: '/favicon.svg' }]
     }
   },
 
@@ -52,16 +51,6 @@ export default defineNuxtConfig({
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  /* buildModules: [ */
-  /*   // https://go.nuxtjs.dev/eslint */
-  /*   '@nuxtjs/eslint-module', */
-  /*   // https://go.nuxtjs.dev/tailwindcss */
-  /*   '@nuxtjs/tailwindcss', */
-  /*   '@nuxtjs/composition-api/module', */
-  /*   '@nuxtjs/style-resources' */
-  /* ], */
-
   generate: {
     // choose to suit your project
     // interval: 2000
@@ -69,17 +58,4 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: []
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  /* build: { */
-  /*   extend(config, ctx) { */
-  /*     if (ctx.isClient) { */
-  /*       config.module.rules.push({ */
-  /*         test: /\.worker\.js$/, */
-  /*         loader: 'worker-loader', */
-  /*         exclude: /(node_modules)/ */
-  /*       }) */
-  /*     } */
-  /*   } */
-  /* } */
 })
