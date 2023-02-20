@@ -33,7 +33,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 4rem;
+  height: 3rem;
   width: 200%;
   top: 0;
   left: -100%;
@@ -41,23 +41,24 @@ header {
   z-index: 5;
   animation: 14s linear 0s infinite normal forwards animateBanner;
 
+  @include tablet-landscape {
+    height: 4rem;
+  }
+
   div {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
-    /* border: solid 4px $green; */
 
     span {
-      @include text-2xl;
-
-      /* @include tablet-landscape { */
-      /*   @include text-3xl; */
-      /* } */
-
       color: $green;
-      font-size: 2rem;
+      font-size: 1.7rem;
       font-family: 'Martyr';
+
+      @include tablet-landscape {
+        font-size: 2rem;
+      }
     }
   }
 }

@@ -12,24 +12,24 @@
   <transition name="fade">
     <div v-if="!isMobile || extendedMatrix" class="links">
       <ul class="menu">
-        <li>
+        <li class="menu__item">
           <nuxt-link to="/">
             <SvgHell />
           </nuxt-link>
         </li>
-        <li>
+        <li class="menu__item">
           <nuxt-link to="/experiences">
             <SvgSatan />
           </nuxt-link>
         </li>
       </ul>
       <ul class="networks">
-        <li>
+        <li class="menu__item">
           <a href="https://github.com/ValJed" target="__blank">
             <SvgGithub />
           </a>
         </li>
-        <li>
+        <li class="menu__item linkedin">
           <a
             href="https://www.linkedin.com/in/valentin-jeudy-585466112"
             target="__blank"
@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   isMobile: {
     type: Boolean,
     required: true
@@ -53,6 +53,9 @@ defineProps({
     required: true
   }
 })
+
+console.log('props.extendedMatrix', props.extendedMatrix)
+console.log('props.isMobile', props.isMobile)
 const emit = defineEmits(['toggleMenu'])
 
 const toggleMenu = () => {
@@ -90,7 +93,7 @@ $menuTranslate: 10px;
   z-index: 10;
 
   @media (max-height: 800px) {
-    bottom: 3vh;
+    bottom: 10vh;
   }
 
   @include tablet-landscape {
@@ -109,7 +112,10 @@ $menuTranslate: 10px;
   li {
     width: 2.5rem;
     height: 2.5rem;
-    margin-bottom: 3.5rem;
+
+    &:not(.linkedin) {
+      margin-bottom: 2.5rem;
+    }
 
     @include tablet-landscape {
       margin-bottom: 1rem;
@@ -165,9 +171,10 @@ $menuTranslate: 10px;
   height: 30px;
   background-color: none;
   right: 2rem;
-  bottom: calc((5rem - 30px) / 2);
+  bottom: calc((4rem - 30px) / 2);
   overflow: hidden;
   cursor: pointer;
+  z-index: 20;
 
   &.opened {
     span:first-child {
