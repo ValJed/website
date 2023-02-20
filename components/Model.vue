@@ -76,10 +76,33 @@ async function generateModel(canvas, containerSize) {
     const mobileMutations = ({ position, rotation }) => {
       if (position.y < 0) {
         position.set(0, position.y + 2, 0)
-      } else if (props.extendedMatrix && rotation.z > -0.2) {
-        rotation.z = rotation.z - 0.002
-      } else if (!props.extendedMatrix && rotation.z < 0) {
-        rotation.z = rotation.z + 0.01
+      }
+      /* if (props.extendedMatrix && rotation.z > -0.2) { */
+      /*   rotation.z = rotation.z - 0.004 */
+      /* } else if (!props.extendedMatrix && rotation.z < 0) { */
+      /*   rotation.z = rotation.z + 0.01 */
+      /*   position.set(0, position.y, position.z + 1) */
+      /* } */
+      /**/
+      if (props.extendedMatrix) {
+        if (rotation.y > Math.PI * 2) {
+          rotation.y = 0
+        } else {
+          rotation.y = rotation.y + 0.05
+        }
+      } else if (!props.extendedMatrix) {
+        if (rotation.y <= Math.PI * 2 && rotation.y !== 0) {
+          console.log('rotation.y', rotation.y)
+          rotation.y = rotation.y + 0.1 * (Math.PI * 2 - rotation.y)
+        } else if (rotation.y !== 0) {
+          rotation.y = 0
+        }
+      }
+
+      if (props.extendedMatrix && position.z > -70) {
+        position.set(0, position.y, position.z - 2)
+      } else if (!props.extendedMatrix && position.z < 0) {
+        position.set(0, position.y, position.z + 2)
       }
     }
 
@@ -188,8 +211,9 @@ canvas {
   position: relative;
   width: 12rem;
   height: 100%;
+  min-height: 10rem;
   left: 0;
-  bottom: -4.5rem;
+  bottom: 2rem;
 
   @include tablet-landscape {
     position: absolute;
