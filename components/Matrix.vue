@@ -97,7 +97,7 @@ function generateMatrix(canvas) {
 .matrix-container {
   position: absolute;
   width: 100%;
-  height: 5rem;
+  height: 100%;
   overflow: hidden;
   transition: all 0.25s ease-in;
   right: 0;
@@ -112,13 +112,12 @@ function generateMatrix(canvas) {
   }
 
   &.extended {
-    height: calc(100vh - 4rem); // header
+    height: calc(100vh - 3rem); // header
 
     @include tablet-landscape {
       height: calc(100vh - 6rem); // header + container padding
       right: 0;
       border-radius: 0;
-      /* animation: none; */
     }
   }
 }
