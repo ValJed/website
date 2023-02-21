@@ -108,6 +108,7 @@ p {
     display: inline-block;
     height: 30px;
     color: $green;
+    line-height: 1.3;
   }
 }
 
