@@ -142,8 +142,7 @@ onMounted(() => {
     top: 6rem;
     flex-shrink: 0;
     width: 20rem;
-    flex-shrink: 0;
-    height: auto;
+    height: calc(100vh - 6rem);
   }
 
   &.extended {

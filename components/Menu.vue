@@ -120,10 +120,10 @@ $menuTranslate: 10px;
 
     &:not(.linkedin) {
       margin-bottom: 2.5rem;
-    }
 
-    @include tablet-landscape {
-      margin-bottom: 1rem;
+      @include tablet-landscape {
+        margin-bottom: 1rem;
+      }
     }
 
     a {
