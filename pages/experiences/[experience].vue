@@ -61,7 +61,7 @@ img {
 }
 
 .description {
-  margin-top: 6rem;
+  margin-top: 4rem;
 
   @include tablet-landscape {
     margin-top: 3rem;
@@ -92,7 +92,6 @@ img {
   }
 }
 
-// Anims
 @include tablet-landscape {
   .v-enter-active {
     .logo {

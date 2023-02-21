@@ -101,7 +101,7 @@ onMounted(() => {
 .container {
   width: 80%;
   margin: 0 auto;
-  padding: 4rem 0 7rem;
+  padding: 3rem 0 7rem;
   min-height: 100vh;
 
   @include tablet-landscape {
@@ -118,7 +118,7 @@ onMounted(() => {
   position: relative;
   flex-grow: 1;
   z-index: 0;
-  padding-top: 2rem;
+  padding-top: 1rem;
   flex: 1;
   min-height: calc(100vh - 11rem);
 
@@ -130,7 +130,7 @@ onMounted(() => {
 
 .sidebar {
   position: fixed;
-  height: 5rem;
+  height: 4rem;
   width: 100%;
   right: 0;
   bottom: 0;
@@ -165,7 +165,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 12rem;
+  height: 4rem;
   bottom: 0;
 
   @include tablet-landscape {
