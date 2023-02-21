@@ -33,7 +33,8 @@
             :extended-matrix="extendedMatrix"
           />
         </div>
-        <SocialNetworks
+        <Menu
+          v-if="containerSize"
           :is-mobile="isMobile"
           :extended-matrix="extendedMatrix"
           @toggle-menu="toggleMenu"
