@@ -20,13 +20,13 @@
       <aside class="sidebar" :class="{ extended: extendedMatrix && isMobile }">
         <div class="model-container">
           <Matrix
-            v-if="containerSize"
+            v-if="containerSize && !isResizing"
             :extended-matrix="extendedMatrix"
             :container-size="containerSize"
             :is-mobile="isMobile"
           />
           <Model
-            v-if="containerSize"
+            v-if="containerSize && !isResizing"
             class="model-canvas"
             :container-size="containerSize"
             :is-mobile="isMobile"
@@ -49,6 +49,7 @@ const isMobile = ref(false)
 const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
+const isResizing = ref(false)
 
 const router = useRouter()
 
@@ -77,25 +78,26 @@ onMounted(() => {
 
   containerSize.value = containerRef.value.clientWidth
 
-  // resize()
+  resize()
 })
 
-// function resize() {
-//   let timeout = null
+function resize() {
+  let timeout = null
 
-//   window.onresize = () => {
-//     if (timeout) {
-//       clearTimeout(timeout)
-//     }
+  window.onresize = () => {
+    if (timeout) {
+      isResizing.value = true
+      clearTimeout(timeout)
+    }
 
-//     timeout = setTimeout(() => {
-//       containerSize.value = containerRef.value.clientWidth
-//       timeout = null
-
-//       console.log('containerSize.value ===> ', containerSize.value)
-//     }, 500)
-//   }
-// }
+    timeout = setTimeout(() => {
+      containerSize.value = containerRef.value.clientWidth
+      timeout = null
+      isResizing.value = false
+      isMobile.value = window.innerWidth < 900
+    }, 500)
+  }
+}
 </script>
 
 <style lang="scss">
