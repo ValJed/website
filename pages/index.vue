@@ -22,7 +22,7 @@ import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
 
 const interests =
   'Also interested in Human Collaboration / Philosophy / Dark Arts'
-const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux']
+const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust']
 const typingMin = 30
 const typingMax = 150
 
@@ -71,16 +71,6 @@ async function write(text, interests) {
 </script>
 
 <style lang="scss" scoped>
-/* @keyframes blink { */
-/*   0% { */
-/*     border-right-width: 2px; */
-/*   } */
-/**/
-/*   50% { */
-/*     border-right-width: 0px; */
-/*   } */
-/* } */
-
 h1 {
   margin-bottom: 2rem;
   color: $green;
@@ -108,6 +98,7 @@ p {
     display: inline-block;
     height: 30px;
     color: $green;
+    line-height: 1.3;
   }
 }
 

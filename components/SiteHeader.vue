@@ -14,7 +14,9 @@ const props = defineProps({
   }
 })
 
-const jedArray = new Array(props.isMobile ? 4 : 10).fill('JED')
+const jedArray = computed(() => {
+  return new Array(props.isMobile ? 4 : 10).fill('JED')
+})
 </script>
 
 <style scoped lang="scss">

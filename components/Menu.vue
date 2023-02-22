@@ -46,7 +46,8 @@
 const props = defineProps({
   isMobile: {
     type: Boolean,
-    required: true
+    required: true,
+    default: true
   },
   extendedMatrix: {
     type: Boolean,
@@ -54,8 +55,8 @@ const props = defineProps({
   }
 })
 
-console.log('props.extendedMatrix', props.extendedMatrix)
 console.log('props.isMobile', props.isMobile)
+console.log('props.extendedMatrix', props.extendedMatrix)
 const emit = defineEmits(['toggleMenu'])
 
 const toggleMenu = () => {
@@ -72,6 +73,10 @@ $menuTranslate: 10px;
 
 .fade-leave-active {
   transition: all 0.1s linear;
+}
+
+[v-cloak] {
+  display: none !important;
 }
 
 .fade-enter-from,
@@ -115,10 +120,10 @@ $menuTranslate: 10px;
 
     &:not(.linkedin) {
       margin-bottom: 2.5rem;
-    }
 
-    @include tablet-landscape {
-      margin-bottom: 1rem;
+      @include tablet-landscape {
+        margin-bottom: 1rem;
+      }
     }
 
     a {

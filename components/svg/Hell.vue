@@ -140,7 +140,7 @@ export default {}
 
 .home:hover {
   .top {
-    transform: translateY(-6%);
+    transform: translateY(-4%);
   }
 
   .center {

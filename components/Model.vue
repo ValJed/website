@@ -74,35 +74,20 @@ async function generateModel(canvas, containerSize) {
     requestAnimationFrame(animate)
 
     const mobileMutations = ({ position, rotation }) => {
+      // Before the mask has been fully loaded
       if (position.y < 0) {
         position.set(0, position.y + 2, 0)
       }
-      /* if (props.extendedMatrix && rotation.z > -0.2) { */
-      /*   rotation.z = rotation.z - 0.004 */
-      /* } else if (!props.extendedMatrix && rotation.z < 0) { */
-      /*   rotation.z = rotation.z + 0.01 */
-      /*   position.set(0, position.y, position.z + 1) */
-      /* } */
-      /**/
+
       if (props.extendedMatrix) {
-        if (rotation.y > Math.PI * 2) {
-          rotation.y = 0
-        } else {
-          rotation.y = rotation.y + 0.05
-        }
-      } else if (!props.extendedMatrix) {
-        if (rotation.y <= Math.PI * 2 && rotation.y !== 0) {
-          console.log('rotation.y', rotation.y)
-          rotation.y = rotation.y + 0.1 * (Math.PI * 2 - rotation.y)
-        } else if (rotation.y !== 0) {
-          rotation.y = 0
-        }
+        rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.05
+        return
       }
 
-      if (props.extendedMatrix && position.z > -70) {
-        position.set(0, position.y, position.z - 2)
-      } else if (!props.extendedMatrix && position.z < 0) {
-        position.set(0, position.y, position.z + 2)
+      if (rotation.y <= Math.PI * 2 && rotation.y !== 0) {
+        rotation.y = rotation.y + 0.1 * (Math.PI * 2 - rotation.y)
+      } else if (rotation.y !== 0) {
+        rotation.y = 0
       }
     }
 
