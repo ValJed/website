@@ -20,9 +20,11 @@
       </div>
     </div>
     <div class="back-link__container">
-      <NuxtLink class="back-link" to="/experiences">
-        <Spear />
-      </NuxtLink>
+      <div class="back-link__inner">
+        <NuxtLink class="back-link" to="/experiences">
+          <Spear />
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -93,23 +95,25 @@ img {
 }
 
 .back-link__container {
-  position: static;
-  display: flex;
-  align-items: center;
-
   @include tablet-landscape {
     position: fixed;
     height: 5rem;
-    background-color: $black;
+    width: 100%;
+    left: 0;
     bottom: 0;
-    left: 10%;
-    width: 80%;
-    overflow: hidden;
+    background-color: $black;
   }
+}
 
-  @include desktop {
+.back-link__inner {
+  @include tablet-landscape {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
     max-width: 1400px;
-    left: calc((100vw - 1400px) / 2);
   }
 }
 
