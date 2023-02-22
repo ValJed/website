@@ -3,8 +3,6 @@ dotenv.config()
 
 export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
-  ssr: true,
-
   devServer: {
     port: parseInt(process.env.PORT || '3000', 10)
   },

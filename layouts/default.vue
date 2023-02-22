@@ -85,6 +85,10 @@ function resize() {
   let timeout = null
 
   window.onresize = () => {
+    if (containerSize.value === containerRef.value.clientWidth) {
+      return
+    }
+
     if (timeout) {
       isResizing.value = true
       clearTimeout(timeout)

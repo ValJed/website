@@ -13,12 +13,12 @@
     <div v-if="!isMobile || extendedMatrix" class="links">
       <ul class="menu">
         <li class="menu__item">
-          <nuxt-link to="/">
+          <nuxt-link to="/" @click="toggleMenu">
             <SvgHell />
           </nuxt-link>
         </li>
         <li class="menu__item">
-          <nuxt-link to="/experiences">
+          <nuxt-link to="/experiences" @click="toggleMenu">
             <SvgSatan />
           </nuxt-link>
         </li>
@@ -55,12 +55,12 @@ const props = defineProps({
   }
 })
 
-console.log('props.isMobile', props.isMobile)
-console.log('props.extendedMatrix', props.extendedMatrix)
 const emit = defineEmits(['toggleMenu'])
 
 const toggleMenu = () => {
-  emit('toggleMenu')
+  if (props.isMobile) {
+    emit('toggleMenu')
+  }
 }
 </script>
 

@@ -80,7 +80,7 @@ async function generateModel(canvas, containerSize) {
       }
 
       if (props.extendedMatrix) {
-        rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.05
+        rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.025
         return
       }
 
