@@ -76,7 +76,7 @@ img {
 }
 
 .stack {
-  color: $green;
+  color: var(--green);
 
   :deep(span) {
     color: #fff;
@@ -84,7 +84,7 @@ img {
 }
 
 .link {
-  color: $green;
+  color: var(--green);
 }
 
 .back-link {
@@ -101,7 +101,7 @@ img {
     width: 100%;
     left: 0;
     bottom: 0;
-    background-color: $black;
+    background-color: var(--black);
   }
 }
 

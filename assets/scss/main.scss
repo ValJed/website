@@ -1,5 +1,69 @@
-@import "./mixins.scss";
-@import "./variables.scss";
+@use "./variables.scss" as *;
+
+@mixin text-3xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+@mixin text-2xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@mixin text-xl {
+  font-size: 1.35rem;
+  line-height: 2rem;
+}
+
+@mixin text {
+  font-size: 1.25rem;
+}
+
+@mixin text-sm {
+  font-size: 1.1rem;
+}
+
+@mixin mobile-small {
+  @media (max-width: 399px) {
+    @content;
+  }
+}
+
+@mixin no-small {
+  @media (min-width: 400px) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: 899px) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin tablet-landscape {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -23,8 +87,8 @@
 }
 
 :root {
-  color: $white;
-  background-color: $black;
+  color: var(--white);
+  background-color: var(--black);
 
   ul {
     padding: 0;
@@ -36,7 +100,7 @@
 
   h1 {
     @include text-2xl;
-    font-family: $ftext;
+    font-family: var(--ftext);
     margin: 0 0 3rem;
 
   }
@@ -47,7 +111,7 @@
   }
 
   p {
-    font-family: $ftext;
+    font-family: var(--ftext);
     margin: 1rem 0;
 
     @include text;

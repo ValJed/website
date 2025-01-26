@@ -39,7 +39,7 @@ header {
   width: 200%;
   top: 0;
   left: -100%;
-  background-color: $black;
+  background-color: var(--black);
   z-index: 5;
   animation: 14s linear 0s infinite normal forwards animateBanner;
 
@@ -54,7 +54,7 @@ header {
     flex: 1;
 
     span {
-      color: $green;
+      color: var(--green);
       font-size: 1.7rem;
       font-family: 'Martyr';
 

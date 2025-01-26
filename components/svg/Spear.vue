@@ -42,7 +42,7 @@
 }
 
 #top {
-  fill: $green;
+  fill: var(--green);
   transform-box: fill-box;
   transform-origin: center;
 

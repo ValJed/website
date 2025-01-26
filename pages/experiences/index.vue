@@ -57,13 +57,13 @@ onMounted(() => {
 <style lang="scss" scoped>
 @keyframes shadow {
   0% {
-    box-shadow: -7px -7px 25px $green;
+    box-shadow: -7px -7px 25px var(--green);
   }
   50% {
-    box-shadow: 7px 5px 25px $green;
+    box-shadow: 7px 5px 25px var(--green);
   }
   100% {
-    box-shadow: -7px -7px 25px $green;
+    box-shadow: -7px -7px 25px var(--green);
   }
 }
 
@@ -131,7 +131,7 @@ onMounted(() => {
 
 h2 {
   @include text-2xl;
-  font-family: $ftitle;
+  font-family: var(--ftitle);
   padding: 1.5rem 0;
 }
 

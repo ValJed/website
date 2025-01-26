@@ -68,7 +68,7 @@ async function write(writtenTexts) {
 }
 
 .active {
-  border-color: $green;
+  border-color: var(--green);
   animation: 1s infinite step-end blink;
 }
 

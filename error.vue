@@ -87,7 +87,7 @@ onMounted(() => {
     position: relative;
     display: flex;
     align-items: center;
-    font-family: $ftext;
+    font-family: var(--ftext);
 
     svg {
       width: 2rem;

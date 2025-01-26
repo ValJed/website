@@ -73,11 +73,11 @@ async function write(text, interests) {
 <style lang="scss" scoped>
 h1 {
   margin-bottom: 2rem;
-  color: $green;
+  color: var(--green);
 }
 
 .interests > span {
-  color: $green;
+  color: var(--green);
 }
 
 .home {
@@ -97,7 +97,7 @@ p {
   .green {
     display: inline-block;
     height: 30px;
-    color: $green;
+    color: var(--green);
     line-height: 1.3;
   }
 }

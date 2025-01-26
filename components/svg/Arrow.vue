@@ -60,7 +60,7 @@ svg {
 
   .part-2 {
     transition: transform 0.05s ease-in-out 0.05s;
-    fill: $green;
+    fill: var(--green);
   }
 
   .part-3 {
