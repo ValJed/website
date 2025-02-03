@@ -1,11 +1,11 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
-
 export default defineNuxtConfig({
-  // Target: https://go.nuxtjs.dev/config-target
+  ssr: true,
   devServer: {
     port: parseInt(process.env.PORT || '3000', 10)
   },
+  // nitro: {
+  //   prerender: true
+  // },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   app: {
@@ -26,6 +26,11 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', href: '/favicon.svg' }]
     }
+  },
+
+  runtimeConfig: {
+    baseUrl: process.env.API_TOKEN,
+    token: process.env.API_BASE_URL,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
