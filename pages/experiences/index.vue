@@ -40,18 +40,10 @@
 </template>
 
 <script setup>
-const showXp = ref(false)
-/* const active = ref(null) */
+const { $api } = useNuxtApp()
+const { data } = await useAsyncData('experiences', () => $api('/experiences'))
+console.log('data', data.value)
 
-onMounted(() => {
-  setTimeout(() => {
-    showXp.value = true
-  }, 250)
-})
-
-/* const activeToggle = ({ currentTarget }) => { */
-/*   currentTarget.classList.toggle('active') */
-/* } */
 </script>
 
 <style lang="scss" scoped>
