@@ -29,8 +29,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    baseUrl: process.env.API_TOKEN,
-    token: process.env.API_BASE_URL,
+    baseUrl: process.env.API_BASE_URL,
+    token: process.env.API_TOKEN,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

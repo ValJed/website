@@ -41,9 +41,9 @@
 
 <script setup>
 const { $api } = useNuxtApp()
-const { data } = await useAsyncData('experiences', () => $api('/experiences'))
-console.log('data', data.value)
-
+const { data, status } = await useAsyncData('experiences', () =>
+  $api('/experiences')
+)
 </script>
 
 <style lang="scss" scoped>
