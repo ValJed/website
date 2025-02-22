@@ -18,17 +18,8 @@
 
 <script setup>
 import weaponsAnimation from '@/lib/weaponsAnimation'
-import { setTextsLoaded, getTextsLoaded } from '@/lib/textsLoaded'
-
-const interests =
-  'Also interested in Human Collaboration / Philosophy / Dark Arts'
-const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust']
-const typingMin = 30
-const typingMax = 150
-
+const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust'] // TODO: get from api
 const weapon = ref(weapons[0])
-const textsLoaded = getTextsLoaded()
-const interestsText = ref(textsLoaded ? interests : '')
 
 defineProps({
   isMobile: {
@@ -41,33 +32,7 @@ onMounted(() => {
   setInterval(async () => {
     await weaponsAnimation(weapons, weapon)
   }, 3000)
-
-  if (!textsLoaded) {
-    setTimeout(() => {
-      write(interestsText, interests)
-    }, 2000)
-  }
 })
-
-async function write(text, interests) {
-  setTextsLoaded()
-
-  for (const char of interests) {
-    await timeOut()
-
-    text.value += char
-  }
-
-  function timeOut() {
-    return new Promise((resolve) => {
-      const random = Math.random() * (typingMax - typingMin + 1) + typingMin
-
-      setTimeout(() => {
-        resolve()
-      }, random)
-    })
-  }
-}
 </script>
 
 <style lang="scss" scoped>
