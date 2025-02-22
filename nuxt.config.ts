@@ -30,7 +30,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     baseUrl: process.env.API_BASE_URL,
-    token: process.env.API_TOKEN,
+    token: process.env.API_TOKEN
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxt/eslint'],
 
   compatibilityDate: '2025-01-26'
 })

@@ -1,38 +1,13 @@
 <template>
   <div class="experiences content">
     <h1>Experiences</h1>
-    <ul>
-      <li>
-        <NuxtLink to="experiences/apostrophe">
+    <ul v-if="!pending">
+      <li v-for="xp in experiences" :key="xp.id">
+        <NuxtLink :to="`experiences/${xp.title}`">
           <div>
-            <img src="/images/apostrophe.svg" alt="Apostrophe" />
-            <span>Apostrophe</span>
+            <img v-if="xp.logo?.url" :src="xp.logo.url" :alt="xp.title" />
+            <span v-if="xp.logoTitle">{{ xp.logoTitle }}</span>
           </div>
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="experiences/iboycott">
-          <img src="/images/iboycott.png" alt="I-boycott" />
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="experiences/easylife">
-          <img src="/images/easylife.svg" alt="Easylife" />
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="experiences/ag">
-          <img src="/images/ag.svg" alt="AG" />
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="experiences/michelin">
-          <img src="/images/michelin.png" alt="Michelin" />
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="experiences/dedi">
-          <img src="/images/dedi.png" alt="Dedi Agency" />
         </NuxtLink>
       </li>
     </ul>
@@ -41,8 +16,8 @@
 
 <script setup>
 const { $api } = useNuxtApp()
-const { data, status } = await useAsyncData('experiences', () =>
-  $api('/experiences')
+const { data: experiences, pending } = await useAsyncData('experiences', () =>
+  $api('/experiences?populate=*')
 )
 </script>
 

@@ -31,7 +31,6 @@ import { useLayoutState } from '@/composables/useLayoutState.js'
 const state = useLayoutState()
 
 const isMobile = ref(false)
-const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
 const isResizing = ref(false)
@@ -57,7 +56,7 @@ const toggleMenu = () => {
   state.value.extendedMatrix = !state.value.extendedMatrix
 }
 
-if (isMobile) {
+if (state.value.isMobile) {
   router.beforeEach(() => {
     contractMatrix()
   })

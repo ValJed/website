@@ -11,7 +11,7 @@
     </div>
     <div class="error-page__content">
       <div class="error-page__info">
-        <h1 v-if="error.statusCode === '404'" class="error-page__title">
+        <h1 v-if="props.error.statusCode === '404'" class="error-page__title">
           Page not found
         </h1>
         <h1 v-else class="error-page__title">An error occurred</h1>
