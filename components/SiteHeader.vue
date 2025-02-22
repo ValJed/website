@@ -7,15 +7,11 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  isMobile: {
-    type: Boolean,
-    required: true
-  }
-})
+import { useLayoutState } from '@/composables/useLayoutState.js'
 
+const state = useLayoutState()
 const jedArray = computed(() => {
-  return new Array(props.isMobile ? 4 : 10).fill('JED')
+  return new Array(state.value.isMobile ? 4 : 10).fill('JED')
 })
 </script>
 

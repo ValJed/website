@@ -2,26 +2,15 @@
   <div>
     <SiteHeader v-if="containerSize" :is-mobile="isMobile" />
     <div ref="containerRef" class="container">
-      <router-view v-if="!isMobile" v-slot="{ Component }">
-        <transition
-          mode="out-in"
-          duration="500"
-          @before-enter="contractMatrix"
-          @before-leave="extendMatrix"
-        >
-          <component :is="Component" :is-mobile="isMobile" class="content" />
-        </transition>
-      </router-view>
-
-      <router-view v-else v-slot="{ Component }">
-        <component :is="Component" :is-mobile="isMobile" class="content" />
-      </router-view>
-
-      <aside class="sidebar" :class="{ extended: extendedMatrix && isMobile }">
+      <NuxtPage :transition="transition" />
+      <aside
+        class="sidebar"
+        :class="{ extended: state.extendedMatrix && isMobile }"
+      >
         <div class="model-container">
           <Matrix
             v-if="containerSize && !isResizing"
-            :extended-matrix="extendedMatrix"
+            :extended-matrix="state.extendedMatrix"
             :container-size="containerSize"
             :is-mobile="isMobile"
           />
@@ -29,40 +18,43 @@
             v-if="containerSize && !isResizing"
             class="model-canvas"
             :container-size="containerSize"
-            :is-mobile="isMobile"
-            :extended-matrix="extendedMatrix"
           />
         </div>
-        <Menu
-          v-if="containerSize"
-          :is-mobile="isMobile"
-          :extended-matrix="extendedMatrix"
-          @toggle-menu="toggleMenu"
-        />
+        <Menu v-if="containerSize" @toggle-menu="toggleMenu" />
       </aside>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useLayoutState } from '@/composables/useLayoutState.js'
+const state = useLayoutState()
+
 const isMobile = ref(false)
 const extendedMatrix = ref(false)
 const containerRef = ref(null)
 const containerSize = ref(0)
 const isResizing = ref(false)
+const transition = ref({
+  name: 'matrix',
+  mode: 'out-in',
+  duration: 500,
+  onBeforeEnter: contractMatrix,
+  onBeforeLeave: extendMatrix
+})
 
 const router = useRouter()
 
-const extendMatrix = () => {
-  extendedMatrix.value = true
+function extendMatrix() {
+  state.value.extendedMatrix = true
 }
 
-const contractMatrix = () => {
-  extendedMatrix.value = false
+function contractMatrix() {
+  state.value.extendedMatrix = false
 }
 
 const toggleMenu = () => {
-  extendedMatrix.value = !extendedMatrix.value
+  state.value.extendedMatrix = !state.value.extendedMatrix
 }
 
 if (isMobile) {
@@ -73,7 +65,8 @@ if (isMobile) {
 
 onMounted(() => {
   if (window.innerWidth < 900) {
-    isMobile.value = true
+    state.value.isMobile = true
+    transition.value = ref({})
   }
 
   containerSize.value = containerRef.value.clientWidth
@@ -98,7 +91,7 @@ function resize() {
       containerSize.value = containerRef.value.clientWidth
       timeout = null
       isResizing.value = false
-      isMobile.value = window.innerWidth < 900
+      state.value.isMobile = window.innerWidth < 900
     }, 500)
   }
 }

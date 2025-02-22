@@ -2,24 +2,19 @@
   <div
     class="matrix-container"
     :style="{ width: matrixContainerWidth, left: matrixContainerLeft }"
-    :class="{ extended: extendedMatrix }"
+    :class="{ extended: state.extendedMatrix }"
   >
     <canvas ref="matrix" :width="width" :height="height" />
   </div>
 </template>
 
 <script setup>
+import { useLayoutState } from '@/composables/useLayoutState.js'
+const state = useLayoutState()
+
 const props = defineProps({
-  extendedMatrix: {
-    type: Boolean,
-    required: true
-  },
   containerSize: {
     type: Number,
-    required: true
-  },
-  isMobile: {
-    type: Boolean,
     required: true
   }
 })
@@ -31,13 +26,13 @@ const matrixContainerWidth = ref('100%')
 const matrixContainerLeft = ref('0px')
 
 watch(
-  () => props.extendedMatrix,
+  () => state.value.extendedMatrix,
   (newVal) => {
     matrixContainerWidth.value =
-      newVal && !props.isMobile ? `${props.containerSize}px` : '100%'
+      newVal && !state.isMobile ? `${props.containerSize}px` : '100%'
 
     matrixContainerLeft.value =
-      newVal && !props.isMobile
+      newVal && !state.isMobile
         ? `calc(-${props.containerSize}px + 20rem)`
         : '0px'
 

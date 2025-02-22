@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home content">
     <div>
       <h1 title="Full stack JS developer">
         Hi, I'm a full stack web developer.

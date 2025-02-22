@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import { useLayoutState } from '@/composables/useLayoutState.js'
 import {
   Scene,
   PerspectiveCamera,
@@ -14,20 +15,13 @@ import {
 } from 'three'
 
 const props = defineProps({
-  isMobile: {
-    type: Boolean,
-    required: true
-  },
   containerSize: {
     type: Number,
-    required: true
-  },
-  extendedMatrix: {
-    type: Boolean,
     required: true
   }
 })
 
+const state = useLayoutState()
 const modelCanvas = ref(null)
 const mouseX = ref(null)
 const mouseY = ref(null)
@@ -56,7 +50,7 @@ async function generateModel(canvas, containerSize) {
   scene.add(pivot)
   scene.add(gltfScene)
 
-  if (props.isMobile) {
+  if (state.value.isMobile) {
     pivot.position.set(0, -75, 0)
   } else {
     pivot.position.set(0, 0, -900)
@@ -79,7 +73,7 @@ async function generateModel(canvas, containerSize) {
         position.set(0, position.y + 2, 0)
       }
 
-      if (props.extendedMatrix) {
+      if (state.value.extendedMatrix) {
         rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.025
         return
       }
@@ -95,12 +89,12 @@ async function generateModel(canvas, containerSize) {
       // Before the mask has been fully loaded
       if (p.position.z < -100) {
         pivot.position.set(0, 0, pivot.position.z + 20)
-      } else if (mouseX.value && mouseY.value && !props.isMobile) {
+      } else if (mouseX.value && mouseY.value && !state.value.isMobile) {
         computePivot(pivot, centerX, centerY)
       }
     }
 
-    if (!props.isMobile) {
+    if (!state.value.isMobile) {
       desktopMutations(pivot)
     } else {
       mobileMutations(pivot)

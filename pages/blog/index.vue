@@ -1,6 +1,6 @@
 <template>
   <div class="experiences content">
-    <h1>Experiences</h1>
+    <h1>Blog</h1>
     <ul>
       <li>
         <NuxtLink to="experiences/apostrophe">
@@ -40,10 +40,18 @@
 </template>
 
 <script setup>
-const { $api } = useNuxtApp()
-const { data, status } = await useAsyncData('experiences', () =>
-  $api('/experiences')
-)
+const showXp = ref(false)
+/* const active = ref(null) */
+
+onMounted(() => {
+  setTimeout(() => {
+    showXp.value = true
+  }, 250)
+})
+
+/* const activeToggle = ({ currentTarget }) => { */
+/*   currentTarget.classList.toggle('active') */
+/* } */
 </script>
 
 <style lang="scss" scoped>

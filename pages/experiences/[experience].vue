@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="work">
       <div class="logo">
         <img :src="`/images/${experience.img}`" :alt="experience.name" />

@@ -1,8 +1,8 @@
 <template>
   <div
-    v-if="isMobile"
+    v-if="state.isMobile"
     class="menu-btn"
-    :class="{ opened: extendedMatrix }"
+    :class="{ opened: state.extendedMatrix }"
     @click="toggleMenu"
   >
     <span></span>
@@ -10,7 +10,7 @@
     <span></span>
   </div>
   <transition name="fade">
-    <div v-if="!isMobile || extendedMatrix" class="links">
+    <div v-if="!state.isMobile || state.extendedMatrix" class="links">
       <ul class="menu">
         <li class="menu__item">
           <nuxt-link to="/" @click="toggleMenu">
@@ -43,22 +43,13 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  isMobile: {
-    type: Boolean,
-    required: true,
-    default: true
-  },
-  extendedMatrix: {
-    type: Boolean,
-    required: true
-  }
-})
+import { useLayoutState } from '@/composables/useLayoutState.js'
+const state = useLayoutState()
 
 const emit = defineEmits(['toggleMenu'])
 
 const toggleMenu = () => {
-  if (props.isMobile) {
+  if (state.value.isMobile) {
     emit('toggleMenu')
   }
 }
