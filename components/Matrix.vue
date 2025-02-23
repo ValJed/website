@@ -29,10 +29,10 @@ watch(
   () => state.value.extendedMatrix,
   (newVal) => {
     matrixContainerWidth.value =
-      newVal && !state.isMobile ? `${props.containerSize}px` : '100%'
+      newVal && !state.value.isMobile ? `${props.containerSize}px` : '100%'
 
     matrixContainerLeft.value =
-      newVal && !state.isMobile
+      newVal && !state.value.isMobile
         ? `calc(-${props.containerSize}px + 20rem)`
         : '0px'
 

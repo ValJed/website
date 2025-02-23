@@ -5,7 +5,7 @@
         Hi, I'm a full stack web developer.
       </h1>
       <p>
-        Here are the weapons I love to fight with: <br v-if="isMobile" />
+        Here are the weapons I love to fight with: <br v-if="state.isMobile" />
         <span class="green">{{ weapon }}</span>
       </p>
       <p class="interests">
@@ -17,16 +17,12 @@
 </template>
 
 <script setup>
-import weaponsAnimation from '@/lib/weaponsAnimation'
+import weaponsAnimation from '@/lib/weaponsAnimation.js'
+import { useLayoutState } from '@/composables/useLayoutState.js'
+
+const state = useLayoutState()
 const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust'] // TODO: get from api
 const weapon = ref(weapons[0])
-
-defineProps({
-  isMobile: {
-    type: Boolean,
-    required: true
-  }
-})
 
 onMounted(() => {
   setInterval(async () => {
