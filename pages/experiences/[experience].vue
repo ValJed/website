@@ -2,21 +2,17 @@
   <div class="content">
     <div class="work">
       <div class="logo">
-        <img :src="`/images/${experience.img}`" :alt="experience.name" />
-        <span v-if="experience.logoName">{{ experience.logoName }}</span>
+        <img
+          v-if="experience.logo.url"
+          :src="`${assetUrl}${experience.logo.url}`"
+          :alt="experience.name"
+        />
+        <span v-if="experience.logoTitle">{{ experience.logoTitle }}</span>
       </div>
       <div class="description">
-        <p>{{ experience.date }}</p>
-        <p class="stack" v-html="stack"></p>
-        <p v-for="(paragraph, i) in experience.content" :key="i">
-          {{ paragraph }}
-        </p>
-        <p v-if="experience.link">
-          See
-          <a class="link" target="__blank" :href="experience.link">{{
-            experience.link
-          }}</a>
-        </p>
+        <p>{{ experience.period }}</p>
+        <p class="stack" v-html="experience.stack"></p>
+        <StrapiBlocksText :nodes="experience.content" />
       </div>
     </div>
     <div class="back-link__container">
@@ -30,16 +26,26 @@
 </template>
 
 <script setup>
-import experiences from '@/data/experiences'
 import Spear from '@/components/svg/Spear.vue'
 import { useRoute } from 'vue-router'
-
 const route = useRoute()
 
 const current = route.params.experience
-const experience = experiences[current]
 
-const stack = experience.stack.join(' <span>/</span> ')
+const { $api } = useNuxtApp()
+const { assetUrl } = useAppConfig()
+const { data: experience } = await useAsyncData(
+  'experience',
+  () => $api(`/experiences/by-slug/${current}`),
+  {
+    transform(data) {
+      data.stack = data.stack.map(({ title }) => title).join(' <span>/</span> ')
+      return data
+    }
+  }
+)
+console.log('experience', experience.value)
+/* const stack = experience.stack.join(' <span>/</span> ') */
 </script>
 
 <style scoped lang="scss">

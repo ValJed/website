@@ -1,4 +1,4 @@
-@use "./variables.scss" as *;
+@use './variables.scss' as *;
 
 @mixin text-3xl {
   font-size: 3rem;
@@ -89,42 +89,41 @@
 :root {
   color: var(--white);
   background-color: var(--black);
+}
 
-  ul {
-    padding: 0;
-  }
+ul {
+  padding: 0;
+}
 
-  body {
-    margin: 0;
-  }
+body {
+  margin: 0;
+}
 
-  h1 {
-    @include text-2xl;
-    font-family: var(--ftext);
-    margin: 0 0 3rem;
+h1 {
+  @include text-2xl;
+  font-family: var(--ftext);
+  margin: 0 0 3rem;
+}
 
-  }
+h2,
+h3 {
+  @include text-xl;
+}
 
-  h2,
-  h3 {
-    @include text-xl;
-  }
+p {
+  font-family: var(--ftext);
+  margin: 1rem 0;
 
-  p {
-    font-family: var(--ftext);
-    margin: 1rem 0;
+  @include text;
+}
 
-    @include text;
-  }
+ul li {
+  list-style: none;
+}
 
-  ul li {
-    list-style: none;
-  }
-
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
+a {
+  color: #fff;
+  text-decoration: none;
 }
 
 // Anims

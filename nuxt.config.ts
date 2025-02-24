@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-  ssr: true,
   devServer: {
     port: parseInt(process.env.PORT || '3000', 10)
   },
@@ -26,6 +25,14 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', href: '/favicon.svg' }]
     }
+  },
+
+  experimental: {
+    componentIslands: true
+  },
+
+  appConfig: {
+    assetUrl: process.env.ASSET_URL
   },
 
   runtimeConfig: {
@@ -57,7 +64,15 @@ export default defineNuxtConfig({
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', 'nuxt-strapi-blocks-renderer'],
+
+  routeRules: {
+    // Homepage pre-rendered at build time
+    '/': { swr: true },
+    // Products page generated on demand, revalidates in background, cached until API response changes
+    '/experiences': { swr: true },
+    '/experiences/*': { swr: true }
+  },
 
   compatibilityDate: '2025-01-26'
 })
