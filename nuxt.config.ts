@@ -68,10 +68,10 @@ export default defineNuxtConfig({
 
   routeRules: {
     // Homepage pre-rendered at build time
-    '/': { swr: true },
+    '/': { prerender: true },
     // Products page generated on demand, revalidates in background, cached until API response changes
-    '/experiences': { swr: true },
-    '/experiences/*': { swr: true }
+    '/experiences': { prerender: true },
+    '/experiences/*': { prerender: true }
   },
 
   compatibilityDate: '2025-01-26'

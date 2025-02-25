@@ -1,19 +1,19 @@
 <template>
-  <ul class="experiences-list">
+  <ul v-if="!experiences" class="experiences-list">
     <li
-      v-for="{ id, title, logo, logoTitle } in experiences.data"
+      v-for="{ id, slug, logo, logoTitle } in experiences.data"
       :key="id"
       class="experiences-list__item"
     >
       <NuxtLink
-        :to="`experiences/${title.toLowerCase()}`"
+        :to="`experiences/${slug.toLowerCase()}`"
         class="experiences-list__item-link"
       >
         <div class="experiences-list__item-content">
           <img
             v-if="logo?.url"
             :src="`${assetUrl}${logo.url}`"
-            :alt="title"
+            :alt="slug"
             class="experiences-list__item-img"
           />
           <span v-if="logoTitle" class="experiences-list__item-title">
@@ -23,14 +23,16 @@
       </NuxtLink>
     </li>
   </ul>
+  <div v-else-if="pending">Loading...</div>
 </template>
 
 <script setup>
 const { $api } = useNuxtApp()
 const { assetUrl } = useAppConfig()
-const { data: experiences } = await useAsyncData('experiences', () =>
+const { data: experiences, pending } = await useAsyncData('experiences', () =>
   $api('/experiences?populate=*')
 )
+console.log('experiences.value', experiences.value)
 </script>
 
 <style lang="scss" scoped>
