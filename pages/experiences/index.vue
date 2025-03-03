@@ -8,7 +8,6 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-// Anims
 @include tablet-landscape {
   .v-enter-active {
     .experiences__title {

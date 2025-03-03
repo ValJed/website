@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="!experiences" class="experiences-list">
+  <ul v-if="experiences" class="experiences-list">
     <li
       v-for="{ id, slug, logo, logoTitle } in experiences.data"
       :key="id"
@@ -27,12 +27,8 @@
 </template>
 
 <script setup>
-const { $api } = useNuxtApp()
 const { assetUrl } = useAppConfig()
-const { data: experiences, pending } = await useAsyncData('experiences', () =>
-  $api('/experiences?populate=*')
-)
-console.log('experiences.value', experiences.value)
+const { data: experiences } = await useFetch('/api/experiences')
 </script>
 
 <style lang="scss" scoped>
