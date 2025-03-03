@@ -2,9 +2,12 @@ export default defineNuxtConfig({
   devServer: {
     port: parseInt(process.env.PORT || '3000', 10)
   },
-  // nitro: {
-  //   prerender: true
-  // },
+
+  nitro: {
+    prerender: {
+      crawlLinks: true
+    }
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   app: {
@@ -25,10 +28,6 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', href: '/favicon.svg' }]
     }
-  },
-
-  experimental: {
-    componentIslands: true
   },
 
   appConfig: {

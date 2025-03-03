@@ -29,23 +29,11 @@
 import Spear from '@/components/svg/Spear.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-
 const current = route.params.experience
-
-const { $api } = useNuxtApp()
 const { assetUrl } = useAppConfig()
-const { data: experience } = await useAsyncData(
-  'experience',
-  () => $api(`/experiences/by-slug/${current}`),
-  {
-    transform(data) {
-      data.stack = data.stack.map(({ title }) => title).join(' <span>/</span> ')
-      return data
-    }
-  }
+const { data: experience } = await useAsyncData('experience', () =>
+  $fetch('/api/experience', { params: { experience: current } })
 )
-console.log('experience', experience.value)
-/* const stack = experience.stack.join(' <span>/</span> ') */
 </script>
 
 <style scoped lang="scss">

@@ -5,10 +5,7 @@
       :key="id"
       class="experiences-list__item"
     >
-      <NuxtLink
-        :to="`experiences/${slug.toLowerCase()}`"
-        class="experiences-list__item-link"
-      >
+      <NuxtLink :to="`experiences/${slug}`" class="experiences-list__item-link">
         <div class="experiences-list__item-content">
           <img
             v-if="logo?.url"
