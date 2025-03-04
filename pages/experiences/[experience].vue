@@ -11,7 +11,7 @@
       </div>
       <div class="description">
         <p>{{ experience.period }}</p>
-        <p class="stack" v-html="experience.stack"></p>
+        <p class="stack" v-html="stack"></p>
         <StrapiBlocksText :nodes="experience.content" />
       </div>
     </div>
@@ -34,6 +34,9 @@ const { assetUrl } = useAppConfig()
 const { data: experience } = await useAsyncData('experience', () =>
   $fetch('/api/experience', { params: { experience: current } })
 )
+const stack = experience.value.stack
+  .map(({ title }) => title)
+  .join(' <span>/</span> ')
 </script>
 
 <style scoped lang="scss">

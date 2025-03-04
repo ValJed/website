@@ -12,14 +12,31 @@
   <transition name="fade">
     <div v-if="!state.isMobile || state.extendedMatrix" class="links">
       <ul class="menu">
-        <li class="menu__item">
+        <li
+          class="menu__item"
+          @mouseenter="setHovered('Home')"
+          @mouseleave="setHovered()"
+        >
           <nuxt-link to="/" @click="toggleMenu">
             <SvgHell />
           </nuxt-link>
         </li>
-        <li class="menu__item">
+        <li
+          class="menu__item"
+          @mouseenter="setHovered('Xp')"
+          @mouseleave="setHovered()"
+        >
           <nuxt-link to="/experiences" @click="toggleMenu">
             <SvgSatan />
+          </nuxt-link>
+        </li>
+        <li
+          class="menu__item"
+          @mouseenter="setHovered('Blog')"
+          @mouseleave="setHovered()"
+        >
+          <nuxt-link to="/blog" @click="toggleMenu">
+            <SvgParchment />
           </nuxt-link>
         </li>
       </ul>
@@ -38,15 +55,29 @@
           </a>
         </li>
       </ul>
+      <p v-if="!state.isMobile" class="menu__item--hovered">
+        <span>{{ hovered }}</span>
+      </p>
     </div>
   </transition>
 </template>
 
 <script setup>
 import { useLayoutState } from '@/composables/useLayoutState.js'
+import { getJapaneseWord, japaneseToWeapon } from '@/lib/weaponsAnimation.js'
 const state = useLayoutState()
+const hovered = ref('')
 
 const emit = defineEmits(['toggleMenu'])
+
+function setHovered(name) {
+  if (!name) {
+    hovered.value = ''
+    return
+  }
+  hovered.value = getJapaneseWord(name)
+  japaneseToWeapon(hovered, name, hovered.value.length)
+}
 
 const toggleMenu = () => {
   if (state.value.isMobile) {
@@ -130,22 +161,35 @@ $menuTranslate: 10px;
   }
 
   .menu {
+    position: relative;
     flex-direction: column;
+    z-index: 2;
 
     @include tablet-landscape {
       height: 10rem;
       margin-top: 4rem;
       justify-content: space-between;
       flex-direction: column;
+
+      .menu__item:nth-child(2) {
+        /* margin-bottom: 4rem; */
+      }
     }
   }
 
+  .menu__item--hovered {
+    text-align: center;
+    color: var(--green);
+  }
+
   .networks {
+    position: absolute;
+    width: 100%;
     flex-direction: column;
 
     @include tablet-landscape {
       flex-direction: row;
-      transform: translateY(-7.5rem);
+      transform: translateY(-8.5rem);
       justify-content: center;
     }
 
