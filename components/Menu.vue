@@ -67,16 +67,24 @@ import { useLayoutState } from '@/composables/useLayoutState.js'
 import { getJapaneseWord, japaneseToWeapon } from '@/lib/weaponsAnimation.js'
 const state = useLayoutState()
 const hovered = ref('')
+const animRunning = ref(false)
 
 const emit = defineEmits(['toggleMenu'])
 
-function setHovered(name) {
+async function setHovered(name) {
+  if (animRunning.value) {
+    setTimeout(() => {
+      setHovered(name)
+    }, 100)
+  }
   if (!name) {
     hovered.value = ''
     return
   }
+  animRunning.value = true
   hovered.value = getJapaneseWord(name)
-  japaneseToWeapon(hovered, name, hovered.value.length)
+  await japaneseToWeapon(hovered, name, hovered.value.length)
+  animRunning.value = false
 }
 
 const toggleMenu = () => {

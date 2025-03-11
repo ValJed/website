@@ -29,18 +29,6 @@ const { data: experiences } = await useFetch('/api/experiences')
 </script>
 
 <style lang="scss" scoped>
-@keyframes shadow {
-  0% {
-    box-shadow: -7px -7px 25px var(--green);
-  }
-  50% {
-    box-shadow: 7px 5px 25px var(--green);
-  }
-  100% {
-    box-shadow: -7px -7px 25px var(--green);
-  }
-}
-
 .experiences-list {
   position: relative;
   display: grid;

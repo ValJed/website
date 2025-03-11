@@ -147,3 +147,15 @@ a {
     transform: translateX(0);
   }
 }
+
+@keyframes shadow {
+  0% {
+    box-shadow: -7px -7px 25px var(--green);
+  }
+  50% {
+    box-shadow: 7px 5px 25px var(--green);
+  }
+  100% {
+    box-shadow: -7px -7px 25px var(--green);
+  }
+}
