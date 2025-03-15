@@ -31,9 +31,6 @@ const { data: experiences } = await useFetch('/api/experiences')
 <style lang="scss" scoped>
 .experiences-list {
   position: relative;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(1, auto);
   height: calc(100% - 132px);
 
   @include tablet-landscape {
@@ -41,6 +38,8 @@ const { data: experiences } = await useFetch('/api/experiences')
   }
 
   @include desktop {
+    display: grid;
+    gap: 1rem;
     padding: 0 20px 0 0;
     grid-template-columns: repeat(2, auto);
   }
@@ -49,6 +48,7 @@ const { data: experiences } = await useFetch('/api/experiences')
 .experiences-list__item {
   border-radius: 50px;
   height: 6rem;
+  margin-bottom: 30px;
 
   @include tablet-landscape {
     &:hover {

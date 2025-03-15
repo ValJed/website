@@ -174,8 +174,8 @@ $menuTranslate: 10px;
     z-index: 2;
 
     @include tablet-landscape {
-      height: 10rem;
-      margin-top: 4rem;
+      height: 160px;
+      margin-top: 70px;
       justify-content: space-between;
       flex-direction: column;
 

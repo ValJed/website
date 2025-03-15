@@ -69,7 +69,6 @@ onMounted(() => {
   }
 
   containerSize.value = containerRef.value.clientWidth
-
   resize()
 })
 
@@ -97,6 +96,9 @@ function resize() {
 </script>
 
 <style lang="scss">
+$model-size-desktop: 320px;
+$model-size-laptop: 250px;
+
 .container {
   width: 80%;
   margin: 0 auto;
@@ -139,9 +141,13 @@ function resize() {
     position: sticky;
     top: 6rem;
     flex-shrink: 0;
-    width: 20rem;
+    width: $model-size-laptop;
     height: calc(100vh - 6rem);
     margin-left: 20px;
+  }
+
+  @include desktop {
+    width: $model-size-desktop;
   }
 
   &.extended {
@@ -170,7 +176,21 @@ function resize() {
   @include tablet-landscape {
     display: block;
     position: relative;
-    height: 20rem;
+    height: $model-size-laptop;
+  }
+
+  @include desktop {
+    height: $model-size-desktop;
+  }
+}
+
+:deep(.matrix-container) {
+  @include tablet-landscape {
+    height: $model-size-laptop;
+  }
+
+  @include desktop {
+    height: $model-size-desktop;
   }
 }
 </style>

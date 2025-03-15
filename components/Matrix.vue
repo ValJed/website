@@ -101,7 +101,6 @@ function generateMatrix(canvas) {
 
   @include tablet-landscape {
     position: relative;
-    height: 20rem;
     border-radius: 50%;
     z-index: 0;
   }
