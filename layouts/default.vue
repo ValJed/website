@@ -141,6 +141,7 @@ function resize() {
     flex-shrink: 0;
     width: 20rem;
     height: calc(100vh - 6rem);
+    margin-left: 20px;
   }
 
   &.extended {

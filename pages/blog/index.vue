@@ -24,7 +24,7 @@ const { data: articles } = await useFetch('/api/articles')
   @include desktop {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 30px;
     padding: 0 20px 0 0;
   }
 }
