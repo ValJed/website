@@ -16,6 +16,10 @@ const props = defineProps({
   containerSize: {
     type: Number,
     required: true
+  },
+  sidebarSize: {
+    type: Number,
+    required: true
   }
 })
 
@@ -33,12 +37,8 @@ watch(
 
     matrixContainerLeft.value =
       newVal && !state.value.isMobile
-        ? `calc(-${props.containerSize}px + 20rem)`
+        ? `calc(-${props.containerSize}px + ${props.sidebarSize}px)`
         : '0px'
-
-    if (newVal) {
-      /* console.log('props.containerSize ===> ', props.containerSize) */
-    }
   }
 )
 
@@ -100,8 +100,6 @@ function generateMatrix(canvas) {
   z-index: -10;
 
   @include tablet-landscape {
-    position: relative;
-    border-radius: 50%;
     z-index: 0;
   }
 
@@ -111,7 +109,6 @@ function generateMatrix(canvas) {
     @include tablet-landscape {
       height: calc(100vh - 6rem); // header + container padding
       right: 0;
-      border-radius: 0;
     }
   }
 }

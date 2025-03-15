@@ -4,16 +4,19 @@
     <div ref="containerRef" class="container">
       <NuxtPage :transition="transition" />
       <aside
+        ref="sidebarEl"
         class="sidebar"
         :class="{ extended: state.extendedMatrix && isMobile }"
       >
+        <Matrix
+          v-if="containerSize && !isResizing"
+          class="matrix-container"
+          :extended-matrix="state.extendedMatrix"
+          :container-size="containerSize"
+          :sidebar-size="sidebarSize"
+          :is-mobile="isMobile"
+        />
         <div class="model-container">
-          <Matrix
-            v-if="containerSize && !isResizing"
-            :extended-matrix="state.extendedMatrix"
-            :container-size="containerSize"
-            :is-mobile="isMobile"
-          />
           <Model
             v-if="containerSize && !isResizing"
             class="model-canvas"
@@ -31,11 +34,13 @@ import { useLayoutState } from '@/composables/useLayoutState.js'
 const state = useLayoutState()
 
 const isMobile = ref(false)
+const sidebarEl = ref(null)
+const sidebarSize = ref(0)
 const containerRef = ref(null)
 const containerSize = ref(0)
 const isResizing = ref(false)
 const transition = ref({
-  name: 'matrix',
+  name: 'page',
   mode: 'out-in',
   duration: 500,
   onBeforeEnter: contractMatrix,
@@ -69,6 +74,7 @@ onMounted(() => {
   }
 
   containerSize.value = containerRef.value.clientWidth
+  sidebarSize.value = sidebarEl.value.clientWidth
   resize()
 })
 
@@ -87,6 +93,7 @@ function resize() {
 
     timeout = setTimeout(() => {
       containerSize.value = containerRef.value.clientWidth
+      sidebarSize.value = sidebarEl.value.clientWidth
       timeout = null
       isResizing.value = false
       state.value.isMobile = window.innerWidth < 900
@@ -177,6 +184,7 @@ $model-size-laptop: 250px;
     display: block;
     position: relative;
     height: $model-size-laptop;
+    top: 0;
   }
 
   @include desktop {
@@ -184,7 +192,7 @@ $model-size-laptop: 250px;
   }
 }
 
-:deep(.matrix-container) {
+.matrix-container {
   @include tablet-landscape {
     height: $model-size-laptop;
   }
