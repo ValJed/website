@@ -1,6 +1,6 @@
 <template>
   <div class="blog content">
-    <h1>Blog</h1>
+    <h1 class="blog__title">Blog</h1>
     <ul v-if="articles" class="blog__list">
       <template v-for="article in articles.data" :key="article.id">
         <ArticleCard :article="article" />
@@ -27,5 +27,9 @@ const { data: articles } = await useFetch('/api/articles')
     gap: 30px;
     padding: 0 20px 0 0;
   }
+}
+
+@include tablet-landscape {
+  @include animateTitle('.blog__title');
 }
 </style>

@@ -78,16 +78,6 @@ img {
 }
 
 @include tablet-landscape {
-  .v-enter-active {
-    .logo {
-      animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
-    }
-  }
-
-  .v-leave-active {
-    .logo {
-      animation: 0.5s ease-in-out 0s 1 normal both titleLeaveAnim;
-    }
-  }
+  @include animateTitle('.logo');
 }
 </style>

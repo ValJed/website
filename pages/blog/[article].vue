@@ -18,4 +18,8 @@ const { data: article } = await useAsyncData('article', () =>
 console.log('article', article.value)
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@include tablet-landscape {
+  @include animateTitle('.article__title');
+}
+</style>

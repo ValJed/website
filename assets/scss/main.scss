@@ -159,3 +159,17 @@ a {
     box-shadow: -7px -7px 25px var(--green);
   }
 }
+
+@mixin animateTitle($selector) {
+  .page-enter-active {
+    #{$selector} {
+      animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+    }
+  }
+
+  .page-leave-active {
+    #{$selector} {
+      animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
+    }
+  }
+}
