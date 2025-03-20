@@ -22,4 +22,13 @@ console.log('article', article.value)
 @include tablet-landscape {
   @include animateTitle('.article__title');
 }
+
+.article {
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
 </style>
