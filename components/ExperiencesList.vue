@@ -1,7 +1,7 @@
 <template>
   <ul v-if="experiences" class="experiences-list">
     <li
-      v-for="{ id, slug, logo, logoTitle } in experiences.data"
+      v-for="{ id, slug, logo, logoTitle } in experiences"
       :key="id"
       class="experiences-list__item"
     >
@@ -24,8 +24,10 @@
 </template>
 
 <script setup>
-const { assetUrl } = useAppConfig()
-const { data: experiences } = await useFetch('/api/experiences')
+const { data: experiences } = await useAsyncData('experience', () =>
+  queryCollection('blog').all()
+)
+console.log('experiences', experiences)
 </script>
 
 <style lang="scss" scoped>

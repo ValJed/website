@@ -10,7 +10,8 @@
 </template>
 
 <script setup>
-const { data: articles } = await useFetch('/api/articles')
+/* const { data: articles } = await useFetch('/api/articles') */
+const articles = ref({ data: [] })
 </script>
 
 <style lang="scss" scoped>

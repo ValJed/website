@@ -27,9 +27,6 @@ const { assetUrl } = useAppConfig()
 const { data: experience } = await useAsyncData('experience', () =>
   $fetch('/api/experience', { params: { experience: current } })
 )
-const stack = experience.value.stack
-  .map(({ title }) => title)
-  .join(' <span>/</span> ')
 </script>
 
 <style scoped lang="scss">

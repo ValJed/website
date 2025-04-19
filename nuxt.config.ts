@@ -63,7 +63,7 @@ export default defineNuxtConfig({
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/eslint', 'nuxt-strapi-blocks-renderer'],
+  modules: ['@nuxt/eslint', '@nuxt/content'],
 
   routeRules: {
     // Homepage pre-rendered at build time
