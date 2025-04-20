@@ -15,13 +15,12 @@ export default defineContentConfig({
     }),
     blog: defineCollection({
       source: 'blog/*.md',
-      type: 'page'
-      // Define custom schema for docs collection
-      /* schema: z.object({ */
-      /*   tags: z.array(z.string()), */
-      /*   image: z.string(), */
-      /*   date: z.date() */
-      /* }) */
+      type: 'page',
+      schema: z.object({
+        coverImg: z.string(),
+        date: z.date(),
+        tags: z.array(z.string())
+      })
     })
   }
 })

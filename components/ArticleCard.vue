@@ -1,10 +1,12 @@
 <template>
   <li
-    :key="article.id"
     class="card"
-    :style="{ backgroundImage: `url(${assetUrl}${article.cover.url})` }"
+    :style="{ backgroundImage: `url(${article.coverImg})` }"
   >
-    <NuxtLink :to="`blog/${article.slug}`" class="card__link">
+    <NuxtLink
+      :to="article.path"
+      class="card__link"
+    >
       <div class="card__content-title">
         <h2 class="card__title">{{ article.title }}</h2>
       </div>
@@ -16,8 +18,7 @@
 </template>
 
 <script setup>
-const { assetUrl } = useAppConfig()
-const props = defineProps({
+defineProps({
   article: {
     type: Object,
     required: true

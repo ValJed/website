@@ -51,6 +51,10 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@include tablet-landscape {
+  @include animateTitle('.intro__logo');
+}
+
 .intro__logo {
   display: flex;
   align-items: center;

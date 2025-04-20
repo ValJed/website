@@ -1,17 +1,28 @@
 <template>
   <div class="blog content">
     <h1 class="blog__title">Blog</h1>
-    <ul v-if="articles" class="blog__list">
-      <template v-for="article in articles.data" :key="article.id">
-        <ArticleCard :article="article" />
-      </template>
+    <ul class="blog__list">
+      <ArticleCard
+        v-for="article in nav.children"
+        :key="article.path"
+        :article="article"
+      />
     </ul>
   </div>
 </template>
 
 <script setup>
-/* const { data: articles } = await useFetch('/api/articles') */
-const articles = ref({ data: [] })
+const nav = ref(null)
+const { data } = await useAsyncData('navigation', async () => {
+  return queryCollectionNavigation('blog', [
+    'description',
+    'date',
+    'tags',
+    'coverImg'
+  ]).order('date', 'DESC')
+})
+
+nav.value = data.value?.[0]
 </script>
 
 <style lang="scss" scoped>

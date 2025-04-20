@@ -1,9 +1,13 @@
 <template>
-  <div v-if="article" class="article content">
+  <div
+    v-if="article"
+    class="content"
+  >
     <h1 class="article__title">{{ article.title }}</h1>
-    <div class="article__content">
-      <StrapiBlocksText :nodes="article.content" />
-    </div>
+    <ContentRenderer
+      class="content__article"
+      :value="article"
+    />
     <BackLink slug="/blog" />
   </div>
 </template>
@@ -11,19 +15,14 @@
 <script setup>
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const slug = route.params.article
 const { data: article } = await useAsyncData('article', () =>
-  $fetch('/api/article', { params: { article: slug } })
+  queryCollection('blog').path(route.path).first()
 )
-console.log('article', article.value)
 </script>
 
 <style lang="scss" scoped>
 @include tablet-landscape {
   @include animateTitle('.article__title');
-}
-
-.article {
 }
 
 img {
