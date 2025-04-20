@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="state.isMobile"
-    class="menu-btn"
+    class="menu__btn"
     :class="{ opened: state.extendedMatrix }"
     @click="toggleMenu"
   >
@@ -12,11 +12,11 @@
   <transition name="fade">
     <div
       v-if="!state.isMobile || state.extendedMatrix"
-      class="links"
+      class="menu__links"
     >
       <ul class="menu">
         <li
-          class="menu__item"
+          class="menu__item menu__item--top"
           @mouseenter="setHovered('Home')"
           @mouseleave="setHovered()"
         >
@@ -28,7 +28,7 @@
           </nuxt-link>
         </li>
         <li
-          class="menu__item"
+          class="menu__item menu__item--center"
           @mouseenter="setHovered('Xp')"
           @mouseleave="setHovered()"
         >
@@ -40,7 +40,7 @@
           </nuxt-link>
         </li>
         <li
-          class="menu__item"
+          class="menu__item menu__item--bottom"
           @mouseenter="setHovered('Blog')"
           @mouseleave="setHovered()"
         >
@@ -51,18 +51,19 @@
             <SvgParchment />
           </nuxt-link>
         </li>
-      </ul>
-      <ul class="networks">
-        <li class="menu__item">
+
+        <li class="menu__item menu__item--left">
           <a
+            class="menu__item-link"
             href="https://github.com/ValJed"
             target="__blank"
           >
             <SvgGithub />
           </a>
         </li>
-        <li class="menu__item linkedin">
+        <li class="menu__item menu__item--right">
           <a
+            class="menu__item-link"
             href="https://www.linkedin.com/in/valentin-jeudy-585466112"
             target="__blank"
           >
@@ -138,16 +139,12 @@ $menuTranslate: 10px;
   }
 }
 
-.links {
+.menu__links {
   position: absolute;
   align-items: center;
   width: 100%;
-  bottom: 10vh;
+  bottom: 20vh;
   z-index: 10;
-
-  @media (max-height: 800px) {
-    bottom: 10vh;
-  }
 
   @include tablet-landscape {
     position: inherit;
@@ -155,52 +152,56 @@ $menuTranslate: 10px;
     opacity: 1;
   }
 
-  ul {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: space-evenly;
+  .menu {
+    display: grid;
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+
+    @include tablet-landscape {
+      margin-top: 70px;
+    }
   }
 
-  li {
-    width: 2.5rem;
-    height: 2.5rem;
-
-    &:not(.linkedin) {
-      margin-bottom: 2.5rem;
-
-      @include tablet-landscape {
-        margin-bottom: 1rem;
-      }
-    }
-
-    a {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-    }
+  .menu__item {
+    width: 40px;
+    height: 40px;
 
     svg {
       width: 100%;
       height: 100%;
     }
+
+    &--center {
+      grid-row: 2;
+      grid-column: 2;
+    }
+    &--top {
+      grid-row: 1;
+      grid-column: 2;
+    }
+    &--bottom {
+      grid-row: 3;
+      grid-column: 2;
+    }
+    &--left {
+      grid-row: 2;
+      grid-column: 1;
+    }
+    &--right {
+      grid-row: 2;
+      grid-column: 3;
+    }
   }
 
-  .menu {
-    position: relative;
-    flex-direction: column;
-    z-index: 2;
-
-    @include tablet-landscape {
-      height: 160px;
-      margin-top: 70px;
-      justify-content: space-between;
-      flex-direction: column;
-
-      .menu__item:nth-child(2) {
-        /* margin-bottom: 4rem; */
-      }
-    }
+  .menu__item-link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
   }
 
   .menu__item--hovered {
@@ -227,7 +228,7 @@ $menuTranslate: 10px;
   }
 }
 
-.menu-btn {
+.menu__btn {
   position: absolute;
   display: flex;
   flex-direction: column;
