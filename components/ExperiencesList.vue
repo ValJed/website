@@ -1,33 +1,46 @@
 <template>
-  <ul v-if="experiences" class="experiences-list">
+  <ul class="experiences-list">
     <li
-      v-for="{ id, slug, logo, logoTitle } in experiences"
-      :key="id"
+      v-for="{ logoImg, logoTitle, path } in nav.children"
+      :key="path"
       class="experiences-list__item"
     >
-      <NuxtLink :to="`experiences/${slug}`" class="experiences-list__item-link">
+      <NuxtLink
+        :to="path"
+        class="experiences-list__item-link"
+      >
         <div class="experiences-list__item-content">
           <img
-            v-if="logo?.url"
-            :src="`${assetUrl}${logo.url}`"
-            :alt="slug"
+            v-if="logoImg"
+            :src="logoImg"
+            :alt="path"
             class="experiences-list__item-img"
           />
-          <span v-if="logoTitle" class="experiences-list__item-title">
+          <span
+            v-if="logoTitle"
+            class="experiences-list__item-title"
+          >
             {{ logoTitle }}
           </span>
         </div>
       </NuxtLink>
     </li>
   </ul>
-  <div v-else-if="pending">Loading...</div>
 </template>
 
 <script setup>
-const { data: experiences } = await useAsyncData('experience', () =>
-  queryCollection('blog').all()
-)
-console.log('experiences', experiences)
+import { ref } from 'vue'
+
+const nav = ref(null)
+const { data } = await useAsyncData('navigation', async () => {
+  return queryCollectionNavigation('experiences', [
+    'date',
+    'logoImg',
+    'logoTitle'
+  ]).order('date', 'DESC')
+})
+
+nav.value = data.value?.[0]
 </script>
 
 <style lang="scss" scoped>

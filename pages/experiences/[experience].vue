@@ -1,20 +1,15 @@
 <template>
   <div class="content">
-    <div class="work">
-      <div class="logo">
-        <img
-          v-if="experience.logo.url"
-          :src="`${assetUrl}${experience.logo.url}`"
-          :alt="experience.name"
-        />
-        <span v-if="experience.logoTitle">{{ experience.logoTitle }}</span>
-      </div>
-      <div class="description">
-        <p>{{ experience.period }}</p>
-        <p class="stack" v-html="stack"></p>
-        <StrapiBlocksText :nodes="experience.content" />
-      </div>
-    </div>
+    <ExperienceIntro
+      :logo-img="experience.logoImg"
+      :logo-title="experience.logoTitle"
+      :period="experience.period"
+      :stack="experience.stack"
+    />
+    <ContentRenderer
+      class="content__experience"
+      :value="experience"
+    />
     <BackLink slug="/experiences" />
   </div>
 </template>
@@ -22,11 +17,11 @@
 <script setup>
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const current = route.params.experience
-const { assetUrl } = useAppConfig()
 const { data: experience } = await useAsyncData('experience', () =>
-  $fetch('/api/experience', { params: { experience: current } })
+  queryCollection('experiences').path(route.path).first()
 )
+
+console.log('experience', experience)
 </script>
 
 <style scoped lang="scss">
