@@ -19,8 +19,6 @@
           text-indent: 0;
           text-transform: none;
           direction: ltr;
-          block-progression: tb;
-          baseline-shift: baseline;
           color: #000000;
           enable-background: accumulate;
         "

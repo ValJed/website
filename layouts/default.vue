@@ -1,7 +1,13 @@
 <template>
   <div>
-    <SiteHeader v-if="containerSize" :is-mobile="isMobile" />
-    <div ref="containerRef" class="container">
+    <SiteHeader
+      v-if="containerSize"
+      :is-mobile="isMobile"
+    />
+    <div
+      ref="containerRef"
+      class="container"
+    >
       <NuxtPage :transition="transition" />
       <aside
         ref="sidebarEl"
@@ -23,7 +29,10 @@
             :container-size="containerSize"
           />
         </div>
-        <Menu v-if="containerSize" @toggle-menu="toggleMenu" />
+        <Menu
+          v-if="containerSize"
+          @toggle-menu="toggleMenu"
+        />
       </aside>
     </div>
   </div>

@@ -4,7 +4,11 @@
     :style="{ width: matrixContainerWidth, left: matrixContainerLeft }"
     :class="{ extended: state.extendedMatrix }"
   >
-    <canvas ref="matrix" :width="width" :height="height" />
+    <canvas
+      ref="matrix"
+      :width="width"
+      :height="height"
+    />
   </div>
 </template>
 

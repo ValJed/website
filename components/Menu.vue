@@ -10,14 +10,20 @@
     <span></span>
   </div>
   <transition name="fade">
-    <div v-if="!state.isMobile || state.extendedMatrix" class="links">
+    <div
+      v-if="!state.isMobile || state.extendedMatrix"
+      class="links"
+    >
       <ul class="menu">
         <li
           class="menu__item"
           @mouseenter="setHovered('Home')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link to="/" @click="toggleMenu">
+          <nuxt-link
+            to="/"
+            @click="toggleMenu"
+          >
             <SvgHell />
           </nuxt-link>
         </li>
@@ -26,7 +32,10 @@
           @mouseenter="setHovered('Xp')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link to="/experiences" @click="toggleMenu">
+          <nuxt-link
+            to="/experiences"
+            @click="toggleMenu"
+          >
             <SvgSatan />
           </nuxt-link>
         </li>
@@ -35,14 +44,20 @@
           @mouseenter="setHovered('Blog')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link to="/blog" @click="toggleMenu">
+          <nuxt-link
+            to="/blog"
+            @click="toggleMenu"
+          >
             <SvgParchment />
           </nuxt-link>
         </li>
       </ul>
       <ul class="networks">
         <li class="menu__item">
-          <a href="https://github.com/ValJed" target="__blank">
+          <a
+            href="https://github.com/ValJed"
+            target="__blank"
+          >
             <SvgGithub />
           </a>
         </li>
@@ -55,7 +70,10 @@
           </a>
         </li>
       </ul>
-      <p v-if="!state.isMobile" class="menu__item--hovered">
+      <p
+        v-if="!state.isMobile"
+        class="menu__item--hovered"
+      >
         <span>{{ hovered }}</span>
       </p>
     </div>

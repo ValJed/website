@@ -1,7 +1,10 @@
 <template>
   <div class="back-link__container">
     <div class="back-link__inner">
-      <NuxtLink class="back-link" :to="slug">
+      <NuxtLink
+        class="back-link"
+        :to="slug"
+      >
         <Spear />
       </NuxtLink>
     </div>
@@ -10,7 +13,7 @@
 
 <script setup>
 import Spear from '@/components/svg/Spear.vue'
-const props = defineProps({
+defineProps({
   slug: {
     type: String,
     required: true
