@@ -2,7 +2,7 @@
   <div>
     <SiteHeader
       v-if="containerSize"
-      :is-mobile="isMobile"
+      :is-mobile="state.isMobile"
     />
     <div
       ref="containerRef"
@@ -12,7 +12,7 @@
       <aside
         ref="sidebarEl"
         class="sidebar"
-        :class="{ extended: state.extendedMatrix && isMobile }"
+        :class="{ extended: state.extendedMatrix && state.isMobile }"
       >
         <Matrix
           v-if="containerSize && !isResizing"
@@ -82,6 +82,7 @@ onMounted(() => {
     transition.value = ref({})
   }
 
+  console.log('state.isMobile', state.value.isMobile)
   containerSize.value = containerRef.value.clientWidth
   sidebarSize.value = sidebarEl.value.clientWidth
   resize()
@@ -168,11 +169,7 @@ $model-size-laptop: 250px;
 
   &.extended {
     .model-canvas {
-      transform: translateY(-75vh);
-
-      @media (max-height: 800px) {
-        transform: translateY(-70vh);
-      }
+      transform: translateY(-70vh);
     }
   }
 }
