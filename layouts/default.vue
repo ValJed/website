@@ -82,7 +82,6 @@ onMounted(() => {
     transition.value = ref({})
   }
 
-  console.log('state.isMobile', state.value.isMobile)
   containerSize.value = containerRef.value.clientWidth
   sidebarSize.value = sidebarEl.value.clientWidth
   resize()

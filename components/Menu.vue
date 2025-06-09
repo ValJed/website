@@ -87,19 +87,37 @@ import { getJapaneseWord, japaneseToWeapon } from '@/lib/weaponsAnimation.js'
 const state = useLayoutState()
 const hovered = ref('')
 const animRunning = ref(false)
+const stopTimeout = ref(null)
+const timeout = ref(null)
 
 const emit = defineEmits(['toggleMenu'])
 
 async function setHovered(name) {
+  clearTimeout(stopTimeout.value)
+  if (!name) {
+    stopTimeout.value = setTimeout(() => {
+      hovered.value = ''
+    }, 300)
+  }
   if (animRunning.value) {
-    setTimeout(() => {
-      setHovered(name)
+    clearTimeout(timeout.value)
+    timeout.value = setTimeout(() => {
+      if (name) {
+        runAnimation(name)
+      } else {
+        hovered.value = ''
+      }
     }, 100)
+    return
   }
   if (!name) {
     hovered.value = ''
     return
   }
+  runAnimation(name)
+}
+
+async function runAnimation(name) {
   animRunning.value = true
   hovered.value = getJapaneseWord(name)
   await japaneseToWeapon(hovered, name, hovered.value.length)
