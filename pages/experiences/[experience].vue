@@ -1,5 +1,8 @@
 <template>
-  <div class="content">
+  <div
+    ref="content"
+    class="content"
+  >
     <ExperienceIntro
       :logo-img="experience.logoImg"
       :logo-title="experience.logoTitle"
@@ -16,10 +19,55 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { getJapaneseWord } from '@/lib/weaponsAnimation.js'
+
 const route = useRoute()
 const { data: experience } = await useAsyncData('experience', () =>
   queryCollection('experiences').path(route.path).first()
 )
+
+const contentEl = useTemplateRef('content')
+const linkText = ref(null)
+const linkInterval = ref(null)
+
+onMounted(() => {
+  const links = contentEl.value.querySelectorAll('a.link')
+  links.forEach((link) => {
+    link.addEventListener('mouseenter', animateLink)
+
+    link.addEventListener('mouseleave', stopAnimateLink)
+  })
+})
+
+onBeforeUnmount(() => {
+  links.forEach((link) => {
+    link.removeEventListener('mouseenter', animateLink)
+    link.removeEventListener('mouseLeave', stopAnimateLink)
+  })
+})
+
+function animateLink(e) {
+  const target = e.currentTarget
+  linkText.value = target.innerText
+
+  setLinkText(target)
+  linkInterval.value = setInterval(() => {
+    setLinkText(target)
+  }, 50)
+}
+
+function stopAnimateLink(e) {
+  const target = e.currentTarget
+  clearTimeout(linkInterval.value)
+  target.innerText = linkText.value
+  linkInterval.value = null
+  linkText.value = null
+}
+
+function setLinkText(target) {
+  const japWord = getJapaneseWord(target.innerText)
+  target.innerText = japWord
+}
 </script>
 
 <style scoped lang="scss">

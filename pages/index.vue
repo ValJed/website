@@ -21,7 +21,7 @@ import weaponsAnimation from '@/lib/weaponsAnimation.js'
 import { useLayoutState } from '@/composables/useLayoutState.js'
 
 const state = useLayoutState()
-const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust'] // TODO: get from api
+const weapons = ['Vue', 'React', 'MongoDB', 'Nodejs', 'Linux', 'Docker', 'Rust']
 const weapon = ref(weapons[0])
 
 onMounted(() => {

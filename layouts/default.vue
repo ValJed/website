@@ -141,7 +141,23 @@ $model-size-laptop: 250px;
 
   @include tablet-landscape {
     margin-top: 5rem;
-    padding: 0;
+    padding: 0 0 80px;
+  }
+
+  &__experience,
+  &__article {
+    img {
+      width: 80%;
+      margin: 0 auto;
+    }
+    p {
+      @include text-sm;
+    }
+    a.link {
+      &:hover {
+        color: var(--green);
+      }
+    }
   }
 }
 
