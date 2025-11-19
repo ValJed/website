@@ -12,7 +12,30 @@ Developing / improving ApostropheCMS core and modules.
 
 Setting up and working on ApostropheCMS projects for customers.,
 
-Support to customers and open source community.,
+Support to customers and open source community.
 
-Maintaining infra scripts, creating AWS clouds and MongoDB Atlas clusters.
+Here are some projects I worked on:
+
+### Vue 3 migration
+
+Migration of all the admin UI from Vue 2 to Vue 3.
+
+### Advanced permission
+
+<a class="link" href="https://github.com/apostrophecms/advanced-permission" target="_blank" rel="noopener noreferrer">See Readme</a>
+
+Working on a pro module to handle advanced permission system.
+
+Creation of groups with sets of permissions for locales / document types. Users can be part of multiple groups merging permission from them.
+
+Creation of a dynamic grid to render these permissions:
+
+::img{src="/images/experiences/apostrophe/permission-grid.png" alt="advanced permission module grid"}
+
+### Rework of Palette UI
+
+### Rework of multisite
+
+### Setup of a monorepo
+
 
