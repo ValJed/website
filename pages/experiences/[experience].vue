@@ -29,10 +29,11 @@ const { data: experience } = await useAsyncData('experience', () =>
 const contentEl = useTemplateRef('content')
 const linkText = ref(null)
 const linkInterval = ref(null)
+const links = ref([])
 
 onMounted(() => {
-  const links = contentEl.value.querySelectorAll('a.link')
-  links.forEach((link) => {
+  links.value = contentEl.value.querySelectorAll('a.link')
+  links.value.forEach((link) => {
     link.addEventListener('mouseenter', animateLink)
 
     link.addEventListener('mouseleave', stopAnimateLink)
@@ -40,7 +41,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  links.forEach((link) => {
+  links.value.forEach((link) => {
     link.removeEventListener('mouseenter', animateLink)
     link.removeEventListener('mouseLeave', stopAnimateLink)
   })

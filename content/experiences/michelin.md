@@ -12,3 +12,5 @@ multilingual sites conception for the different brands of the group.'
 Delivering a large amount of websites through our ApostropheCMS factory.
 
 Creation of cross sites applications (Dealer locator / Rating & reviews / Tyre selector)
+
+::img{src="/images/experiences/michelin/michelin.webp" alt="Michelin"}
