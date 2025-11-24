@@ -144,6 +144,7 @@ $model-size-laptop: 250px;
     padding: 0 0 80px;
   }
 
+  // Markdown content
   &__experience,
   &__article {
     img {
@@ -156,6 +157,16 @@ $model-size-laptop: 250px;
     a.link {
       &:hover {
         color: var(--green);
+      }
+    }
+
+    ul {
+      padding-left: 15px;
+
+      li {
+        font-family: var(--ftext);
+        list-style: none;
+        margin: 10px 0;
       }
     }
   }

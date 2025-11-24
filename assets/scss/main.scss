@@ -93,6 +93,9 @@
 
 ul {
   padding: 0;
+  li {
+    list-style: none;
+  }
 }
 
 body {
@@ -115,10 +118,6 @@ p {
   margin: 1rem 0;
 
   @include text;
-}
-
-ul li {
-  list-style: none;
 }
 
 a {
