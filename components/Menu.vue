@@ -180,8 +180,12 @@ $menuTranslate: 10px;
   position: absolute;
   align-items: center;
   width: 100%;
-  bottom: 15vh;
+  bottom: 80px;
   z-index: 10;
+
+  @include mobile-tiny {
+    bottom: 40px;
+  }
 
   @include tablet-landscape {
     position: inherit;
@@ -195,11 +199,10 @@ $menuTranslate: 10px;
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 250px;
-    height: 300px;
+    width: 200px;
+    height: 250px;
     margin: 0 auto;
     justify-content: space-between;
-    grid-gap: 40px 40px;
 
     @include tablet-landscape {
       display: grid;
@@ -208,7 +211,7 @@ $menuTranslate: 10px;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(3, 1fr);
       margin-top: 70px;
-      grid-gap: 20px 20px;
+      gap: 20px;
     }
   }
 

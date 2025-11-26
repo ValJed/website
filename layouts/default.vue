@@ -195,7 +195,11 @@ $model-size-laptop: 250px;
 
   &.extended {
     .model-canvas {
-      transform: translateY(-70vh);
+      transform: translateY(calc(-450px - 10vh));
+
+      @include mobile-tiny {
+        transform: translateY(-70vh);
+      }
     }
   }
 }
