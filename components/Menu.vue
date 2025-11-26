@@ -12,9 +12,9 @@
   <transition name="fade">
     <div
       v-if="!state.isMobile || state.extendedMatrix"
-      class="menu__links"
+      class="menu"
     >
-      <ul class="menu">
+      <ul class="menu__items">
         <li
           class="menu__item menu__item--top"
           @mouseenter="setHovered('Home')"
@@ -25,6 +25,11 @@
             @click="toggleMenu"
           >
             <SvgHell />
+            <span
+              v-if="state.isMobile"
+              class="menu__item-title"
+              >Home</span
+            >
           </nuxt-link>
         </li>
         <li
@@ -37,6 +42,12 @@
             @click="toggleMenu"
           >
             <SvgSatan />
+
+            <span
+              v-if="state.isMobile"
+              class="menu__item-title"
+              >Xp</span
+            >
           </nuxt-link>
         </li>
         <li
@@ -49,6 +60,11 @@
             @click="toggleMenu"
           >
             <SvgParchment />
+            <span
+              v-if="state.isMobile"
+              class="menu__item-title"
+              >Blog</span
+            >
           </nuxt-link>
         </li>
 
@@ -93,6 +109,9 @@ const timeout = ref(null)
 const emit = defineEmits(['toggleMenu'])
 
 async function setHovered(name) {
+  if (state.isMobile) {
+    return
+  }
   clearTimeout(stopTimeout.value)
   if (!name) {
     stopTimeout.value = setTimeout(() => {
@@ -157,11 +176,11 @@ $menuTranslate: 10px;
   }
 }
 
-.menu__links {
+.menu {
   position: absolute;
   align-items: center;
   width: 100%;
-  bottom: 20vh;
+  bottom: 15vh;
   z-index: 10;
 
   @include tablet-landscape {
@@ -170,28 +189,58 @@ $menuTranslate: 10px;
     opacity: 1;
   }
 
-  .menu {
-    display: grid;
+  &__items {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 250px;
+    height: 300px;
     margin: 0 auto;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 20px;
+    justify-content: space-between;
+    grid-gap: 40px 40px;
 
     @include tablet-landscape {
+      display: grid;
+      width: 160px;
+      height: 160px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       margin-top: 70px;
+      grid-gap: 20px 20px;
     }
   }
 
   .menu__item {
     width: 40px;
-    height: 40px;
+    height: 65px;
+
+    @include tablet-landscape {
+      height: 40px;
+    }
+
+    &-title {
+      text-align: center;
+      color: var(--green);
+      margin-top: 5px;
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      @include tablet-landscape {
+        display: inline-block;
+      }
+    }
 
     svg {
       width: 100%;
-      height: 100%;
+      height: 40px;
     }
 
     &--center {
@@ -207,12 +256,26 @@ $menuTranslate: 10px;
       grid-column: 2;
     }
     &--left {
+      position: inherit;
       grid-row: 2;
       grid-column: 1;
+
+      @include mobile-only {
+        position: absolute;
+        left: 0;
+        top: calc(100% / 2 - 20px);
+      }
     }
     &--right {
+      position: inherit;
       grid-row: 2;
       grid-column: 3;
+
+      @include mobile-only {
+        position: absolute;
+        right: 0;
+        top: calc(100% / 2 - 20px);
+      }
     }
   }
 
