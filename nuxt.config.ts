@@ -20,13 +20,25 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
-          hid: 'description',
           name: 'description',
           content:
             "Full stack web developer based in France. I love to collaborate with people on great and useful tools, let's try to make the world even a little bit better."
         }
       ],
       link: [{ rel: 'icon', href: '/favicon.svg' }]
+    }
+  },
+
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          /* theme: 'houston', */
+          /* theme: 'rose-pine', */
+          theme: 'poimandres',
+          langs: ['rust']
+        }
+      }
     }
   },
 

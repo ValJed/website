@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxt/content": "^3.4.0",
+    "shiki": "^3.19.0",
     "three": "^0.130.0"
   },
   "devDependencies": {
