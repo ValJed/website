@@ -1,6 +1,6 @@
 <template>
   <div class="intro">
-    <div class="intro__logo">
+    <h1 class="intro__logo">
       <img
         v-if="logoImg"
         class="intro__logo-img"
@@ -13,16 +13,16 @@
       >
         {{ logoTitle }}</span
       >
-    </div>
+    </h1>
     <div class="intro__description">
-      <p>{{ period }}</p>
-      <p class="intro__stack">
+      <p v-if="period">{{ period }}</p>
+      <p class="intro__tags">
         <template
-          v-for="(item, index) in stack"
+          v-for="(item, index) in tags"
           :key="index"
         >
           {{ item }}
-          <span v-if="index < stack.length - 1"> / </span>
+          <span v-if="index < tags.length - 1"> / </span>
         </template>
       </p>
     </div>
@@ -41,9 +41,9 @@ defineProps({
   },
   period: {
     type: String,
-    required: true
+    default: null
   },
-  stack: {
+  tags: {
     type: Array,
     required: true
   }
@@ -61,8 +61,8 @@ defineProps({
 
   &-title {
     font-size: 1.5rem;
+    font-weight: normal;
     font-family: Inter, 'sans-serif';
-    margin-left: 0.5rem;
   }
 
   &-img {
@@ -71,6 +71,7 @@ defineProps({
     max-height: 5rem;
     max-width: 13rem;
     height: auto;
+    margin-right: 0.5rem;
   }
 }
 
@@ -82,7 +83,7 @@ defineProps({
   }
 }
 
-.intro__stack {
+.intro__tags {
   color: var(--green);
 
   :deep(span) {

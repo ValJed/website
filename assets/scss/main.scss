@@ -20,7 +20,7 @@
 }
 
 @mixin text-sm {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @mixin mobile-small {
@@ -121,7 +121,7 @@ h3 {
 
 p {
   font-family: var(--ftext);
-  margin: 1rem 0;
+  margin: 10px 0;
 
   @include text;
 }

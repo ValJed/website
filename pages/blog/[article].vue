@@ -1,9 +1,13 @@
 <template>
   <div
     v-if="article"
+    ref="content"
     class="content"
   >
-    <h1 class="article__title">{{ article.title }}</h1>
+    <ContentIntro
+      :logo-title="article.title"
+      :tags="article.tags"
+    />
     <ContentRenderer
       class="content__article"
       :value="article"
@@ -14,10 +18,15 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { useAnimateLink } from '@/composables/useAnimateLink.js'
+
 const route = useRoute()
 const { data: article } = await useAsyncData('article', () =>
   queryCollection('blog').path(route.path).first()
 )
+
+const contentEl = useTemplateRef('content')
+useAnimateLink(contentEl)
 </script>
 
 <style lang="scss" scoped>

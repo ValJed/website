@@ -148,16 +148,25 @@ $model-size-laptop: 250px;
   &__experience,
   &__article {
     img {
+      display: block;
       width: 80%;
       margin: 0 auto;
     }
     p {
       @include text-sm;
+      font-weight: normal;
     }
     a.link {
+      font-weight: bold;
+
       &:hover {
         color: var(--green);
       }
+    }
+
+    pre,
+    code {
+      width: 100%;
     }
 
     ul {
