@@ -133,7 +133,6 @@ $model-size-laptop: 250px;
 
 .content {
   position: relative;
-  flex-grow: 1;
   z-index: 0;
   padding-top: 1rem;
   flex: 1;
@@ -162,6 +161,10 @@ $model-size-laptop: 250px;
       &:hover {
         color: var(--green);
       }
+    }
+
+    pre {
+      overflow-x: scroll;
     }
 
     pre,
