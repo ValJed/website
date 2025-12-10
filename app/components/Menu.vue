@@ -2,7 +2,7 @@
   <div
     v-if="state.isMobile"
     class="menu__btn"
-    :class="{ opened: state.extendedMatrix }"
+    :class="{ opened: state.openedMenu }"
     @click="toggleMenu"
   >
     <span></span>
@@ -11,7 +11,7 @@
   </div>
   <transition name="fade">
     <div
-      v-if="!state.isMobile || state.extendedMatrix"
+      v-if="!state.isMobile || state.openedMenu"
       class="menu"
     >
       <ul class="menu__items">

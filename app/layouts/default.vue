@@ -12,7 +12,7 @@
       <aside
         ref="sidebarEl"
         class="sidebar"
-        :class="{ extended: state.extendedMatrix && state.isMobile }"
+        :class="{ extended: state.openedMenu }"
       >
         <Matrix
           v-if="containerSize && !isResizing"
@@ -53,7 +53,10 @@ const transition = ref({
   mode: 'out-in',
   duration: 500,
   onBeforeEnter: contractMatrix,
-  onBeforeLeave: extendMatrix
+  onBeforeLeave: extendMatrix,
+  onAfterLeave: () => {
+    /* window.scrollTo(0, 0) */
+  }
 })
 
 const router = useRouter()
@@ -67,19 +70,46 @@ function contractMatrix() {
 }
 
 const toggleMenu = () => {
-  state.value.extendedMatrix = !state.value.extendedMatrix
+  if (state.value.openedMenu) {
+    closeMenu()
+  } else {
+    openMenu()
+  }
 }
 
-if (state.value.isMobile) {
-  router.beforeEach(() => {
-    contractMatrix()
-  })
+const closeMenu = () => {
+  state.value.openedMenu = false
+  state.value.extendedMatrix = false
+  restoreTransition()
+  console.log('state.value', state.value.openedMenu, state.value.extendedMatrix)
 }
+
+const openMenu = () => {
+  state.value.openedMenu = true
+  state.value.extendedMatrix = true
+  transition.value = {}
+}
+
+const restoreTransition = () => {
+  transition.value = {
+    name: 'page',
+    mode: 'out-in',
+    duration: 500,
+    onBeforeEnter: contractMatrix,
+    onBeforeLeave: extendMatrix
+  }
+}
+
+router.beforeEach(() => {
+  if (state.value.isMobile && state.openedMenu) {
+    closeMenu()
+  }
+})
 
 onMounted(() => {
   if (window.innerWidth < 900) {
     state.value.isMobile = true
-    transition.value = ref({})
+    /* setTransition() */
   }
 
   containerSize.value = containerRef.value.clientWidth
@@ -106,9 +136,24 @@ function resize() {
       timeout = null
       isResizing.value = false
       state.value.isMobile = window.innerWidth < 900
+      /* setTransition() */
     }, 500)
   }
 }
+
+/* function setTransition() { */
+/*   if (state.isMobile) { */
+/*     transition.value = {} */
+/*     return */
+/*   } */
+/*   transition.value = { */
+/*     name: 'page', */
+/*     mode: 'out-in', */
+/*     duration: 500, */
+/*     onBeforeEnter: contractMatrix, */
+/*     onBeforeLeave: extendMatrix */
+/*   } */
+/* } */
 </script>
 
 <style lang="scss">

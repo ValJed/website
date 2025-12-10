@@ -73,7 +73,7 @@ async function generateModel(canvas, containerSize) {
         position.set(0, position.y + 2, 0)
       }
 
-      if (state.value.extendedMatrix) {
+      if (state.value.openedMenu) {
         rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.025
         return
       }

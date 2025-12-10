@@ -320,7 +320,7 @@ It creates a block with a title, instructions, and the main part, renders items.
 As you can see, we here use a `StatefulWidget` which is a widget with an internal state, passed as third argument.
 
 this internal state allows Ratatui to render the right view with visible highlighted item. 
-It also allows myself to get the highlighted item and to select the previous / next or to perform an operation on it.
+It also allows myself to get the highlighted item and to select the previous / next or to perform any operation on it.
 This method is implemented on the App struct, and has access to its state.
 
 ```rust 

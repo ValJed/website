@@ -1,0 +1,15 @@
+export default defineNuxtRouteMiddleware((to, from) => {
+  if (to.path === from.path || !import.meta.client) {
+    return
+  }
+  console.log('=====> FUCK you <=====')
+
+  /* if (window.innerWidth < 900) { */
+  /*   window.scrollTo(0, 0) */
+  /*   return */
+  /* } */
+
+  /* setTimeout(() => { */
+  /*   window.scrollTo(0, 0) */
+  /* }, 250) */
+})
