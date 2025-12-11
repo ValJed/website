@@ -1,6 +1,6 @@
 ---
 title: 'Iboycott'
-description: 'meta description of the page'
+description: 'Association aiming to make companies more responsible'
 date: 2020-09-01
 logoImg: '/logo/iboycott.png'
 period: 'September - October 2020'

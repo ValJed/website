@@ -1,6 +1,6 @@
 ---
 title: 'ApostropheCMS'
-description: 'meta description of the page'
+description: 'In-context editing CMS'
 date: 2020-11-01
 logoImg: '/logo/apostrophe.svg'
 logoTitle: 'ApostropheCMS'

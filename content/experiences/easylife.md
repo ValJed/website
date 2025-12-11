@@ -1,6 +1,6 @@
 ---
 title: 'EasyLife'
-description: 'meta description of the page'
+description: 'Corporate concierge service'
 date: 2019-11-01
 logoImg: '/logo/easylife.svg'
 period: 'November 2019 - July 2020'

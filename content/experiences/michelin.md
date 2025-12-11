@@ -1,6 +1,6 @@
 ---
 title: 'Michelin'
-description: 'meta description of the page'
+description: 'Bibendum selling tires'
 date: 2017-05-01
 logoImg: '/logo/michelin.png'
 period: 'May 2017 - November 2019'
