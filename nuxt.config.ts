@@ -50,7 +50,6 @@ export default defineNuxtConfig({
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  // css: ['@/assets/scss/main'],
   vite: {
     css: {
       preprocessorOptions: {
@@ -69,12 +68,6 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxt/eslint', '@nuxt/content'],
-
-  /* router: { */
-  /*   options: { */
-  /*     scrollBehaviorType: undefined */
-  /*   } */
-  /* }, */
 
   compatibilityDate: '2025-01-26'
 })
