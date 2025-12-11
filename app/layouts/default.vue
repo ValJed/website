@@ -164,7 +164,7 @@ $model-size-laptop: 250px;
 }
 
 .container {
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
   padding: 3rem 0 7rem;
   min-height: 100vh;
@@ -177,6 +177,7 @@ $model-size-laptop: 250px;
   }
 
   @include desktop {
+    width: 80%;
     margin: 0 auto;
     max-width: 1400px;
   }
