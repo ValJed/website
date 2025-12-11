@@ -48,18 +48,31 @@ const sidebarSize = ref(0)
 const containerRef = ref(null)
 const containerSize = ref(0)
 const isResizing = ref(false)
-const transition = ref({
-  name: 'page',
-  mode: 'out-in',
-  duration: 500,
-  onBeforeEnter: contractMatrix,
-  onBeforeLeave: extendMatrix,
-  onAfterLeave: () => {
-    /* window.scrollTo(0, 0) */
+const transition = ref(getTransition())
+
+const router = useRouter()
+
+router.beforeEach(() => {
+  if (state.value.isMobile && state.openedMenu) {
+    closeMenu()
   }
 })
 
-const router = useRouter()
+router.afterEach(() => {
+  if (state.isMobile) {
+    closeMenu()
+  }
+})
+
+onMounted(() => {
+  if (window.innerWidth < 900) {
+    state.value.isMobile = true
+  }
+
+  containerSize.value = containerRef.value.clientWidth
+  sidebarSize.value = sidebarEl.value.clientWidth
+  resize()
+})
 
 function extendMatrix() {
   state.value.extendedMatrix = true
@@ -69,7 +82,7 @@ function contractMatrix() {
   state.value.extendedMatrix = false
 }
 
-const toggleMenu = () => {
+function toggleMenu() {
   if (state.value.openedMenu) {
     closeMenu()
   } else {
@@ -77,21 +90,23 @@ const toggleMenu = () => {
   }
 }
 
-const closeMenu = () => {
+function closeMenu() {
   state.value.openedMenu = false
   state.value.extendedMatrix = false
-  restoreTransition()
-  console.log('state.value', state.value.openedMenu, state.value.extendedMatrix)
+
+  setTimeout(() => {
+    transition.value = getTransition()
+  }, 250)
 }
 
-const openMenu = () => {
+function openMenu() {
   state.value.openedMenu = true
   state.value.extendedMatrix = true
   transition.value = {}
 }
 
-const restoreTransition = () => {
-  transition.value = {
+function getTransition() {
+  return {
     name: 'page',
     mode: 'out-in',
     duration: 500,
@@ -99,23 +114,6 @@ const restoreTransition = () => {
     onBeforeLeave: extendMatrix
   }
 }
-
-router.beforeEach(() => {
-  if (state.value.isMobile && state.openedMenu) {
-    closeMenu()
-  }
-})
-
-onMounted(() => {
-  if (window.innerWidth < 900) {
-    state.value.isMobile = true
-    /* setTransition() */
-  }
-
-  containerSize.value = containerRef.value.clientWidth
-  sidebarSize.value = sidebarEl.value.clientWidth
-  resize()
-})
 
 function resize() {
   let timeout = null
@@ -160,6 +158,11 @@ function resize() {
 $model-size-desktop: 320px;
 $model-size-laptop: 250px;
 
+.none-enter-active,
+.none-leave-active {
+  transition: none;
+}
+
 .container {
   width: 80%;
   margin: 0 auto;
@@ -167,11 +170,14 @@ $model-size-laptop: 250px;
   min-height: 100vh;
 
   @include tablet-landscape {
+    width: auto;
+    margin: 0 40px;
     padding: 4rem 0 0;
     display: flex;
   }
 
   @include desktop {
+    margin: 0 auto;
     max-width: 1400px;
   }
 }
@@ -240,7 +246,6 @@ $model-size-laptop: 250px;
     position: -webkit-sticky;
     position: sticky;
     top: 4rem;
-    padding-top: 2rem;
     flex-shrink: 0;
     width: $model-size-laptop;
     height: calc(100vh - 4rem);
@@ -275,6 +280,7 @@ $model-size-laptop: 250px;
   bottom: 0;
 
   @include tablet-landscape {
+    margin-top: 2rem;
     display: block;
     position: relative;
     height: $model-size-laptop;

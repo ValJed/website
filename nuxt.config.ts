@@ -33,8 +33,6 @@ export default defineNuxtConfig({
     build: {
       markdown: {
         highlight: {
-          /* theme: 'houston', */
-          /* theme: 'rose-pine', */
           theme: 'poimandres',
           langs: ['rust']
         }
@@ -57,7 +55,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/scss/main.scss" as *;'
+          additionalData: '@use "@@/assets/scss/main.scss" as *;'
         }
       }
     }
@@ -69,26 +67,13 @@ export default defineNuxtConfig({
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  generate: {
-    // choose to suit your project
-    // interval: 2000
-  },
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxt/eslint', '@nuxt/content'],
 
-  router: {
-    options: {
-      scrollBehaviorType: undefined
-    }
-  },
-
-  /* routeRules: { */
-  /*   // Homepage pre-rendered at build time */
-  /*   '/': { prerender: true }, */
-  /*   // Products page generated on demand, revalidates in background, cached until API response changes */
-  /*   '/experiences': { prerender: true }, */
-  /*   '/experiences/*': { prerender: true } */
+  /* router: { */
+  /*   options: { */
+  /*     scrollBehaviorType: undefined */
+  /*   } */
   /* }, */
 
   compatibilityDate: '2025-01-26'

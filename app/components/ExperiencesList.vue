@@ -32,7 +32,7 @@
 import { ref } from 'vue'
 
 const nav = ref(null)
-const { data } = await useAsyncData('navigation', async () => {
+const { data } = await useAsyncData('experiences', async () => {
   return queryCollectionNavigation('experiences', [
     'date',
     'logoImg',

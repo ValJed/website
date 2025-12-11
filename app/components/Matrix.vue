@@ -111,7 +111,7 @@ function generateMatrix(canvas) {
     height: calc(100vh - 3rem); // header
 
     @include tablet-landscape {
-      height: calc(100vh - 6rem); // header + container padding
+      height: calc(100vh - 4rem); // header + container padding
       right: 0;
     }
   }
