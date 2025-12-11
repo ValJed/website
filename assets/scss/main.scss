@@ -137,7 +137,7 @@ a {
     transform: translateX(2rem);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-100vw);
   }
 }
 
@@ -168,13 +168,13 @@ a {
 @mixin animateTitle($selector) {
   .page-enter-active {
     #{$selector} {
-      animation: 0.5s ease-in-out 0s 1 normal both titleEnterAnim;
+      animation: 0.3s ease-in-out 0s 1 normal both titleEnterAnim;
     }
   }
 
   .page-leave-active {
     #{$selector} {
-      animation: 0.5s ease-in-out 0s 1 normal forwards titleLeaveAnim;
+      animation: 0.3s ease-in-out 0s 1 normal forwards titleLeaveAnim;
     }
   }
 }
