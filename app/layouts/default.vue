@@ -239,10 +239,11 @@ $model-size-laptop: 250px;
   @include tablet-landscape {
     position: -webkit-sticky;
     position: sticky;
-    top: 6rem;
+    top: 4rem;
+    padding-top: 2rem;
     flex-shrink: 0;
     width: $model-size-laptop;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 4rem);
     margin-left: 20px;
   }
 
