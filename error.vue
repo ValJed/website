@@ -1,6 +1,10 @@
 <template>
-  <SiteHeader v-if="containerSize" :is-mobile="isMobile" />
-  <div ref="containerRef" class="error-page">
+  <SiteHeader
+v-if="containerSize"
+:is-mobile="isMobile" />
+  <div
+ref="containerRef"
+class="error-page">
     <div class="error-page__matrix">
       <Matrix
         v-if="containerSize"
@@ -11,12 +15,18 @@
     </div>
     <div class="error-page__content">
       <div class="error-page__info">
-        <h1 v-if="error.statusCode === '404'" class="error-page__title">
+        <h1
+v-if="props.error.statusCode === '404'"
+class="error-page__title">
           Page not found
         </h1>
-        <h1 v-else class="error-page__title">An error occurred</h1>
+        <h1
+v-else
+class="error-page__title">An error occurred</h1>
 
-        <nuxt-link class="error-page__link" to="/">
+        <nuxt-link
+class="error-page__link"
+to="/">
           <SvgHell />
           <h2>Back Home</h2>
         </nuxt-link>
@@ -87,7 +97,7 @@ onMounted(() => {
     position: relative;
     display: flex;
     align-items: center;
-    font-family: $ftext;
+    font-family: var(--ftext);
 
     svg {
       width: 2rem;
