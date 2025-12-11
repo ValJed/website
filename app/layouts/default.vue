@@ -201,7 +201,7 @@ $model-size-laptop: 250px;
     img {
       display: block;
       width: 100%;
-      margin: 0 auto;
+      margin: 30px auto;
 
       @include tablet-landscape {
         width: 80%;
