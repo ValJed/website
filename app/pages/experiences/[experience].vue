@@ -18,12 +18,12 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import { useAnimateLink } from '@/composables/useAnimateLink.js'
 
 const route = useRoute()
-const { data: experience } = await useAsyncData('experience', () =>
-  queryCollection('experiences').path(route.path).first()
+const { data: experience } = await useAsyncData(
+  `experience-${route.path}`,
+  () => queryCollection('experiences').path(route.path).first()
 )
 
 const contentEl = useTemplateRef('content')

@@ -6,6 +6,7 @@ export default defineContentConfig({
       source: 'experiences/*.md',
       type: 'page',
       schema: z.object({
+        title: z.string(),
         logoImg: z.string(),
         logoTitle: z.string().nullable(),
         period: z.string(),
@@ -17,6 +18,7 @@ export default defineContentConfig({
       source: 'blog/*.md',
       type: 'page',
       schema: z.object({
+        title: z.string(),
         coverImg: z.string(),
         date: z.date(),
         tags: z.array(z.string())

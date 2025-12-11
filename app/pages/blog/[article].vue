@@ -17,11 +17,10 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import { useAnimateLink } from '@/composables/useAnimateLink.js'
 
 const route = useRoute()
-const { data: article } = await useAsyncData('article', () =>
+const { data: article } = await useAsyncData(`article-${route.path}`, () =>
   queryCollection('blog').path(route.path).first()
 )
 

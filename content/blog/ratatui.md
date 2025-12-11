@@ -1,6 +1,5 @@
 ---
 title: "Creating a TUI using Rust and Ratatui"
-description: "I developed a pomodoro TUI called Tomato. I used Rust and Ratatui to do so, here is a overview of what's doable with Ratatui."
 date: 2025-12-07
 coverImg: "/images/articles/ratatui/cover.png"
 tags: ["Rust", "Ratatui", "TUI"]

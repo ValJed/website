@@ -10,9 +10,6 @@
       <div class="card__content-title">
         <h2 class="card__title">{{ article.title }}</h2>
       </div>
-      <div class="card__content-description">
-        <p class="card__description">{{ article.description }}</p>
-      </div>
     </NuxtLink>
   </li>
 </template>
@@ -42,7 +39,7 @@ defineProps({
 
       .card__content-title {
         position: relative;
-        transition: all 0.2s linear;
+        transition: all 100ms linear;
         width: 20%;
       }
 
@@ -84,8 +81,8 @@ defineProps({
 .card__content-title {
   background-color: rgba(3, 160, 98, 0.6);
   padding: 20px 10px 20px 20px;
-  width: 40%;
-  transition: all 0.1s linear;
+  width: 80%;
+  transition: all 100ms ease-out;
 }
 
 .card__title {
