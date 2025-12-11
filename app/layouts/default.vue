@@ -200,19 +200,21 @@ $model-size-laptop: 250px;
   &__article {
     img {
       display: block;
-      width: 80%;
+      width: 100%;
       margin: 0 auto;
+
+      @include tablet-landscape {
+        width: 80%;
+      }
     }
+
     p {
       @include text-sm;
       font-weight: normal;
     }
-    a.link {
-      font-weight: bold;
 
-      &:hover {
-        color: var(--green);
-      }
+    a.link {
+      color: var(--green);
     }
 
     pre {
