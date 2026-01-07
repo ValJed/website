@@ -1,11 +1,17 @@
 import { getJapaneseWord } from '@/lib/weaponsAnimation.js'
+import { useLayoutState } from '@/composables/useLayoutState.js'
 
 export const useAnimateLink = (contentEl) => {
   const linkText = ref(null)
   const linkInterval = ref(null)
   const links = ref([])
 
+  const state = useLayoutState()
+
   onMounted(() => {
+    if (state.value.isMobile) {
+      return
+    }
     links.value = contentEl.value.querySelectorAll('a.link')
     links.value.forEach((link) => {
       link.addEventListener('mouseenter', animateLink)

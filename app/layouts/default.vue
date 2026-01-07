@@ -20,7 +20,7 @@
           :extended-matrix="state.extendedMatrix"
           :container-size="containerSize"
           :sidebar-size="sidebarSize"
-          :is-mobile="isMobile"
+          :is-mobile="state.isMobile"
         />
         <div class="model-container">
           <Model
@@ -42,7 +42,6 @@
 import { useLayoutState } from '@/composables/useLayoutState.js'
 const state = useLayoutState()
 
-const isMobile = ref(false)
 const sidebarEl = ref(null)
 const sidebarSize = ref(0)
 const containerRef = ref(null)
@@ -53,13 +52,13 @@ const transition = ref(getTransition())
 const router = useRouter()
 
 router.beforeEach(() => {
-  if (state.value.isMobile && state.openedMenu) {
+  if (state.value.isMobile && state.value.openedMenu) {
     closeMenu()
   }
 })
 
 router.afterEach(() => {
-  if (state.isMobile) {
+  if (state.vaue.isMobile) {
     closeMenu()
   }
 })
@@ -122,9 +121,9 @@ function resize() {
     if (containerSize.value === containerRef.value.clientWidth) {
       return
     }
+    isResizing.value = true
 
     if (timeout) {
-      isResizing.value = true
       clearTimeout(timeout)
     }
 
@@ -134,24 +133,9 @@ function resize() {
       timeout = null
       isResizing.value = false
       state.value.isMobile = window.innerWidth < 900
-      /* setTransition() */
     }, 500)
   }
 }
-
-/* function setTransition() { */
-/*   if (state.isMobile) { */
-/*     transition.value = {} */
-/*     return */
-/*   } */
-/*   transition.value = { */
-/*     name: 'page', */
-/*     mode: 'out-in', */
-/*     duration: 500, */
-/*     onBeforeEnter: contractMatrix, */
-/*     onBeforeLeave: extendMatrix */
-/*   } */
-/* } */
 </script>
 
 <style lang="scss">
