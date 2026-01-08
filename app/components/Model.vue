@@ -22,57 +22,48 @@ const props = defineProps({
 })
 
 const state = useLayoutState()
-const modelCanvas = ref(null)
-const mouseX = ref(null)
-const mouseY = ref(null)
-/* const model = ref(null) */
-const pivot = ref(null)
-const scene = ref(null)
-const camera = ref(null)
-const rendered = ref(null)
+const modelCanvas = useTemplateRef('modelCanvas')
+
 const height = ref(null)
 const width = ref(null)
+const mouseX = ref(null)
+const mouseY = ref(null)
 const centerX = ref(null)
 const centerY = ref(null)
 
+let pivot
+let scene
+/* let model */
+let camera
+let renderer
+
 onMounted(async () => {
-  const model = await generateModelAndScene(
-    modelCanvas.value,
-    props.containerSize
-  )
-  setPosition(model, height)
-  setModelCenterAndPosition(model, height)
-  requestIdleCallback(() => {
-    pivot.value.add(model)
-    scene.value.add(pivot.value)
-    scene.value.add(gltf.scene)
-  })
+  initSceneAndCamera()
+  const { model, gltfScene } = await loadModel()
+  setPosition()
+  setModelCenterAndPosition(model)
+  console.log('centerX', centerX.value)
+  console.log('centerY', centerY.value)
+  insertModelInScene(model, gltfScene)
 
   animate()
 })
 
-async function generateModelAndScene(canvas) {
-  width.value = canvas.clientWidth
-  height.value = canvas.clientHeight
-
-  init(canvas)
-
-  scene.value = scene
-  camera.value = camera
-
-  const gltf = await loadModel()
-  const model = gltf.scene.children[0]
-
-  return model
+function insertModelInScene(model, gltfScene) {
+  /* requestIdleCallback(() => { */
+  /* }) */
+  pivot.add(model)
+  scene.add(pivot)
+  scene.add(gltfScene)
 }
 
 function setPosition() {
-  pivot.value = new Object3D()
+  pivot = new Object3D()
 
   if (state.value.isMobile) {
-    pivot.value.position.set(0, -75, 0)
+    pivot.position.set(0, -75, 0)
   } else {
-    pivot.value.position.set(0, 0, -900)
+    pivot.position.set(0, 0, -900)
   }
 
   // Mouse position listener
@@ -85,30 +76,32 @@ function setPosition() {
 function animate() {
   requestAnimationFrame(animate)
 
-  const mobileMutations = ({ position, rotation }) => {
+  const mobileMutations = () => {
     // Before the mask has been fully loaded
-    if (position.y < 0) {
-      position.set(0, position.y + 2, 0)
+    if (pivot.position.y < 0) {
+      pivot.position.set(0, pivot.position.y + 2, 0)
     }
 
     if (state.value.openedMenu) {
-      rotation.y = rotation.y > Math.PI * 2 ? 0 : rotation.y + 0.025
+      pivot.rotation.y =
+        pivot.rotation.y > Math.PI * 2 ? 0 : pivot.rotation.y + 0.025
       return
     }
 
-    if (rotation.y <= Math.PI * 2 && rotation.y !== 0) {
-      rotation.y = rotation.y + 0.1 * (Math.PI * 2 - rotation.y)
-    } else if (rotation.y !== 0) {
-      rotation.y = 0
+    if (pivot.rotation.y <= Math.PI * 2 && pivot.rotation.y !== 0) {
+      pivot.rotation.y =
+        pivot.rotation.y + 0.1 * (Math.PI * 2 - pivot.rotation.y)
+    } else if (pivot.rotation.y !== 0) {
+      pivot.rotation.y = 0
     }
   }
 
   const desktopMutations = () => {
     // Before the mask has been fully loaded
-    if (pivot.value.position.z < -100) {
-      pivot.value.position.set(0, 0, pivot.value.position.z + 20)
+    if (pivot.position.z < -100) {
+      pivot.position.set(0, 0, pivot.position.z + 20)
     } else if (mouseX.value && mouseY.value && !state.value.isMobile) {
-      computePivot(centerX, centerY)
+      computePivot()
     }
   }
 
@@ -118,21 +111,20 @@ function animate() {
     mobileMutations()
   }
 
-  console.log('renderer', renderer)
-  renderer.value.render(scene.value, camera.value)
+  renderer.render(scene, camera)
 }
 
-function computePivot(centerX, centerY) {
-  const destinationY = ((mouseX.value - centerX) / 100) * 1.2
-  const destinationX = ((mouseY.value - centerY) / 100) * 1.2
+function computePivot() {
+  const destinationY = ((mouseX.value - centerX.value) / 100) * 1.2
+  const destinationX = ((mouseY.value - centerY.value) / 100) * 1.2
 
   const maxDistance = 0.1
 
-  if (pivot.value.rotation.y !== destinationY) {
-    pivot.value.rotation.y = getDistance(pivot.value.rotation.y, destinationY)
+  if (pivot.rotation.y !== destinationY) {
+    pivot.rotation.y = getDistance(pivot.rotation.y, destinationY)
   }
-  if (pivot.value.rotation.x !== destinationX) {
-    pivot.value.rotation.x = getDistance(pivot.value.rotation.x, destinationX)
+  if (pivot.rotation.x !== destinationX) {
+    pivot.rotation.x = getDistance(pivot.rotation.x, destinationX)
   }
 
   function getDistance(position, destination) {
@@ -147,17 +139,14 @@ function computePivot(centerX, centerY) {
   }
 }
 
-function init(canvas) {
-  camera.value = new PerspectiveCamera(
-    45,
-    width.value / height.value,
-    0.1,
-    1000
-  )
-  scene.value = new Scene()
-  renderer.value = new WebGLRenderer({
+function initSceneAndCamera() {
+  width.value = modelCanvas.value.clientWidth
+  height.value = modelCanvas.value.clientHeight
+  camera = new PerspectiveCamera(45, width.value / height.value, 0.1, 1000)
+  scene = new Scene()
+  renderer = new WebGLRenderer({
     antialias: true,
-    canvas,
+    canvas: modelCanvas.value,
     alpha: true
   })
 
@@ -167,19 +156,21 @@ function init(canvas) {
   scene.add(new AmbientLight(0x9b9898, 6))
 
   renderer.setSize(width.value, height.value)
-
-  scene.value = scene
-  camera.value = camera
-  renderer.value = rendered
 }
 
 async function loadModel() {
   const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader')
   const loader = new GLTFLoader()
-  return loader.loadAsync('/models/samuraiMask/scene.gltf')
+  const gltf = await loader.loadAsync('/models/samuraiMask/scene.gltf')
+
+  return {
+    model: gltf.scene.children[0],
+    gltfScene: gltf.scene
+  }
 }
 
 function setModelCenterAndPosition(model, modelSize) {
+  console.log('modelSize', modelSize)
   // Model position
   const box = new Box3().setFromObject(model)
   const { y } = box.getSize(new Vector3())
