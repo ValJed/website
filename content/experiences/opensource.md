@@ -10,11 +10,15 @@ Open source projects I contributed to:
  
 - <a class="link" href="https://github.com/natecraddock/workspaces.nvim/pull/18" target="_blank" rel="noopener noreferrer">Nvim Workspace</a>
 
-Neovim plugin to manage workspace directories.
+Neovim plugin to manage workspace directories: Adds a feature to register all workspaces in existing defined folders.
+
+- <a class="link" href="https://github.com/chentoast/marks.nvim/pull/106" target="_blank" rel="noopener noreferrer">Nvim Marks</a>
+
+Neovim plugin to improve marks: Adds telescope support for listing mark.
 
 - <a class="link" href="https://github.com/ajeetdsouza/zoxide/pull/1026" target="_blank" rel="noopener noreferrer">Zoxide</a>
 
-Zoxide is a smarter cd command, inspired by z and autojump written in Rust.
+Zoxide is a smarter cd command, inspired by z and autojump written in Rust: Adds an environment variable to set extra flags to the default ones.
 
 - <a class="link" href="https://github.com/ValJed/task" target="_blank" rel="noopener noreferrer">Task</a>
 
