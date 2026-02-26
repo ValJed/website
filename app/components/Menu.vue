@@ -20,8 +20,9 @@
           @mouseenter="setHovered('Home')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link
+          <MenuLink
             to="/"
+            :disabled="state.extendedMatrix"
             @click="toggleMenu"
           >
             <SvgHell />
@@ -30,15 +31,16 @@
               class="menu__item-title"
               >Home</span
             >
-          </nuxt-link>
+          </MenuLink>
         </li>
         <li
           class="menu__item menu__item--center"
           @mouseenter="setHovered('Xp')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link
+          <MenuLink
             to="/experiences"
+            :disabled="state.extendedMatrix"
             @click="toggleMenu"
           >
             <SvgSatan />
@@ -48,15 +50,16 @@
               class="menu__item-title"
               >Xp</span
             >
-          </nuxt-link>
+          </MenuLink>
         </li>
         <li
           class="menu__item menu__item--bottom"
           @mouseenter="setHovered('Blog')"
           @mouseleave="setHovered()"
         >
-          <nuxt-link
+          <MenuLink
             to="/blog"
+            :disabled="state.extendedMatrix"
             @click="toggleMenu"
           >
             <SvgParchment />
@@ -65,7 +68,7 @@
               class="menu__item-title"
               >Blog</span
             >
-          </nuxt-link>
+          </MenuLink>
         </li>
 
         <li class="menu__item menu__item--left">
@@ -143,7 +146,7 @@ async function runAnimation(name) {
   animRunning.value = false
 }
 
-const toggleMenu = () => {
+function toggleMenu() {
   if (state.value.isMobile) {
     emit('toggleMenu')
   }

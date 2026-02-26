@@ -4,6 +4,7 @@
     class="content"
   >
     <ContentIntro
+      :title="experience.title"
       :logo-img="experience.logoImg"
       :logo-title="experience.logoTitle"
       :period="experience.period"

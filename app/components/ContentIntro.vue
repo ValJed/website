@@ -5,7 +5,7 @@
         v-if="logoImg"
         class="intro__logo-img"
         :src="logoImg"
-        :alt="name"
+        :alt="`${title} Logo`"
       />
       <span
         v-if="logoTitle"
@@ -31,6 +31,10 @@
 
 <script setup>
 defineProps({
+  title: {
+    type: String,
+    required: true
+  },
   logoImg: {
     type: String,
     default: null

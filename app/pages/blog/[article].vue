@@ -5,6 +5,7 @@
     class="content"
   >
     <ContentIntro
+      :title="article.title"
       :logo-title="article.title"
       :tags="article.tags"
     />
