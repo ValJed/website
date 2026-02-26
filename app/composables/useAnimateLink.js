@@ -15,7 +15,6 @@ export const useAnimateLink = (contentEl) => {
     links.value = contentEl.value.querySelectorAll('a.link')
     links.value.forEach((link) => {
       link.addEventListener('mouseenter', animateLink)
-
       link.addEventListener('mouseleave', stopAnimateLink)
     })
   })
